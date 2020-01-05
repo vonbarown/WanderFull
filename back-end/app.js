@@ -41,7 +41,7 @@ app.use('/users', usersRouter);
 app.post('/upload', upload.single('image'), (req, res, next) => {
   console.log('req.file', req.file);
 
-  let imageUrl = "http://localhost:3001/" + req.file.path.replace('public/', '')
+  let imageUrl = "http://localhost:8080/" + req.file.path.replace('public/', '')
 
   res.json({
     message: 'image uploaded',
