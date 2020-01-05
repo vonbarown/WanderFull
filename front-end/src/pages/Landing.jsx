@@ -9,7 +9,7 @@ class Landing extends Component {
 
 handleChange = (event) =>{
     const {firstRender} = this.state
-    if(firstRender) {
+    if (firstRender) {
         this.switchFirstRender()
     }
 
@@ -17,7 +17,7 @@ handleChange = (event) =>{
         this.setState({
             login: true
         })
-    } else{
+    } else {
         this.setState({
             login: false
         })
@@ -25,13 +25,10 @@ handleChange = (event) =>{
 }
 
 switchFirstRender = () => {
-
- this.setState({
-     firstRender: false 
- })
+    this.setState({
+        firstRender: false 
+    })
 }
-
-
 
     render() {
         const {firstRender, login, signUp} = this.state
@@ -40,16 +37,12 @@ switchFirstRender = () => {
             <div>
                 <h1>Landing</h1>
                 <Container 
-                handleChange = {handleChange}
-                firstRender = {firstRender}
-                login={login}
-                signUp = {signUp}
+                    handleChange = {handleChange}
+                    firstRender = {firstRender}
+                    login={login}
+                    signUp = {signUp}
                 />
-                
-
             </div>
-
-
         )
     }
 }

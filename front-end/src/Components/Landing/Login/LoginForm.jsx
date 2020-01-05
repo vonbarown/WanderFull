@@ -14,16 +14,14 @@ class LoginForm extends Component{
         const {submitLogin} = this
         return(
             <div>
-        <form onSubmit = {submitLogin}>
-            <input type="text"/>
-            <Button 
-            value = 'Welcome'/>
-            
-        </form>
-            <Button 
-            value = 'Sign up'
-            handleChange = {this.props.handleChange}
-            />
+                <form onSubmit = {submitLogin}>
+                    <input type="text"/>
+                    <Button value = 'Welcome'/>
+                </form>
+                <Button 
+                    value = 'Sign up'
+                    handleChange = {this.props.handleChange}
+                />
             </div>
         )
      }

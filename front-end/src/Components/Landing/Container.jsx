@@ -12,12 +12,13 @@ const Container = ({firstRender, login, handleChange}) => (
     : ( <div>
             <Button 
                 value='Login' 
-                handleChange = {handleChange}/>
+                handleChange = {handleChange}
+            />
 
             <Button 
                 value ='Sign up' 
                 handleChange = {handleChange}
-                />
+            />
 
         </div>)
 )

@@ -18,12 +18,11 @@ constructor (props){
                     <input type="text"/>
                     <input type="text"/>
                     <input type="text"/>
-                    <Button 
-                    value = 'Welcome'/>
+                    <Button value = 'Welcome'/>
                 </form>
                 <Button 
-                value = 'Login'
-                handleChange = {this.props.handleChange}
+                    value = 'Login'
+                    handleChange = {this.props.handleChange}
                 />
                 </div>
             )
