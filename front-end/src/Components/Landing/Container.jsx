@@ -1,5 +1,5 @@
 import React from 'react'
-import Button from '../Landing/Button'
+import Button from '../Shared/Button'
 import LoginForm from './Login/LoginForm'
 import SignUpForm from './SignUp/SignUpForm'
 import Carousel from './Carousel'

@@ -1,7 +1,7 @@
 import React from 'react'
 
-const Container = () => (
+const NavBar = () => (
 
 )
 
-export default Container
+export default NavBar
