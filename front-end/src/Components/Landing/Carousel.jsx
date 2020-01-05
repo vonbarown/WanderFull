@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Carousel = () => (
+class Carousel extends Component  (
 
 )
 
