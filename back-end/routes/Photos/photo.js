@@ -24,7 +24,7 @@ const addPic = async (req, res, next) => {
         console.log(error)
     }
 }
-//adding 
+//adding posts 
 router.post('/', addPic)
 
 
@@ -42,7 +42,7 @@ const getPics = async (req, res, next) => {
         console.log(error);
     }
 }
-//router to retrieve all posts
+//retrieving all posts
 router.get('/', getPics)
 
 
@@ -52,14 +52,14 @@ const deletePhoto = async (req, res, next) => {
 
         res.json({
             status: 'success',
-            message: 'picture deleted',
+            message: 'image deleted',
             payload: deletedPhoto
         })
     } catch (error) {
         console.log(error);
         res.send({
             status: 'failure',
-            message: 'Picture does not exist '
+            message: 'image does not exist '
         })
     }
 }
