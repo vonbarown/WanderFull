@@ -59,7 +59,7 @@ const deletePhoto = async (req, res, next) => {
         console.log(error);
         res.send({
             status: 'failure',
-            message: 'image does not exist '
+            message: 'you can\'t perform this operation'
         })
     }
 }

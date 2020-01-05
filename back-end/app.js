@@ -24,7 +24,7 @@ const upload = multer({
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/Users/users');
 const photosRouter = require('./routes/Photos/photo')
-
+const likesRouter = require('./routes/Likes/likes')
 
 const app = express();
 
@@ -41,8 +41,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 
 app.use('/', indexRouter);
-
 app.use('/users', usersRouter);
+app.use('/images', upload.single('imageUrl'), photosRouter);
+app.use('/likes', likesRouter)
+
 
 app.use('/images', upload.single('imageUrl'), photosRouter)
 
