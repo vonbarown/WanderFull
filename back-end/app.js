@@ -45,9 +45,6 @@ app.use('/users', usersRouter);
 app.use('/images', upload.single('imageUrl'), photosRouter);
 app.use('/likes', likesRouter)
 
-
-app.use('/images', upload.single('imageUrl'), photosRouter)
-
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   next(createError(404));
