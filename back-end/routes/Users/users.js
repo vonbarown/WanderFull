@@ -3,6 +3,11 @@ var router = express.Router();
 const db  = require('../../database/databasejs');
 const hash = require('js-sha256').sha256;
 
+console.log(hash('voniel'))
+console.log(hash('jenesh'))
+console.log(hash('briany'))
+console.log(hash('suzette'))
+
 /* GET users listing. */
 router.get('/', function (req, res, next) {
   res.send('I am a user route')
