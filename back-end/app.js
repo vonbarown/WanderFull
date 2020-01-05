@@ -22,7 +22,9 @@ const upload = multer({
 
 
 const indexRouter = require('./routes/index');
-const usersRouter = require('./routes/users');
+const usersRouter = require('./routes/Users/users');
+const photosRouter = require('./routes/Photos/photo')
+
 
 const app = express();
 
@@ -41,18 +43,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 
 app.use('/users', usersRouter);
+app.use('/images', upload.single('image'), photosRouter)
 
-app.post('/upload', upload.single('image'), (req, res, next) => {
-  console.log('req.file', req.file);
 
-  let imageUrl = "http://localhost:8080/" + req.file.path.replace('public/', '')
-
-  res.json({
-    message: 'image uploaded',
-    imageUrl: imageUrl
-  })
-
-})
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
