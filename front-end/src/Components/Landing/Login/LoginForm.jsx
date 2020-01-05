@@ -2,9 +2,6 @@ import React, { Component } from 'react'
 import Button from '../../Shared/Button'
 
 class LoginForm extends Component{ 
-    constructor (props){
-        super(props)
-    }
 
     submitLogin = (event) =>{
         event.preventDefault()
