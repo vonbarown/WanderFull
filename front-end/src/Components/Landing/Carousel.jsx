@@ -1,7 +1,7 @@
 import React from 'react'
 
-const Container = () => (
+const Carousel = () => (
 
 )
 
-export default Container
+export default Carousel
