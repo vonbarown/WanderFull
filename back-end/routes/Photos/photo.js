@@ -24,20 +24,47 @@ const addPic = async (req, res, next) => {
         console.log(error)
     }
 }
+//adding 
 router.post('/', addPic)
+
 
 const getPics = async (req, res, next) => {
 
-    let pictures = await db.any('SELECT * FROM posts')
+    try {
+        let pictures = await db.any('SELECT * FROM posts')
 
-    res.json({
-        status: 'success',
-        message: 'retrieved all post',
-        payload: pictures
-    })
+        res.json({
+            status: 'success',
+            message: 'retrieved all post',
+            payload: pictures
+        })
+    } catch (error) {
+        console.log(error);
+    }
 }
-
+//router to retrieve all posts
 router.get('/', getPics)
 
+
+const deletePhoto = async (req, res, next) => {
+    try {
+        let deletedPhoto = await db.one('DELETE from posts WHERE id = $1 RETURNING *', Number([req.body.id]))
+
+        res.json({
+            status: 'success',
+            message: 'picture deleted',
+            payload: deletedPhoto
+        })
+    } catch (error) {
+        console.log(error);
+        res.send({
+            status: 'failure',
+            message: 'Picture does not exist '
+        })
+    }
+}
+
+//delete pictures
+router.delete('/', deletePhoto)
 
 module.exports = router;
