@@ -1,6 +1,7 @@
 import React,{ Component } from 'react'
 import Container from '../Components/Landing/Container'
 
+
 class Landing extends Component {
     state = {
         firstRender: true,

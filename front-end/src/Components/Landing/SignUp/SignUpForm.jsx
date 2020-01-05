@@ -2,9 +2,7 @@ import React, {Component} from 'react'
 import Button from '../Button'
 
 class SignUpForm extends Component{ 
-constructor (props){
-    super(props)
-}
+
     submitSignUp = (event) =>{
         event.preventDefault()
         console.log('ok')

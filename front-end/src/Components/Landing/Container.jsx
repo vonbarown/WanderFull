@@ -2,10 +2,13 @@ import React from 'react'
 import Button from '../Landing/Button'
 import LoginForm from './Login/LoginForm'
 import SignUpForm from './SignUp/SignUpForm'
+import Carousel from './Carousel'
 
 
 const Container = ({firstRender, login, handleChange}) => (
-    !firstRender && login 
+ <div>
+    {/* {firstRender ? <Carousel /> : null} */}
+    {!firstRender && login 
     ? <LoginForm handleChange = {handleChange}/> 
     : !firstRender && !login 
     ? <SignUpForm handleChange = {handleChange}/> 
@@ -21,6 +24,8 @@ const Container = ({firstRender, login, handleChange}) => (
             />
 
         </div>)
+    }
+    </div>
 )
 
 export default Container
