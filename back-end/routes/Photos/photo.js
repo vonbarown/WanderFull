@@ -28,7 +28,7 @@ const addPic = async (req, res, next) => {
 router.post('/', addPic)
 
 
-const getPics = async (req, res, next) => {
+const getFeedPics = async (req, res, next) => {
 
     try {
         let pictures = await db.any('SELECT * FROM posts')
@@ -42,9 +42,43 @@ const getPics = async (req, res, next) => {
         console.log(error);
     }
 }
-//retrieving all posts
-router.get('/', getPics)
 
+//retrieving all posts
+router.get('/', getFeedPics)
+
+const getUserPics = async (req, res, next) => {
+
+    try {
+        let userPics = await db.any('SELECT * FROM posts WHERE user_id = $1', Number([req.body.user_id]))
+
+        res.json({
+            status: 'success',
+            message: 'retrieved all post',
+            payload: userPics
+        })
+    } catch (error) {
+        console.log(error);
+    }
+}
+//retrieving all user posts
+router.get('/home', getUserPics)
+
+const searchByHashtag = async (req, res, next) => {
+
+    try {
+        let userPics = await db.any('SELECT * FROM posts WHERE hashtag = $1', req.body.hashtag)
+
+        res.json({
+            status: 'success',
+            message: 'retrieved all post',
+            payload: userPics
+        })
+    } catch (error) {
+        console.log(error);
+    }
+}
+//searching by hashtag
+router.get('/hashtag', searchByHashtag)
 
 const deletePhoto = async (req, res, next) => {
     try {
