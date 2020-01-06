@@ -5,22 +5,25 @@ import Home from '../../../pages/Home'
 
 class LoginForm extends Component{ 
 
- 
-    submitLogin = (event) =>{
-        event.preventDefault()
-        console.log('ok')
-        return (
-            <Home />
-        )
-        
+ constructor(props){
+    super(props)
+    this.state = {
+        renderComponent: false
     }
 
-//    componentWillUnmount(){
-//        this.submitLogin()
-//    }
+ }
+    submitLogin = (event) =>{
+        event.preventDefault()
+        this.setState ({
+            renderComponent: true
+        })
+    }
+
 
     render(){
         const {submitLogin} = this
+        console.log(this.state)
+        const {renderComponent} = this.state
         return(
             <div>
                 <form onSubmit = {submitLogin}>
@@ -28,6 +31,10 @@ class LoginForm extends Component{
                     <Button value = 'Welcome'
                             submitLogin = {submitLogin}    
                     />
+
+                    {
+                        renderComponent ? <Home /> : null 
+                    }
                 </form>
                 <Button 
                     value = 'Sign up'
