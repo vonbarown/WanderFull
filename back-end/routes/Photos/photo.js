@@ -29,7 +29,6 @@ router.post('/', addPic)
 
 
 const getPics = async (req, res, next) => {
-
     try {
         let pictures = await db.any('SELECT * FROM posts')
 
