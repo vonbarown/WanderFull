@@ -66,4 +66,5 @@ const deletePhoto = async (req, res, next) => {
 //delete pictures
 router.delete('/', deletePhoto)
 
+
 module.exports = router;

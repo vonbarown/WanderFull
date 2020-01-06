@@ -10,7 +10,8 @@ CREATE TABLE users (
     password VARCHAR(100),
     firstname VARCHAR, 
     lastname VARCHAR, 
-    email VARCHAR UNIQUE
+    email VARCHAR UNIQUE,
+    profile_pic VARCHAR
 ); 
 
 CREATE TABLE posts (
