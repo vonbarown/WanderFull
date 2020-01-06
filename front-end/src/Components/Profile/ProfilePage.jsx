@@ -5,10 +5,12 @@ import NavBar from './NavBar'
 class Profile extends Component {
 
     render() {
-        return (<div className='profile'>
-            <UserAvatar UserAvatar={'placeholder'} class_name={classes.large} />
-            <NavBar />
-        </div>)
+        return (
+            <div className='profile'>
+                <UserAvatar UserAvatar={'placeholder'} class_name={classes.large} />
+                <NavBar />
+            </div>
+        )
     }
 }
 
