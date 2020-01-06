@@ -22,6 +22,10 @@ class imgCarousel extends Component {
         }, 3000);
     }
 
+componentWillUnmount(){
+    clearInterval(this.interval)
+}
+
     render() {
         return (
             <div>
