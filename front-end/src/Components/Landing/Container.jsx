@@ -7,7 +7,7 @@ import Carousel from './Carousel'
 
 const Container = ({firstRender, login, handleChange}) => (
  <div>
-    {/* {firstRender ? <Carousel /> : null} */}
+    {firstRender ? <Carousel /> : null}
     {!firstRender && login 
     ? <LoginForm handleChange = {handleChange}/> 
     : !firstRender && !login 
