@@ -5,6 +5,7 @@ import SignUpForm from './SignUp/SignUpForm'
 import Carousel from './Carousel'
 
 
+
 const Container = ({firstRender, login, handleChange}) => (
  <div>
     {firstRender ? <Carousel /> : null}
@@ -18,13 +19,13 @@ const Container = ({firstRender, login, handleChange}) => (
                 handleChange = {handleChange}
             />
 
-            <Button 
-                value ='Sign up' 
-                handleChange = {handleChange}
-            />
+                    <Button
+                        value='Sign up'
+                        handleChange={handleChange}
+                    />
 
-        </div>)
-    }
+                </div>)
+        }
     </div>
 )
 
