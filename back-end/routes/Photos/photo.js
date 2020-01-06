@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
 
-const { db } = require('../../database/databasejs')
+const db = require('../../database/databasejs')
 
 
 const addPic = async (req, res, next) => {
@@ -29,7 +29,6 @@ router.post('/', addPic)
 
 
 const getPics = async (req, res, next) => {
-
     try {
         let pictures = await db.any('SELECT * FROM posts')
 
