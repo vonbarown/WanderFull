@@ -4,7 +4,6 @@ import LoginForm from './Login/LoginForm'
 import SignUpForm from './SignUp/SignUpForm'
 import Carousel from './Carousel'
 
-
 const Container = ({ firstRender, login, handleChange }) => (
     <div>
         {firstRender ? <Carousel /> : null}
