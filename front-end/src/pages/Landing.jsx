@@ -25,6 +25,7 @@ handleChange = (event) =>{
     }
 }
 
+
 switchFirstRender = () => {
     this.setState({
         firstRender: false 
