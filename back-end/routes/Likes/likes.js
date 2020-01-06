@@ -44,9 +44,9 @@ const addLike = async (req, res, next) => {
 router.post('/', addLike)
 
 
-const deletePhoto = async (req, res, next) => {
+const deleteLike = async (req, res, next) => {
     try {
-        let deletedPhoto = await db.one('DELETE from likes WHERE id = $1 RETURNING *', Number([req.body.liker_id]))
+        let deletedLike = await db.one('DELETE from likes WHERE id = $1 RETURNING *', Number([req.body.liker_id]))
 
         res.json({
             status: 'success',
@@ -63,6 +63,6 @@ const deletePhoto = async (req, res, next) => {
 }
 
 //delete pictures
-router.delete('/', deletePhoto)
+router.delete('/', deleteLike)
 
 module.exports = router
