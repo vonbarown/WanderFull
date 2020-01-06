@@ -1,13 +1,23 @@
 import React, { Component } from 'react'
 import Button from '../../Shared/Button'
+import Home from '../../../pages/Home'
+
 
 class LoginForm extends Component{ 
 
+ 
     submitLogin = (event) =>{
         event.preventDefault()
-        
+        console.log('ok')
+        return (
+            <Home />
+        )
         
     }
+
+//    componentWillUnmount(){
+//        this.submitLogin()
+//    }
 
     render(){
         const {submitLogin} = this
@@ -15,7 +25,9 @@ class LoginForm extends Component{
             <div>
                 <form onSubmit = {submitLogin}>
                     <input type="text"/>
-                    <Button value = 'Welcome'/>
+                    <Button value = 'Welcome'
+                            submitLogin = {submitLogin}    
+                    />
                 </form>
                 <Button 
                     value = 'Sign up'
