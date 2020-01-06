@@ -1,7 +1,26 @@
-import React from 'react'
+import React, {Component} from 'react'
+import Button from '../Shared/Button'
 
-const Container = () => (
+class NavBtns extends Component{ 
+// render(){
+//     return(
+//         <Button 
+//         value = 'Travel'
+//         />
 
-)
+//         <Button 
+//         value = 'Location'
+//         />
 
-export default Container
+//         <Button 
+//         value = 'Wishlist'
+//         />
+
+//         <Button
+//         value = 'Buds'
+//         />
+//     )
+// }
+}
+
+export default NavBtns

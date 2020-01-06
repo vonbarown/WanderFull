@@ -1,10 +1,8 @@
 import React, {Component} from 'react'
-import Button from '../Button'
+import Button from '../../Shared/Button'
 
 class SignUpForm extends Component{ 
-constructor (props){
-    super(props)
-}
+
     submitSignUp = (event) =>{
         event.preventDefault()
         console.log('ok')
