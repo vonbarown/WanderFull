@@ -3,21 +3,29 @@ var router = express.Router();
 const db = require('../../database/databasejs');
 const hash = require('js-sha256').sha256;
 
+
+
+
 /* GET users listing. */
 router.get('/', function (req, res, next) {
   res.send('I am a user route')
 });
 
 router.get('/authenticate', async (req, res, next) => {
-  console.log('Authentication')
-  console.log(req.body)
+  console.log('Authentication route hit')
+  console.log('Request body: ', {...req.body})
   const { username, password } = req.body
   const hashedPassword = hash(password)
-  console.log(hashedPassword)
   const query = `SELECT * FROM users WHERE username = $1 AND password = $2`
   const data = await db.any(query, [username, hashedPassword])
   console.log(data)
-  res.json(data)
+
+  res.json({
+    status: 'success',
+    message: 'User logged in',
+    payload: data
+  })
+
 })
 
 router.post('/register', async (req, res, next) => {
