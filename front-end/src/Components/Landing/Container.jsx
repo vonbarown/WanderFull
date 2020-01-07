@@ -5,11 +5,12 @@ import SignUpForm from './SignUp/SignUpForm'
 import Carousel from './Carousel'
 
 
-const Container = ({firstRender, login, handleChange}) => (
+const Container = ({firstRender, login, handleChange, submitLogin}) => (
  <div>
+      <h1>Landing</h1>
     {firstRender ? <Carousel /> : null}
     {!firstRender && login 
-    ? <LoginForm handleChange = {handleChange}/> 
+    ? <LoginForm handleChange = {handleChange} submitLogin = {submitLogin}/> 
     : !firstRender && !login 
     ? <SignUpForm handleChange = {handleChange}/> 
     : ( <div>
@@ -19,7 +20,7 @@ const Container = ({firstRender, login, handleChange}) => (
             />
 
             <Button 
-                value ='Sign up' 
+                value ='Sign up'  
                 handleChange = {handleChange}
             />
 
