@@ -1,13 +1,30 @@
 import React,{ Component } from 'react'
+import axios from 'axios'
 
 class Home extends Component {
 
+    componentDidMount(){
+        this.getAllPhotos()
+    }
+
+getAllPhotos = async () =>{
+    let allPhotos = `http://localhost:8080/images`
+try{
+    const {data:{payload}} = await axios.get(allPhotos)
+    console.log(payload);
     
-    
+} catch (error){
+    console.log(error)
+}
+
+}
 
     render() {
         return (
-            <div>Home</div>
+            <div><h1>Home</h1>
+            
+            
+            </div>
         )
     }
 }

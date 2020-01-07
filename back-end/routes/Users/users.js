@@ -56,7 +56,11 @@ router.post('/register', async (req, res, next) => {
 const getUser = async (req, res, next) => {
 
   try {
+<<<<<<< HEAD
     let user = await db.any('SELECT * FROM users WHERE username = $1', req.params.username)
+=======
+    let user = await db.any('SELECT * FROM users WHERE username = $1', req.body.username)
+>>>>>>> 79e55263225d2bdf8336ed6dbe158eda8bb2dcb5
 
     res.json({
       status: 'success',
@@ -68,7 +72,16 @@ const getUser = async (req, res, next) => {
   }
 }
 //retrieving one users info
-router.get('/:username', getUser)
+router.get('/username', getUser)
+
+
+const updateUserInfo = async (req, res, next) => {
+  // username, password, firstname, lastname, email, profile_pic
+
+
+}
+
+router.patch('/:username', updateUserInfo)
 
 
 module.exports = router;
