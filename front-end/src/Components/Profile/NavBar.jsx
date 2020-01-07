@@ -1,9 +1,8 @@
 import React from 'react'
-import NavBtns from './NavItems'
 
 const NavBar = () => {
-    return (
-        <NavItems />
-    )
+    // return (
+
+    // )
 }
 export default NavBar

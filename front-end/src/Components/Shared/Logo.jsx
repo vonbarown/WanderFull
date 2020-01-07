@@ -1,7 +1,7 @@
 import React from 'react'
 
-const Container = () => (
-
+const Logo = () => (
+    <div>Logo</div>
 )
 
-export default Container
+export default Logo 
