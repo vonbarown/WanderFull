@@ -56,10 +56,8 @@ class App extends Component {
                 <Switch>
                     <Route exact path='/' render={this.renderContainer} />
                     <Route path='/home' component={Home} />
-                    <Route path='/profile' component={Profile} />
+                    <Route path = '/profile' component = {Profile}/>
                 </Switch>
-
-
             </div>
         )
     }

@@ -4,8 +4,6 @@ import Button from '../../Shared/Button'
 // import { Redirect } from 'react-router-dom'
 import axios from 'axios'
 
-
-
 class LoginForm extends Component {
     constructor(props) {
         super(props)
@@ -37,7 +35,6 @@ class LoginForm extends Component {
     render() {
         // console.log(this.state)
         // const { renderComponent } = this.state
-
         return (
             <div>
                 <form onSubmit={this.submitLogin}>

@@ -37,9 +37,7 @@ class SignUpForm extends Component {
                     <input type="text" placeholder="First name" name="firstname" onChange={ this.inputChange } />
                     <input type="text" placeholder="Last name" name="lastname" onChange={ this.inputChange } />
                     <input type="text" placeholder="Email" name="email" onChange={ this.inputChange } />
-                    <Button value='Welcome'
-
-                    />
+                    <Button value='Welcome' />
                 </form>
                 <Button
                     value='Login'
