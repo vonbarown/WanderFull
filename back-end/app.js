@@ -74,6 +74,7 @@ passport.serializeUser((user, done) => {
   done(null, user.id);
 });
 
+// DESERIALIZE NOT COMPLETE YET
 passport.deserializeUser( async (id, done) => {
   console.log('De-Serialize Hit')
   try {
