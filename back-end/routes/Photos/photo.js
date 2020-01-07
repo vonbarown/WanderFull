@@ -49,7 +49,7 @@ router.get('/', getFeedPics)
 const getUserPics = async (req, res, next) => {
 
     try {
-        let userPics = await db.any('SELECT username,hashtag,caption,img FROM posts INNER JOIN users ON posts.user_id = users.id WHERE user_id = $1', Number([req.body.user_id]))
+        let userPics = await db.any('SELECT username,hashtag,caption,img FROM posts INNER JOIN users ON posts.user_id = users.id WHERE username = $1', Number([req.body.username]))
 
         res.json({
             status: 'success',
