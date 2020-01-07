@@ -65,4 +65,26 @@ const deleteLike = async (req, res, next) => {
 //delete pictures
 router.delete('/', deleteLike)
 
+const getNumOfLikes = async (req, res, next) => {
+    try {
+        let numOfLikes = await db.any('SELECT COUNT(*) from likes WHERE photo_id = $1', Number([req.body.photo_id]))
+
+        res.json({
+            status: 'success',
+            message: 'received number of likes',
+            payload: numOfLikes
+        })
+    } catch (error) {
+        console.log(error);
+        res.send({
+            status: 'failure',
+            message: 'you can\'t perform this operation'
+        })
+    }
+}
+
+//get number of likes on a post
+router.get('/photo_id', getNumOfLikes)
+
+
 module.exports = router
