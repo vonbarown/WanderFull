@@ -28,10 +28,11 @@ const upload = multer({
 })
 
 
-const indexRouter = require('./routes/index');
-const usersRouter = require('./routes/Users/users');
+const indexRouter = require('./routes/index')
+const usersRouter = require('./routes/Users/users')
 const photosRouter = require('./routes/Photos/photo')
 const likesRouter = require('./routes/Likes/likes')
+const registerRouter = require('./routes/Users/register')
 
 const app = express();
 
@@ -89,9 +90,10 @@ passport.deserializeUser( async (id, done) => {
 });
 
 // Routes
-app.use('/', indexRouter);
-app.use('/users', passport.authenticate('local'), usersRouter);
-app.use('/images', upload.single('imageUrl'), photosRouter);
+app.use('/', indexRouter)
+app.use('/register', registerRouter)
+app.use('/users', passport.authenticate('local'), usersRouter)
+app.use('/images', upload.single('imageUrl'), photosRouter)
 app.use('/likes', likesRouter)
 
 // catch 404 and forward to error handler
