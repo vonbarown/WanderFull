@@ -17,7 +17,7 @@ router.post('/authenticate', async (req, res, next) => {
   const data = await db.one(query, [username, hashedPassword])
   console.log('User Query response data: ', data)
   delete data.password
-
+  console.log('REQUEST: ', req)
   res.json({
     status: 'success',
     message: 'User logged in',

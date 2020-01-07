@@ -88,12 +88,14 @@ passport.deserializeUser( async (id, done) => {
   }
 });
 
+const loggedIn = (req, res, next) => req.user ? next() : res.redirect('/')
+
 // Routes
 app.use('/', indexRouter)
 app.use('/register', registerRouter)
-app.use('/users', passport.authenticate('local'), usersRouter)
+app.use('/users', passport.authenticate('local'), loggedIn, usersRouter)
 app.use('/images', upload.single('imageUrl'), photosRouter)
-app.use('/likes', likesRouter)
+app.use('/likes', loggedIn, likesRouter)
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
