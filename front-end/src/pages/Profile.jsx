@@ -23,7 +23,7 @@ class Profile extends Component {
 
     // Retrieves all the pictures that a user uploaded
     getUserAlbum = async () => {
-        let { album } = this.state
+        // let { album } = this.state
         try {
             const { data } = await axios.get(`http://localhost:8080/images/home`)
             console.log(data.payload);

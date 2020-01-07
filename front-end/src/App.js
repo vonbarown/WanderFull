@@ -35,7 +35,7 @@ class App extends Component {
     }
 
     renderContainer = (routeProps) => {
-        console.log(routeProps)
+        // console.log(routeProps)
         const { firstRender, login, signUp } = this.state
         const { handleChange, submitLogin } = this
         return (
@@ -53,11 +53,10 @@ class App extends Component {
 
         return (
             <div>
-
                 <Switch>
                     <Route exact path='/' render={this.renderContainer} />
                     <Route path='/home' component={Home} />
-                    <Route path = '/profile' component = {Profile}/>
+                    <Route path='/profile' component={Profile} />
                 </Switch>
 
 

@@ -3,7 +3,7 @@ import NavBtns from './NavItems'
 
 const NavBar = () => {
     return (
-        <NavItems />
+        <NavBtns />
     )
 }
 export default NavBar
