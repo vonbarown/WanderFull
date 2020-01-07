@@ -3,10 +3,7 @@ import Button from '../../Shared/Button'
 
 class SignUpForm extends Component{ 
 
-    submitSignUp = (event) =>{
-        event.preventDefault()
-        console.log('ok')
-    }
+   
         render(){
             const {submitSignUp} = this
             return(

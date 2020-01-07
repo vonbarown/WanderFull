@@ -31,7 +31,7 @@ router.post('/', addPic)
 const getFeedPics = async (req, res, next) => {
 
     try {
-        let pictures = await db.any('SELECT * FROM posts')
+        let pictures = await db.any('SELECT username,hashtag,caption,img FROM posts INNER JOIN users ON posts.user_id = users.id')
 
         res.json({
             status: 'success',
@@ -49,7 +49,7 @@ router.get('/', getFeedPics)
 const getUserPics = async (req, res, next) => {
 
     try {
-        let userPics = await db.any('SELECT * FROM posts WHERE user_id = $1', Number([req.body.user_id]))
+        let userPics = await db.any('SELECT username,hashtag,caption,img FROM posts INNER JOIN users ON posts.user_id = users.id WHERE username = $1', Number([req.body.username]))
 
         res.json({
             status: 'success',
@@ -66,7 +66,7 @@ router.get('/home', getUserPics)
 const searchByHashtag = async (req, res, next) => {
 
     try {
-        let userPics = await db.any('SELECT * FROM posts WHERE hashtag = $1', req.body.hashtag)
+        let userPics = await db.any('SELECT username,hashtag,caption,img FROM posts INNER JOIN users ON posts.user_id = users.id WHERE hashtag = $1', req.body.hashtag)
 
         res.json({
             status: 'success',
