@@ -1,7 +1,7 @@
 import React from 'react'
 
-const Container = () => (
-
+const Menu = () => (
+    <div>Menu</div>
 )
 
-export default Container
+export default Menu
