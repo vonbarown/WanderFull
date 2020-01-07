@@ -13,7 +13,7 @@ class Profile extends Component {
         }
     }
 
-    // Fetch pictures when the component get uppdated
+    // Fetch pictures when the component get updated
     componentDidUpdate = (prevProps, prevState) => {
         const { album } = this.state
         if (album !== prevState.album) {

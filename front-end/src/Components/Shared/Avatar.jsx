@@ -1,5 +1,4 @@
 import React from 'react'
-import { Avatar } from '@material-ui/core';
 
 const UserAvatar = (props) => (
     <div className='userAvatar'>
