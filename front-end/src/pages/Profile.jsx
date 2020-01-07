@@ -40,8 +40,10 @@ class Profile extends Component {
     render() {
         return (
             <div className='profile'>
-                <UserAvatar pic={'https://media.newyorker.com/photos/5e06335ca15be900089fe632/master/pass/Brody-CatsReview.jpg'} class_name={'classes.large'} userName={"Test"} />
-                <NavBar />
+                <div className='header'>
+                    <UserAvatar pic={'https://media.newyorker.com/photos/5e06335ca15be900089fe632/master/pass/Brody-CatsReview.jpg'} class_name={'classes.large'} userName={"Test"} />
+                    <NavBar />
+                </div>
             </div>
         )
     }
