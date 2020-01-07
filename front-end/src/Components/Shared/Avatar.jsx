@@ -1,9 +1,8 @@
 import React from 'react'
-import { Avatar } from '@material-ui/core';
 
 const UserAvatar = (props) => (
     <div className='userAvatar'>
-        <Avatar alt='user' src={props.userAvatar} className={props.class_name} />
+        <img className='userPic' src={props.pic} alt="ubu" />
         <p>{props.userName}</p>
     </div>
 )
