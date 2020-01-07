@@ -10,8 +10,6 @@ class Home extends Component {
 getAllPhotos = async () =>{
     let allPhotos = `http://localhost:8080/images`
 try{
-    // let photosArr = await axios.get(allPhotos).then(payload)
-    // console.log(photosArr)
     const {data:{payload}} = await axios.get(allPhotos)
     console.log(payload);
     
