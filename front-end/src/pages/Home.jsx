@@ -2,6 +2,12 @@ import React,{ Component } from 'react'
 import axios from 'axios'
 
 class Home extends Component {
+    constructor(){
+        super()
+        this.state = {
+            feed: true
+        }
+    }
 
     componentDidMount(){
         this.getAllPhotos()
@@ -21,9 +27,10 @@ try{
 
     render() {
         return (
-            <div><h1>Home</h1>
+            <div>
+                <h1>Home</h1>
             
-            
+        
             </div>
         )
     }

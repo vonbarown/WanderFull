@@ -2,8 +2,6 @@ import React, {Component} from 'react'
 import Button from '../../Shared/Button'
 
 class SignUpForm extends Component{ 
-
-   
         render(){
             const {submitSignUp} = this
             return(
