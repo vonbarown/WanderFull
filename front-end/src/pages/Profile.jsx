@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
-import UserAvatar from '../Shared/Avatar'
-import NavBar from './NavBar'
-
+import UserAvatar from '../Components/Shared/Avatar'
+import NavBar from '../Components/Profile/NavBar'
+import axios from 'axios'
+import '../styles/profile.css'
 class Profile extends Component {
 
     constructor(props) {
@@ -39,7 +40,7 @@ class Profile extends Component {
     render() {
         return (
             <div className='profile'>
-                <UserAvatar UserAvatar={'placeholder'} class_name={classes.large} />
+                <UserAvatar pic={'https://media.newyorker.com/photos/5e06335ca15be900089fe632/master/pass/Brody-CatsReview.jpg'} class_name={'classes.large'} userName={"Test"} />
                 <NavBar />
             </div>
         )
