@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-const db  = require('../../database/databasejs');
+const db = require('../../database/databasejs');
 const hash = require('js-sha256').sha256;
 
 /* GET users listing. */
@@ -23,7 +23,7 @@ router.get('/authenticate', async (req, res, next) => {
 router.post('/register', async (req, res, next) => {
   console.log(req.body)
 
-  const {username, password, firstname, lastname, email} = req.body
+  const { username, password, firstname, lastname, email } = req.body
   const hashedPassword = hash(password)
 
   const query = `
@@ -48,26 +48,28 @@ router.post('/register', async (req, res, next) => {
 const getUser = async (req, res, next) => {
 
   try {
-      let user = await db.any('SELECT * FROM users WHERE username = $1', req.body.username)
+    let user = await db.any('SELECT * FROM users WHERE username = $1', req.body.username)
 
-      res.json({
-          status: 'success',
-          message: 'retrieved user',
-          payload: user
-      })
+    res.json({
+      status: 'success',
+      message: 'retrieved user',
+      payload: user
+    })
   } catch (error) {
-      console.log(error);
+    console.log(error);
   }
 }
 //retrieving one users info
 router.get('/username', getUser)
 
 
-const updateUser = async (req, res, next) => {
+const updateUserInfo = async (req, res, next) => {
+  // username, password, firstname, lastname, email, profile_pic
 
 
-  
 }
+
+router.patch('/:username', updateUserInfo)
 
 
 module.exports = router;
