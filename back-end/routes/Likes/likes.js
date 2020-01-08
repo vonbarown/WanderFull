@@ -19,7 +19,7 @@ const getAllLikes = async (req, res, next) => {
     }
 }
 //retrieving all likes
-router.get('/', getAllLikes)
+router.get('/all', getAllLikes)
 
 
 
@@ -41,7 +41,7 @@ const addLike = async (req, res, next) => {
     }
 }
 //adding a like to a post
-router.post('/', addLike)
+router.post('/add', addLike)
 
 
 const deleteLike = async (req, res, next) => {
@@ -63,11 +63,11 @@ const deleteLike = async (req, res, next) => {
 }
 
 //delete pictures
-router.delete('/', deleteLike)
+router.delete('/unlike', deleteLike)
 
 const getNumOfLikes = async (req, res, next) => {
     try {
-        let numOfLikes = await db.any('SELECT COUNT(*) from likes WHERE photo_id = $1', Number([req.body.photo_id]))
+        let numOfLikes = await db.any('SELECT COUNT(*) from likes WHERE photo_id = $1', Number([req.params.photo_id]))
 
         res.json({
             status: 'success',
@@ -83,8 +83,9 @@ const getNumOfLikes = async (req, res, next) => {
     }
 }
 
+// change to get all likes on a posts, well count # of likes in front end 
 //get number of likes on a post
-router.get('/photo_id', getNumOfLikes)
+router.get('/:photo_id', getNumOfLikes)
 
 
 module.exports = router
