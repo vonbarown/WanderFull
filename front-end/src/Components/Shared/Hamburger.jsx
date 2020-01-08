@@ -8,12 +8,11 @@ import { Profile } from '../../pages/Profile'
 import { Settings } from '../../pages/Settings'
 // import '../../styles/Hamburger.css'
 
-
 const options = [
     <a href = '/home'>Home</a>,
     <a href = '/profile'>Profile</a>,
     <a href = '/settings'>Settings</a>,
-    <a href ='/search'>Search</a>
+   <input type='text'></input>
 ];
 
 const ITEM_HEIGHT = 48;
@@ -67,3 +66,4 @@ const Hamburger = () => {
 
 
 export default Hamburger
+ 
