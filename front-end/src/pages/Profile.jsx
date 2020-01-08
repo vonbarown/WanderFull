@@ -1,7 +1,8 @@
+import axios from 'axios'
 import React, { Component } from 'react'
 import UserAvatar from '../Components/Shared/Avatar'
 import NavBar from '../Components/Profile/NavBar'
-import axios from 'axios'
+import ImageCard from '../Components/Shared/Cards'
 import '../styles/profile.css'
 class Profile extends Component {
 
@@ -44,6 +45,7 @@ class Profile extends Component {
                 <div className='header'>
                     <UserAvatar pic={'https://media.newyorker.com/photos/5e06335ca15be900089fe632/master/pass/Brody-CatsReview.jpg'} class_name={'classes.large'} userName={"Test"} />
                     <NavBar />
+                    <ImageCard pic={'https://media.newyorker.com/photos/5e06335ca15be900089fe632/master/pass/Brody-CatsReview.jpg'} />
                 </div>
             </div>
         )
