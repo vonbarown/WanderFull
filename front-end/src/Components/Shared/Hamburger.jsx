@@ -1,29 +1,38 @@
 import React from 'react'
-import Home from '../../pages/Home'
+// import Home from '../../pages/Home'
+import '../../styles/Hamburger.css'
 
 
-feedMenu = () => {
-    (
-     <a href='/'> Profile </a>
-        <a href='/'> Settings</a>
-        <input type = 'text'/>
+const feedMenu = () => {
+  return  (
+        <ul>
+            <li><a href='/profile'> Profile </a></li>
+            <li><a href='/settings'> Settings</a></li>
+            <li><input type = 'text'/></li>
+        </ul>    
 )
 }
 
-profileMenu = () => {(
-    <a href = '/'>Feed</a>
-    <a href = '/'> Settings</a>
+const profileMenu = () => {
+    return (
+    <ul>
+        <li><a href = '/home'>Feed</a></li>
+        <li><a href = '/settings'> Settings</a></li>
+    </ul>
+)} 
+
+const Hamburger = ({ feed }) => (
+    <header className = 'hamburger'>
+        <nav className = 'hamburger-nav'>
+            <div></div>
+            <div>
+                {feed ? feedMenu() : profileMenu() }
+
+            </div>
+        </nav>
+    </header>
+
 )
-
-}
-
-const Hamburger = ({ feed, feedMenu, profileMenu }) => (
-    
-)
-
-
-
-
 
 
 export default Hamburger
