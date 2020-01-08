@@ -13,11 +13,12 @@ router.post('/authenticate', async (req, res, next) => {
   console.log('Request body: ', {...req.body})
   let { username, password } = req.body
   const hashedPassword = hash(password)
+  console.log(password, hashedPassword)
   const query = `SELECT * FROM users WHERE username = $1 AND password = $2`
   const data = await db.one(query, [username, hashedPassword])
   console.log('User Query response data: ', data)
   delete data.password
-  console.log('REQUEST: ', req)
+  // console.log('REQUEST: ', req)
   res.json({
     status: 'success',
     message: 'User logged in',

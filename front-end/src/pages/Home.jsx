@@ -1,9 +1,9 @@
-import React,{ Component } from 'react'
+import React, { Component } from 'react'
 import Hamburger from '../Components/Shared/Hamburger'
 import axios from 'axios'
 
 class Home extends Component {
-    constructor(){
+    constructor() {
         super()
         this.state = {
             feed: true
@@ -15,7 +15,7 @@ class Home extends Component {
     }
 
     getAllPhotos = async () => {
-        let allPhotos = `http://localhost:8080/images`
+        let allPhotos = `http://localhost:8080/posts`
         try {
             const { data: { payload } } = await axios.get(allPhotos)
             console.log(payload);
@@ -25,11 +25,11 @@ class Home extends Component {
     }
 
     render() {
-        const {feed} = this.state
+        const { feed } = this.state
         return (
             <div>
-                <Hamburger 
-                feed = {feed}/>
+                <Hamburger
+                    feed={feed} />
                 <h1>Home</h1>
             </div>
         )
