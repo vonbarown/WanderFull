@@ -7,21 +7,20 @@ import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
 import Avatar from '@material-ui/core/Avatar';
 import IconButton from '@material-ui/core/IconButton';
-import Typography from '@material-ui/core/Typography';
-import { red } from '@material-ui/core/colors';
+import { blueGrey } from '@material-ui/core/colors';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import ShareIcon from '@material-ui/icons/Share';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 const useStyles = makeStyles(theme => ({
     card: {
-        maxWidth: 500,
+        maxWidth: 500
     },
     media: {
         height: 0,
         paddingTop: '56.25%', // 16:9
     },
     avatar: {
-        backgroundColor: red[500],
+        backgroundColor: blueGrey[500],
     },
 }));
 
@@ -47,10 +46,7 @@ export default function ImageCard(props) {
                 title="post"
             />
             <CardContent>
-                <Typography variant="body2" color="textSecondary" component="p">
-                    This impressive paella is a perfect party dish and a fun meal to cook together with your
-                    guests. Add 1 cup of frozen peas along with the mussels, if you like.
-        </Typography>
+                {props.caption}
             </CardContent>
             <CardActions disableSpacing>
                 <IconButton aria-label="add to favorites">
@@ -60,6 +56,6 @@ export default function ImageCard(props) {
                     <ShareIcon />
                 </IconButton>
             </CardActions>
-        </Card>
+        </Card >
     );
 }
