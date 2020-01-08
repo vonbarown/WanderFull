@@ -1,4 +1,5 @@
 import React,{ Component } from 'react'
+import Hamburger from '../Components/Shared/Hamburger'
 import axios from 'axios'
 
 class Home extends Component {
@@ -26,8 +27,11 @@ try{
 }
 
     render() {
+        const {feed} = this.state
         return (
             <div>
+                <Hamburger 
+                feed = {feed}/>
                 <h1>Home</h1>
             
         
