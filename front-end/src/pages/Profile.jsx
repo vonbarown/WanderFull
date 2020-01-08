@@ -50,6 +50,7 @@ class Profile extends Component {
 
                     username: "Voniel"
                 }
+
             ]
         }
     }
@@ -91,12 +92,18 @@ class Profile extends Component {
                     </div>
                     <NavBar />
                 </div>
-                {
-                    album.map(el => {
-                        return <ImageCard postPic={el.img} pic={'https://media.newyorker.com/photos/5e06335ca15be900089fe632/master/pass/Brody-CatsReview.jpg'} />
-                    })
+                <Container maxWidth='lg' className='imgContainer'>
+                    {
+                        album.map(el => {
+                            return <ImageCard
+                                postPic={el.img}
+                                pic={'https://media.newyorker.com/photos/5e06335ca15be900089fe632/master/pass/Brody-CatsReview.jpg'}
+                                caption={el.caption}
+                            />
+                        })
 
-                }
+                    }
+                </Container>
             </div>
         )
     }
