@@ -26,7 +26,7 @@ const addPic = async (req, res, next) => {
     }
 }
 //adding posts 
-router.post('/', addPic)
+router.post('/add', addPic)
 
 
 const getFeedPics = async (req, res, next) => {
@@ -50,7 +50,7 @@ const getFeedPics = async (req, res, next) => {
 }
 
 //retrieving all posts
-router.get('/', getFeedPics)
+router.get('/all', getFeedPics)
 
 const getUserPics = async (req, res, next) => {
 
@@ -61,7 +61,7 @@ const getUserPics = async (req, res, next) => {
             INNER JOIN users 
             ON posts.user_id = users.id 
             WHERE username = $1
-        `, [req.body.username])
+        `, [req.params.username])
 
         res.json({
             status: 'success',
@@ -73,7 +73,7 @@ const getUserPics = async (req, res, next) => {
     }
 }
 //retrieving all user posts
-router.get('/home', getUserPics)
+router.get('/profile/:username', getUserPics)
 
 const searchByHashtag = async (req, res, next) => {
 
@@ -84,7 +84,7 @@ const searchByHashtag = async (req, res, next) => {
             INNER JOIN users 
             ON posts.user_id = users.id 
             WHERE hashtag = $1
-        `, [req.body.hashtag])
+        `, [req.params.tag])
 
         res.json({
             status: 'success',
@@ -96,14 +96,14 @@ const searchByHashtag = async (req, res, next) => {
     }
 }
 //searching by hashtag
-router.get('/hashtag', searchByHashtag)
+router.get('/hashtag/:tag', searchByHashtag)
 
 const deletePhoto = async (req, res, next) => {
     try {
         let deletedPhoto = await db.one(`
             DELETE from posts 
             WHERE id = $1 RETURNING *
-        `, Number([req.body.id]))
+        `, req.body.id)
 
         res.json({
             status: 'success',
@@ -120,7 +120,11 @@ const deletePhoto = async (req, res, next) => {
 }
 
 //delete pictures
-router.delete('/', deletePhoto)
+router.delete('/:post_id', deletePhoto)
 
+
+//update post  
+
+// get post by location 
 
 module.exports = router;

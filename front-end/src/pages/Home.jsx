@@ -1,7 +1,14 @@
-import React, { Component } from 'react'
+import React,{ Component } from 'react'
+import Hamburger from '../Components/Shared/Hamburger'
 import axios from 'axios'
 
 class Home extends Component {
+    constructor(){
+        super()
+        this.state = {
+            feed: true
+        }
+    }
 
     componentDidMount() {
         this.getAllPhotos()
@@ -18,8 +25,11 @@ class Home extends Component {
     }
 
     render() {
+        const {feed} = this.state
         return (
             <div>
+                <Hamburger 
+                feed = {feed}/>
                 <h1>Home</h1>
             </div>
         )

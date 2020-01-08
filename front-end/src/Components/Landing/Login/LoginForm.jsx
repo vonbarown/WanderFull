@@ -1,10 +1,8 @@
 import React, { Component } from 'react'
 import Button from '../../Shared/Button'
-// import Home from '../../../pages/Home'
-// import { Redirect } from 'react-router-dom'
+import Home from '../../../pages/Home'
+import { Redirect } from 'react-router-dom'
 import axios from 'axios'
-
-
 
 class LoginForm extends Component {
     constructor(props) {
@@ -25,9 +23,9 @@ class LoginForm extends Component {
             console.log('Login failed.')
             console.log(err)
         }
-        // this.setState({
-        //     renderComponent: true
-        // })
+        this.setState({
+            renderComponent: true
+        })
     }
 
     inputChange = e => {
@@ -36,8 +34,7 @@ class LoginForm extends Component {
 
     render() {
         // console.log(this.state)
-        // const { renderComponent } = this.state
-
+        const { renderComponent } = this.state
         return (
             <div>
                 <form onSubmit={this.submitLogin}>
@@ -49,7 +46,7 @@ class LoginForm extends Component {
                     value='Sign up'
                     handleChange={this.props.handleChange} // TODO
                 />
-                {/* { renderComponent ? <Redirect to='/home' /> : null } */}
+                { renderComponent ? <Redirect to='/home' /> : null }
             </div>
         )
     }
