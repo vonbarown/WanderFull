@@ -9,10 +9,7 @@ const feedMenu = () => {
             <li><a href='/profile'> Profile </a></li>
             <li><a href='/settings'> Settings</a></li>
             <li><input type = 'text'/></li>
-        </ul>
-     
-        
-        
+        </ul>    
 )
 }
 

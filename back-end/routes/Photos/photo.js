@@ -8,13 +8,14 @@ const addPic = async (req, res, next) => {
     console.log('req.file', req.file)
     try {
         let imageUrl = "http://localhost:8080/" + req.file.path.replace('public/', '')
-        let insertQuery = `INSERT INTO posts (user_id, img, caption,hashtag) 
-        VALUES($/user_id/, $/imageUrl/,$/caption/,$/hashtag/)`
-
         let bodyCopy = Object.assign({}, req.body)
         bodyCopy.imageUrl = imageUrl
 
-        await db.none(insertQuery, bodyCopy)
+        await db.none(`
+            INSERT INTO posts (user_id, img, caption,hashtag) VALUES (
+                $/user_id/, $/imageUrl/, $/caption/, $/hashtag/
+            )
+        `, bodyCopy)
 
         res.json({
             message: 'image uploaded',
@@ -31,7 +32,12 @@ router.post('/', addPic)
 const getFeedPics = async (req, res, next) => {
 
     try {
-        let pictures = await db.any('SELECT username,hashtag,caption,img FROM posts INNER JOIN users ON posts.user_id = users.id')
+        let pictures = await db.any(`
+            SELECT username, hashtag, caption, img 
+            FROM posts 
+            INNER JOIN users 
+            ON posts.user_id = users.id
+        `)
 
         res.json({
             status: 'success',
@@ -49,7 +55,13 @@ router.get('/', getFeedPics)
 const getUserPics = async (req, res, next) => {
 
     try {
-        let userPics = await db.any('SELECT username,hashtag,caption,img FROM posts INNER JOIN users ON posts.user_id = users.id WHERE username = $1', Number([req.body.username]))
+        let userPics = await db.any(`
+            SELECT username, hashtag, caption, img 
+            FROM posts 
+            INNER JOIN users 
+            ON posts.user_id = users.id 
+            WHERE username = $1
+        `, [req.body.username])
 
         res.json({
             status: 'success',
@@ -66,7 +78,13 @@ router.get('/home', getUserPics)
 const searchByHashtag = async (req, res, next) => {
 
     try {
-        let userPics = await db.any('SELECT username,hashtag,caption,img FROM posts INNER JOIN users ON posts.user_id = users.id WHERE hashtag = $1', req.body.hashtag)
+        let userPics = await db.any(`
+            SELECT username, hashtag, caption, img 
+            FROM posts 
+            INNER JOIN users 
+            ON posts.user_id = users.id 
+            WHERE hashtag = $1
+        `, [req.body.hashtag])
 
         res.json({
             status: 'success',
@@ -82,7 +100,10 @@ router.get('/hashtag', searchByHashtag)
 
 const deletePhoto = async (req, res, next) => {
     try {
-        let deletedPhoto = await db.one('DELETE from posts WHERE id = $1 RETURNING *', Number([req.body.id]))
+        let deletedPhoto = await db.one(`
+            DELETE from posts 
+            WHERE id = $1 RETURNING *
+        `, Number([req.body.id]))
 
         res.json({
             status: 'success',
