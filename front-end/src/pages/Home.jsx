@@ -1,9 +1,5 @@
-<<<<<<< HEAD
 import React,{ Component } from 'react'
 import Hamburger from '../Components/Shared/Hamburger'
-=======
-import React, { Component } from 'react'
->>>>>>> e575bd0deb2c164310a5010efab717806499778c
 import axios from 'axios'
 
 class Home extends Component {

@@ -13,8 +13,6 @@ const feedMenu = () => {
 )
 }
 
-
-
 const profileMenu = () => {
     return (
     <ul>
