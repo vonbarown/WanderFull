@@ -9,7 +9,7 @@ const db = require('./database/databasejs');
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const session = require('express-session');
-const hash = require('js-sha256').sha256
+const hash = require('js-sha256').sha256;
 
 
 
