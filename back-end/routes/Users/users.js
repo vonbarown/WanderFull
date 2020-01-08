@@ -45,11 +45,11 @@ router.get('/username', getUser)
 
 
 const updateUserInfo = async (req, res, next) => {
-  // username, password, firstname, lastname, email, profile_pic
+  // username, profile_pic
   let user_id = req.body.user_id
   let username = req.body.username
   let profile_pic = req.body.profile_pic 
-
+console.log(user_id, username)
   try {
     if (username) {
       let updatedUsername = await db.any("UPDATE users SET username = $1 WHERE id = $2 RETURNING *", [username, user_id])
@@ -71,7 +71,15 @@ const updateUserInfo = async (req, res, next) => {
   }
 }
 
-router.patch('/', updateUserInfo)
+router.patch('/update', updateUserInfo)
+
+
+const deactivateUser = async (req, res, next) => {
+
+}
+
+router.patch('/deactivate', deactivateUser)
+
 
 
 module.exports = router;

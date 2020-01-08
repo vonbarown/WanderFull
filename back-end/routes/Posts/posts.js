@@ -50,7 +50,7 @@ const getFeedPics = async (req, res, next) => {
 }
 
 //retrieving all posts
-router.get('/', getFeedPics)
+router.get('/all', getFeedPics)
 
 const getUserPics = async (req, res, next) => {
 
@@ -122,5 +122,9 @@ const deletePhoto = async (req, res, next) => {
 //delete pictures
 router.delete('/', deletePhoto)
 
+
+//update post  
+
+// get post by location 
 
 module.exports = router;
