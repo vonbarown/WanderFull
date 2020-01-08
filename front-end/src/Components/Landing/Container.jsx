@@ -11,18 +11,18 @@ const Container = ({ firstRender, login, handleChange }) => (
             ? <LoginForm handleChange={handleChange} />
             : !firstRender && !login
                 ? <SignUpForm handleChange={handleChange} />
-                : (<div>
-                    <Button
-                        value='Login'
-                        handleChange={handleChange}
-                    />
-
-                    <Button
-                        value='Sign up'
-                        handleChange={handleChange}
-                    />
-
-                </div>)
+                : (
+                    <div>
+                        <Button
+                            value='Login'
+                            handleChange={handleChange}
+                        />
+                        <Button
+                            value='Sign up'
+                            handleChange={handleChange}
+                        />
+                    </div>
+                )
         }
     </div>
 )

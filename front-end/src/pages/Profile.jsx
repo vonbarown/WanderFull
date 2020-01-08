@@ -17,20 +17,12 @@ class Profile extends Component {
         this.getUserAlbum()
     }
 
-    // Fetch pictures when the component get updated
-    componentDidUpdate = (prevProps, prevState) => {
-        const { album } = this.state
-        if (album !== prevState.album) {
-            this.getUserAlbum()
-        }
-    }
-
     // Retrieves all the pictures that a user uploaded
     getUserAlbum = async () => {
         let username = 'Voniel'
         let { album } = this.state
         try {
-            const { data } = await axios.get(`http://localhost:8080/images/home`, {
+            const { data } = await axios.get(`http://localhost:8080/posts/profile/${username}`, {
                 params: {
                     username: username
                 }

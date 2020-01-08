@@ -11,7 +11,8 @@ CREATE TABLE users (
     firstname VARCHAR, 
     lastname VARCHAR, 
     email VARCHAR UNIQUE,
-    profile_pic VARCHAR
+    profile_pic VARCHAR,
+    active BOOLEAN 
 ); 
 
 CREATE TABLE posts (
@@ -19,14 +20,17 @@ CREATE TABLE posts (
     user_id INT REFERENCES users(id), 
     img VARCHAR, 
     caption VARCHAR, 
-    hashtag VARCHAR
+    location VARCHAR 
 );
+-- add date/time column 
 
 CREATE TABLE likes (
     id SERIAL PRIMARY KEY, 
     liker_id INT REFERENCES users(id), 
-    photo_id INT REFERENCES posts(id)
+    post_id INT REFERENCES posts(id)
 );
+
+-- create hashtag table 
 
 --- values for tables in db ---
 
@@ -38,14 +42,14 @@ INSERT INTO users (username, password, firstname, lastname, email) values
 ('Briany', '1f7378adb8c1ee2ed469e0c499859fb603a4643f10c98feb10be7f07ea6b47f3', 'Briany', 'Taveras', 'brianytaveras@pursuit.org')
 ;
 
-INSERT INTO posts(user_id, img, caption, hashtag) values
-(1, 'https://www.desktodirtbag.com/wp-content/uploads/2019/05/best-cartagena-beaches-playa-blanca-0003.jpeg', 'Bliss', '#cartagena #travelbug'),
-(2, 'https://www.maremmaguide.com/image-files/maremma_restaurants_500.jpg', 'AUTHENTIC', '#italy'),
-(3, 'https://3tsll33cscvk11pae33oze51-wpengine.netdna-ssl.com/wp-content/uploads/2018/01/tokyo-street-food-takoyaki.png', 'Japanese street food', '#japan'),
-(4, 'https://i.ytimg.com/vi/y8hXqoK8LuI/maxresdefault.jpg', 'Kats Deli', '#LES #NewYork')
+INSERT INTO posts(user_id, img, caption) values
+(1, 'https://www.desktodirtbag.com/wp-content/uploads/2019/05/best-cartagena-beaches-playa-blanca-0003.jpeg', 'Bliss'),
+(2, 'https://www.maremmaguide.com/image-files/maremma_restaurants_500.jpg', 'AUTHENTIC'),
+(3, 'https://3tsll33cscvk11pae33oze51-wpengine.netdna-ssl.com/wp-content/uploads/2018/01/tokyo-street-food-takoyaki.png', 'Japanese street food'),
+(4, 'https://i.ytimg.com/vi/y8hXqoK8LuI/maxresdefault.jpg', 'Kats Deli')
 ;
 
-INSERT INTO likes (liker_id, photo_id) values
+INSERT INTO likes (liker_id, post_id) values
 (1, 2),
 (1, 3),
 (1, 4),

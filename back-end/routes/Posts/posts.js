@@ -8,13 +8,14 @@ const addPic = async (req, res, next) => {
     console.log('req.file', req.file)
     try {
         let imageUrl = "http://localhost:8080/" + req.file.path.replace('public/', '')
-        let insertQuery = `INSERT INTO posts (user_id, img, caption,hashtag) 
-        VALUES($/user_id/, $/imageUrl/,$/caption/,$/hashtag/)`
-
         let bodyCopy = Object.assign({}, req.body)
         bodyCopy.imageUrl = imageUrl
 
-        await db.none(insertQuery, bodyCopy)
+        await db.none(`
+            INSERT INTO posts (user_id, img, caption,hashtag) VALUES (
+                $/user_id/, $/imageUrl/, $/caption/, $/hashtag/
+            )
+        `, bodyCopy)
 
         res.json({
             message: 'image uploaded',
@@ -25,13 +26,18 @@ const addPic = async (req, res, next) => {
     }
 }
 //adding posts 
-router.post('/', addPic)
+router.post('/add', addPic)
 
 
 const getFeedPics = async (req, res, next) => {
 
     try {
-        let pictures = await db.any('SELECT username,hashtag,caption,img FROM posts INNER JOIN users ON posts.user_id = users.id')
+        let pictures = await db.any(`
+            SELECT username, hashtag, caption, img 
+            FROM posts 
+            INNER JOIN users 
+            ON posts.user_id = users.id
+        `)
 
         res.json({
             status: 'success',
@@ -44,12 +50,18 @@ const getFeedPics = async (req, res, next) => {
 }
 
 //retrieving all posts
-router.get('/', getFeedPics)
+router.get('/all', getFeedPics)
 
 const getUserPics = async (req, res, next) => {
 
     try {
-        let userPics = await db.any('SELECT username,hashtag,caption,img FROM posts INNER JOIN users ON posts.user_id = users.id WHERE username = $1', Number([req.body.username]))
+        let userPics = await db.any(`
+            SELECT username, hashtag, caption, img 
+            FROM posts 
+            INNER JOIN users 
+            ON posts.user_id = users.id 
+            WHERE username = $1
+        `, [req.params.username])
 
         res.json({
             status: 'success',
@@ -61,12 +73,18 @@ const getUserPics = async (req, res, next) => {
     }
 }
 //retrieving all user posts
-router.get('/home', getUserPics)
+router.get('/profile/:username', getUserPics)
 
 const searchByHashtag = async (req, res, next) => {
 
     try {
-        let userPics = await db.any('SELECT username,hashtag,caption,img FROM posts INNER JOIN users ON posts.user_id = users.id WHERE hashtag = $1', req.body.hashtag)
+        let userPics = await db.any(`
+            SELECT username, hashtag, caption, img 
+            FROM posts 
+            INNER JOIN users 
+            ON posts.user_id = users.id 
+            WHERE hashtag = $1
+        `, [req.params.tag])
 
         res.json({
             status: 'success',
@@ -78,11 +96,14 @@ const searchByHashtag = async (req, res, next) => {
     }
 }
 //searching by hashtag
-router.get('/hashtag', searchByHashtag)
+router.get('/hashtag/:tag', searchByHashtag)
 
 const deletePhoto = async (req, res, next) => {
     try {
-        let deletedPhoto = await db.one('DELETE from posts WHERE id = $1 RETURNING *', Number([req.body.id]))
+        let deletedPhoto = await db.one(`
+            DELETE from posts 
+            WHERE id = $1 RETURNING *
+        `, req.body.id)
 
         res.json({
             status: 'success',
@@ -99,7 +120,11 @@ const deletePhoto = async (req, res, next) => {
 }
 
 //delete pictures
-router.delete('/', deletePhoto)
+router.delete('/:post_id', deletePhoto)
 
+
+//update post  
+
+// get post by location 
 
 module.exports = router;
