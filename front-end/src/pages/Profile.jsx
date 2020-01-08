@@ -10,13 +10,42 @@ class Profile extends Component {
         super(props)
 
         this.state = {
-            album: []
+            album: [
+                {
+                    caption: "Japanese street food",
+
+                    hashtag: "#japan",
+
+                    img: "https://3tsll33cscvk11pae33oze51-wpengine.netdna-ssl.com/wp-content/uploads/2018/01/tokyo-street-food-takoyaki.png",
+
+                    username: "Voniel"
+                },
+                {
+                    caption: "Japanese street food",
+
+                    hashtag: "#japan",
+
+                    img: "https://3tsll33cscvk11pae33oze51-wpengine.netdna-ssl.com/wp-content/uploads/2018/01/tokyo-street-food-takoyaki.png",
+
+                    username: "Voniel"
+                },
+                {
+                    caption: "Japanese street food",
+
+                    hashtag: "#japan",
+
+                    img: "https://3tsll33cscvk11pae33oze51-wpengine.netdna-ssl.com/wp-content/uploads/2018/01/tokyo-street-food-takoyaki.png",
+
+                    username: "Voniel"
+                }
+
+            ]
         }
     }
 
-    componentDidMount() {
-        this.getUserAlbum()
-    }
+    // componentDidMount() {
+    //     this.getUserAlbum()
+    // }
 
     // Retrieves all the pictures that a user uploaded
     getUserAlbum = async () => {
@@ -40,12 +69,20 @@ class Profile extends Component {
     }
 
     render() {
+        const { album } = this.state
+
         return (
             <div className='profile'>
                 <div className='header'>
                     <UserAvatar pic={'https://media.newyorker.com/photos/5e06335ca15be900089fe632/master/pass/Brody-CatsReview.jpg'} class_name={'classes.large'} userName={"Test"} />
                     <NavBar />
-                    <ImageCard pic={'https://media.newyorker.com/photos/5e06335ca15be900089fe632/master/pass/Brody-CatsReview.jpg'} />
+
+                    {
+                        album.map(el => {
+                            return <ImageCard postPic={el.img} pic={'https://media.newyorker.com/photos/5e06335ca15be900089fe632/master/pass/Brody-CatsReview.jpg'} />
+                        })
+
+                    }
                 </div>
             </div>
         )
