@@ -25,7 +25,8 @@ router.get('/all', getAllLikes)
 
 const addLike = async (req, res, next) => {
     try {
-        let insertQuery = `INSERT INTO likes (liker_id, photo_id) 
+        let insertQuery = 
+        `INSERT INTO likes (liker_id, photo_id) 
         VALUES($/liker_id/,$/photo_id/) RETURNING *`
 
         const liked = await db.one(insertQuery, req.body)
@@ -46,7 +47,10 @@ router.post('/add', addLike)
 
 const deleteLike = async (req, res, next) => {
     try {
-        let deletedLike = await db.one('DELETE from likes WHERE id = $1 RETURNING *', Number([req.body.liker_id]))
+        let deletedLike = await db.one(
+        `DELETE from likes 
+         WHERE post_id = $1 
+         AND liker_id = $2 RETURNING *`, [req.params.post_id, req.params.liker_id])
 
         res.json({
             status: 'success',
@@ -62,12 +66,13 @@ const deleteLike = async (req, res, next) => {
     }
 }
 
-//delete pictures
-router.delete('/unlike', deleteLike)
+//delete like on a post
+router.delete('/unlike/:post_id/:liker_id', deleteLike)
 
-const getNumOfLikes = async (req, res, next) => {
+
+const getLikesOnPost = async (req, res, next) => {
     try {
-        let numOfLikes = await db.any('SELECT COUNT(*) from likes WHERE photo_id = $1', Number([req.params.photo_id]))
+        let numOfLikes = await db.any('SELECT * FROM likes WHERE post_id = $1', Number([req.params.post_id]))
 
         res.json({
             status: 'success',
@@ -83,9 +88,8 @@ const getNumOfLikes = async (req, res, next) => {
     }
 }
 
-// change to get all likes on a posts, well count # of likes in front end 
-//get number of likes on a post
-router.get('/:photo_id', getNumOfLikes)
+// get all likes on a post
+router.get('/:post_id', getLikesOnPost)
 
 
 module.exports = router
