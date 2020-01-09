@@ -5,6 +5,7 @@ import NavBar from '../Components/Profile/NavBar'
 import ImageCard from '../Components/Shared/Cards'
 import Hamburger from '../Components/Shared/Hamburger'
 import { Container } from '@material-ui/core'
+import { Buds } from '../Components/Profile/Buds'
 import '../styles/profile.css'
 class Profile extends Component {
 
@@ -80,6 +81,10 @@ class Profile extends Component {
         }
     }
 
+    renderNavBar() {
+        return <Buds />
+    }
+
     render() {
         const { album } = this.state
 
@@ -90,7 +95,7 @@ class Profile extends Component {
                         <UserAvatar pic={'https://media.newyorker.com/photos/5e06335ca15be900089fe632/master/pass/Brody-CatsReview.jpg'} class_name={'classes.large'} userName={"Test"} />
                         <Hamburger />
                     </div>
-                    <NavBar />
+                    <NavBar renderNavBar={this.renderNavBar} />
                 </div>
                 <Container maxWidth='lg' className='imgContainer'>
                     {

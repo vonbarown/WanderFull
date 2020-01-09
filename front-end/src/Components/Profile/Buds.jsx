@@ -1,9 +1,11 @@
 import React from 'react';
 
-const Buds = () =>{
+export const Buds = () => {
 
-
+    return (
+        <div>Buds</div>
+    )
 
 }
 
-export default Buds
+// export default Buds
