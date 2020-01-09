@@ -54,9 +54,9 @@ class App extends Component {
         return (
             <div>
                 <Switch>
-                    <Route exact path='/' render={this.renderContainer} />
+                    <Route exact path='/' component={this.renderContainer} />
                     <Route path='/home' component={Home} />
-                    <Route path = '/profile' component = {Profile}/>
+                    <Route path='/profile' component={Profile} />
                 </Switch>
             </div>
         )

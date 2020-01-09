@@ -9,7 +9,7 @@ const db = require('./database/databasejs');
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const session = require('express-session');
-const hash = require('js-sha256').sha256
+const hash = require('js-sha256').sha256;
 
 
 
@@ -33,6 +33,7 @@ const usersRouter = require('./routes/Users/users')
 const photosRouter = require('./routes/Posts/posts')
 const likesRouter = require('./routes/Likes/likes')
 const registerRouter = require('./routes/Users/register')
+const loginRouter = require('./routes/Users/login')
 
 const app = express();
 
@@ -94,7 +95,7 @@ const loggedIn = (req, res, next) => req.user ? next() : res.redirect('/')
 // Routes
 app.use('/', indexRouter)
 app.use('/register', registerRouter)
-// app.use('/users', passport.authenticate('local'), usersRouter)
+app.use('/login', passport.authenticate('local'), loginRouter)
 app.use('/users', usersRouter)
 app.use('/posts', upload.single('imageUrl'), photosRouter)
 app.use('/likes', likesRouter)
