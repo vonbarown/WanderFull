@@ -17,7 +17,7 @@ class LoginForm extends Component {
         console.log('Submitting Login request...')
         const { username, password } = this.state
         try {
-            const data = await axios.post(`http://localhost:8080/users/authenticate`, { username, password })
+            const data = await axios.post(`http://localhost:8080/login`, { username, password })
             console.log(data.data)
             this.setState({
                 renderComponent: true
