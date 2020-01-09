@@ -9,10 +9,10 @@ import { Settings } from '../../pages/Settings'
 // import '../../styles/Hamburger.css'
 
 const options = [
-    <a href = '/home'>Home</a>,
-    <a href = '/profile'>Profile</a>,
-    <a href = '/settings'>Settings</a>,
-   <input type='text'></input>
+    <a href='/home'>Home</a>,
+    <a href='/profile'>Profile</a>,
+    <a href='/settings'>Settings</a>,
+    <input type='text'></input>
 ];
 
 const ITEM_HEIGHT = 48;
@@ -30,7 +30,12 @@ const Hamburger = () => {
         setAnchorEl(null);
     };
 
-    
+    const handleKeyPress = (event) => {
+        if (event.key === 'Enter') {
+            console.log('hi')
+        }
+    }
+
     return (
         <div>
             <IconButton
@@ -55,7 +60,7 @@ const Hamburger = () => {
                 }}
             >
                 {options.map(option => (
-                    <MenuItem key={option} selected={option === 'Search'} onClick={handleClose}>
+                    <MenuItem key={option} selected={option === 'Search'} onKeyPress={handleKeyPress}>
                         {option}
                     </MenuItem>
                 ))}
@@ -66,4 +71,3 @@ const Hamburger = () => {
 
 
 export default Hamburger
- 

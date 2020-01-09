@@ -1,3 +1,11 @@
-div {
+.header {
     justify-content: center;
+}
+
+.nav{
+    text-align: right;
+}
+
+.feed{
+    justify-content: center
 }

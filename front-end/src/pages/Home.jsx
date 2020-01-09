@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import Hamburger from '../Components/Shared/Hamburger'
 import axios from 'axios'
 import ImageCard from '../Components/Shared/Cards'
+import '../styles/HomePage.css'
 
 class Home extends Component {
     constructor() {
@@ -33,21 +34,30 @@ class Home extends Component {
         const { feed, feedArr } = this.state
         return (
             <div>
-                <Hamburger
-                    feed={feed} />
-                <h1></h1>
+                <div className='nav'>
+                    <Hamburger
+                        feed={feed} />
+                </div>
+                <div className='header'>
+                    <h1>WanderFull</h1>
+                </div>
 
-                {
-                    feedArr.map(el => {
-                        return <ImageCard
-                         postPic={el.img} 
-                         pic={'https://media.newyorker.com/photos/5e06335ca15be900089fe632/master/pass/Brody-CatsReview.jpg'}
-                         caption = {el.caption}
-                         key={el.username}
-                         />
-                    })
+                <div className='feed'>
+                    {
+                        feedArr.map(el => {
+                            return <ImageCard
+                                postPic={el.img}
+                                pic={'https://media.newyorker.com/photos/5e06335ca15be900089fe632/master/pass/Brody-CatsReview.jpg'}
+                                caption={el.caption}
+                                key={el.username}
+                            />
+                        })
 
-                }
+                    }
+                </div>
+
+
+
             </div>
         )
     }
