@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import Hamburger from '../Components/Shared/Hamburger'
 import '../styles/settings.css'
 
 class Settings extends Component {
@@ -12,6 +13,7 @@ class Settings extends Component {
     render() {
         return (
             <div className='settingsPage'>
+                <Hamburger />
                 <h1>Settings</h1>
                 <p>Dark Theme<button>on/off</button></p>
                 <p>Edit Profile info</p>
