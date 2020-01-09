@@ -6,6 +6,10 @@
     text-align: right;
 }
 
-.feed{
-    justify-content: center
+.feedContainer {
+    justify-content: center;
+}
+
+.imgCard{
+    margin-bottom: 5%;
 }

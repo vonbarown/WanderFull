@@ -6,17 +6,17 @@ const handleSubmit = (event) => {
     console.log('form was submitted')
 }
 
-const Settings = () => {
+const Settings = (props) => {
     return (
         <div>
             <h1>Settings</h1>
             <p>Dark Theme<button>on/off</button></p>
             <p>Edit Profile info</p>
-            <form onSubmit={handleSubmit}>
+            {/* <form onSubmit={handleSubmit}>
                 <input type="text" placeholder="username"></input>
                 <input type="text" placeholder="profile pic url"></input>
                 <button>Submit</button>
-            </form>
+            </form> */}
         </div>
     )
 }

@@ -3,21 +3,22 @@ import IconButton from '@material-ui/core/IconButton';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
-import { Home } from '../../pages/Home'
-import { Profile } from '../../pages/Profile'
-import { Settings } from '../../pages/Settings'
+// import Axios from 'axios';
 // import '../../styles/Hamburger.css'
 
-const options = [
-    <a href='/home'>Home</a>,
-    <a href='/profile'>Profile</a>,
-    <a href='/settings'>Settings</a>,
-    <input type='text'></input>
-];
+
 
 const ITEM_HEIGHT = 48;
 
-const Hamburger = () => {
+const Hamburger = (props) => {
+console.log('hamburger props' , props)
+    const options = [
+        <a href='/home'>Home</a>,
+        <a href='/profile'>Profile</a>,
+        <a href='/settings'>Settings</a>,
+        <input type='text' onChange={props.handleInput} ></input>
+    ];
+
     const [anchorEl, setAnchorEl] = React.useState(null);
     const open = Boolean(anchorEl);
 
@@ -30,12 +31,12 @@ const Hamburger = () => {
         setAnchorEl(null);
     };
 
-    const handleKeyPress = (event) => {
+    const handleKeyPress =  (event) => {
         if (event.key === 'Enter') {
-            console.log('hi')
-        }
+    }
     }
 
+   
     return (
         <div>
             <IconButton
