@@ -3,6 +3,8 @@ import Container from './Components/Landing/Container'
 import { Switch, Route } from 'react-router-dom'
 import Home from './pages/Home'
 import Profile from './pages/Profile'
+import { Buds } from './Components/Profile/Buds'
+import Settings from './pages/Settings'
 
 class App extends Component {
     state = {
@@ -57,6 +59,8 @@ class App extends Component {
                     <Route exact path='/' component={this.renderContainer} />
                     <Route path='/home' component={Home} />
                     <Route path='/profile' component={Profile} />
+                    <Route path='/buds' component={Buds} />
+                    <Route path='/settings' component={Settings} />
                 </Switch>
             </div>
         )
