@@ -46,25 +46,35 @@ router.get('/:username', getUser)
 
 
 const updateUserInfo = async (req, res, next) => {
-  // username, profile_pic
-  let user_id = req.body.user_id
+  let user_id = req.params.user_id
   let username = req.body.username
   let profile_pic = req.body.profile_pic 
 console.log(user_id, username)
+
   try {
     if (username) {
-      let updatedUsername = await db.any("UPDATE users SET username = $1 WHERE id = $2 RETURNING *", [username, user_id])
+      let updatedUsername = await db.any(
+      `UPDATE users 
+      SET username = $1 
+      WHERE id = $2
+      RETURNING *`, 
+      [username, Number(user_id)])
       res.status(200)
       res.json({
         payload: updatedUsername,
         message: `Success. Updated ${username} in users table.`
       });
     } else if (profile_pic) {
-      let updatedProfile_pic = await db.any("UPDATE users SET email = $1 WHERE id = $2 RETURNING *", [profile_pic, user_id])
+      let updatedProfile_pic = await db.any(
+      `UPDATE users 
+      SET profile_pic = $1 
+      WHERE id = $2 
+      RETURNING *`, 
+      [profile_pic, Number(user_id)])
       res.status(200)
       res.json({
         payload: updatedProfile_pic,
-        message: `Success. Updated ${profile_pic} in users table.`
+        message: `Success. Updated user ${user_id}'s profile pic in users table.`
       });
     }
   } catch (error) {
@@ -72,7 +82,7 @@ console.log(user_id, username)
   }
 }
 
-router.patch('/update', updateUserInfo)
+router.patch('/update/:user_id', updateUserInfo)
 
 
 const deactivateUser = async (req, res, next) => {
@@ -102,5 +112,8 @@ router.patch('/deactivate/:username', deactivateUser)
 
 // middleware to check if user exists
 // reactivate user
+
+
+
 
 module.exports = router;
