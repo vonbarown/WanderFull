@@ -29,7 +29,7 @@ router.post('/authenticate', async (req, res, next) => {
 const getUser = async (req, res, next) => {
 
   try {
-    let user = await db.any('SELECT * FROM users WHERE username = $1', req.body.username)
+    let user = await db.any('SELECT * FROM users WHERE username = $1', req.params.username)
 
     res.json({
       status: 'success',
@@ -41,7 +41,7 @@ const getUser = async (req, res, next) => {
   }
 }
 //retrieving one users info
-router.get('/username', getUser)
+router.get('/:username', getUser)
 
 
 const updateUserInfo = async (req, res, next) => {
@@ -75,11 +75,31 @@ router.patch('/update', updateUserInfo)
 
 
 const deactivateUser = async (req, res, next) => {
+  try {
+    let deactivatedUser = await db.one(`
+        UPDATE users
+        SET active = $1
+        WHERE username = $2
+        RETURNING username, active 
+    `, ['false', req.params.username])
 
+    res.json({
+        status: 'success',
+        message: 'account deactivated',
+        payload: deactivatedUser
+    })
+} catch (error) {
+    console.log(error);
+    res.send({
+        status: 'failure',
+        message: 'you can\'t perform this operation'
+    })
+}
 }
 
-router.patch('/deactivate', deactivateUser)
+router.patch('/deactivate/:username', deactivateUser)
 
-
+// middleware to check if user exists
+// reactivate user
 
 module.exports = router;

@@ -94,7 +94,8 @@ const loggedIn = (req, res, next) => req.user ? next() : res.redirect('/')
 // Routes
 app.use('/', indexRouter)
 app.use('/register', registerRouter)
-app.use('/users', passport.authenticate('local'), usersRouter)
+// app.use('/users', passport.authenticate('local'), usersRouter)
+app.use('/users', usersRouter)
 app.use('/posts', upload.single('imageUrl'), photosRouter)
 app.use('/likes', likesRouter)
 

@@ -11,10 +11,10 @@ const addPic = async (req, res, next) => {
         let bodyCopy = Object.assign({}, req.body)
         bodyCopy.imageUrl = imageUrl
 
-        await db.none(`
-            INSERT INTO posts (user_id, img, caption,hashtag) VALUES (
-                $/user_id/, $/imageUrl/, $/caption/, $/hashtag/
-            )
+        await db.any(`
+            INSERT INTO posts (user_id, caption,hashtag) VALUES (
+                $/user_id/, $/caption/, $/hashtag/
+            ) RETURNING (id, hashtag)
         `, bodyCopy)
 
         res.json({
@@ -33,7 +33,7 @@ const getFeedPics = async (req, res, next) => {
 
     try {
         let pictures = await db.any(`
-            SELECT username, hashtag, caption, img 
+            SELECT username, hashtag, caption, location, img, profile_pic 
             FROM posts 
             INNER JOIN users 
             ON posts.user_id = users.id
@@ -56,7 +56,7 @@ const getUserPics = async (req, res, next) => {
 
     try {
         let userPics = await db.any(`
-            SELECT username, hashtag, caption, img 
+            SELECT username, hashtag, caption, location, img, profile_pic
             FROM posts 
             INNER JOIN users 
             ON posts.user_id = users.id 
@@ -78,32 +78,34 @@ router.get('/profile/:username', getUserPics)
 const searchByHashtag = async (req, res, next) => {
 
     try {
-        let userPics = await db.any(`
-            SELECT username, hashtag, caption, img 
+        let hashtagPics = await db.any(`
+            SELECT username, hashtag, caption, location, img, profile_pic
             FROM posts 
             INNER JOIN users 
             ON posts.user_id = users.id 
-            WHERE hashtag = $1
+            WHERE $1 = ANY(hashtag)
         `, [req.params.tag])
 
         res.json({
             status: 'success',
             message: 'retrieved all post',
-            payload: userPics
+            payload: hashtagPics
         })
     } catch (error) {
         console.log(error);
     }
 }
 //searching by hashtag
-router.get('/hashtag/:tag', searchByHashtag)
+//SELECT * FROM posts WHERE id IN (1, 2, 3);
+// SELECT * FROM posts WHERE '#this' = ANY(hashtag);
+router.get('/search/hashtag/:tag', searchByHashtag)
 
 const deletePhoto = async (req, res, next) => {
     try {
         let deletedPhoto = await db.one(`
             DELETE from posts 
             WHERE id = $1 RETURNING *
-        `, req.body.id)
+        `, req.params.post_id)
 
         res.json({
             status: 'success',
@@ -122,9 +124,33 @@ const deletePhoto = async (req, res, next) => {
 //delete pictures
 router.delete('/:post_id', deletePhoto)
 
+ 
+const searchByLocation = async (req, res, next) => {
 
-//update post  
+    try {
+        let locationPics = await db.any(`
+            SELECT username, hashtag, caption, location, img, profile_pic
+            FROM posts 
+            INNER JOIN users 
+            ON posts.user_id = users.id 
+            WHERE location = $1
+        `, [req.params.place])
+
+        res.json({
+            status: 'success',
+            message: 'retrieved all post',
+            payload: locationPics
+        })
+    } catch (error) {
+        console.log(error);
+    }
+}
 
 // get post by location 
+router.get('/search/location/:place', searchByLocation)
+
+
+//update post 
+
 
 module.exports = router;
