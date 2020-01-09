@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import '../styles/settings.css'
 
-
 class Settings extends Component {
 
     handleSubmit = (event) => {
