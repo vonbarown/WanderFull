@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import Hamburger from '../Components/Shared/Hamburger'
 import '../styles/settings.css'
 
+
 class Settings extends Component {
 
     handleSubmit = (event) => {
