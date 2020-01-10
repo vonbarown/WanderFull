@@ -11,13 +11,13 @@ class SignUpForm extends Component {
 
     submitSignUp = async (event) => {
         event.preventDefault()
-        console.log('Submitting Login request...')
+        console.log('Submitting Signup request...')
         const { username, password, firstname, lastname, email } = this.state
         try {
             const data = await axios.post(`http://localhost:8080/register`,
                 { username, password, firstname, lastname, email }
             )
-            console.log(data.data)
+            console.log('Data', data.data)
         } catch (err) {
             console.log('Signup failed.')
             console.log(err)
@@ -37,10 +37,10 @@ class SignUpForm extends Component {
                     <input type="text" placeholder="First name" name="firstname" onChange={ this.inputChange } />
                     <input type="text" placeholder="Last name" name="lastname" onChange={ this.inputChange } />
                     <input type="text" placeholder="Email" name="email" onChange={ this.inputChange } />
-                    <Button value='Welcome' />
+                    <Button value='Signup' />
                 </form>
                 <Button
-                    value='Login'
+                    value='Login Instead?'
                     handleChange={this.props.handleChange}
                 />
             </div>

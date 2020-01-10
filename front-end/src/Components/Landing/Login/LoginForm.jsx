@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Button from '../../Shared/Button'
+// import Home from '../../../pages/Home'
 import { Redirect } from 'react-router-dom'
 import axios from 'axios'
 

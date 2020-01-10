@@ -1,18 +1,25 @@
 const createError = require('http-errors');
-const express = require('express');
 const path = require('path');
-const cookieParser = require('cookie-parser');
 const logger = require('morgan');
+const cookieParser = require('cookie-parser');
+
+// Express
+const express = require('express');
 const cors = require('cors');
 const multer = require('multer');
+
+// Database
 const db = require('./database/databasejs');
+
+// Passport
 const passport = require('passport');
-const LocalStrategy = require('passport-local').Strategy;
+require('./routes/config/passport')(passport);
+// const LocalStrategy = require('passport-local').Strategy;
 const session = require('express-session');
-const hash = require('js-sha256').sha256;
+// const hash = require('js-sha256').sha256;
 
 
-
+// Multer setup for image storage
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
     cb(null, './public/images')
@@ -27,7 +34,7 @@ const upload = multer({
   storage: storage
 })
 
-
+// Importing Routes
 const indexRouter = require('./routes/index')
 const usersRouter = require('./routes/Users/users')
 const photosRouter = require('./routes/Posts/posts')
@@ -35,6 +42,7 @@ const likesRouter = require('./routes/Likes/likes')
 const registerRouter = require('./routes/Users/register')
 const loginRouter = require('./routes/Users/login')
 
+// Init Express
 const app = express();
 
 // Passport setup
@@ -46,6 +54,7 @@ app.use(passport.session());
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
+// Express Middlewares
 app.use(logger('dev'));
 app.use(express.json());
 app.use(cors())
@@ -55,58 +64,63 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 
 // PASSPORT
-passport.use(new LocalStrategy(async (username, password, cb) => {
-  try {
-    const data = await db.one('SELECT id, username, password FROM users WHERE username=$1', [username])
-    console.log('Incoming U/P: ', username, password)
-    console.log('Passport: ', data)
-    if (hash(password) === data.password) {
-      cb(null, { id: data.id, username: data.username })
-    } else {
-      cb(null, false)
-    }
-  } catch (err) {
-    console.error('Error when selecting user on login', err)
-    cb(null, false)
-  }
-}))
+// passport.use(new LocalStrategy(async (username, password, cb) => {
+//   try {
+//     const data = await db.one('SELECT id, username, password FROM users WHERE username=$1', [username])
+//     console.log('Incoming U/P: ', username, password)
+//     console.log('Passport: ', data)
+//     if (hash(password) === data.password) {
+//       cb(null, { id: data.id, username: data.username })
+//     } else {
+//       cb(null, false)
+//     }
+//   } catch (err) {
+//     console.error('Error when selecting user on login', err)
+//     cb(null, false)
+//   }
+// }))
 
-passport.serializeUser((user, done) => {
-  console.log('Serialize Hit', user)
-  done(null, user.id);
-});
+// passport.serializeUser((user, done) => {
+//   console.log('Serialize Hit', user)
+//   done(null, user.id);
+// });
 
-// DESERIALIZE NOT COMPLETE YET
-passport.deserializeUser( async (id, done) => {
-  console.log('De-Serialize Hit')
-  try {
-    const data = await db.query('SELECT id, username FROM users WHERE id = $1', [parseInt(id, 10)])
-    console.log(data)
-    done(null, false)
-  } catch (err) {
-    console.error('Error when selecting user on session deserialize', err)
-    res.send('Invalid sign-in')
-    done(null, false)
-  }
-});
+// // DESERIALIZE NOT COMPLETE YET
+// passport.deserializeUser( async (id, done) => {
+//   console.log('De-Serialize Hit')
+//   try {
+//     const data = await db.query('SELECT id, username FROM users WHERE id = $1', [parseInt(id, 10)])
+//     console.log(data)
+//     done(null, false)
+//   } catch (err) {
+//     console.error('Error when selecting user on session deserialize', err)
+//     res.send('Invalid sign-in')
+//     done(null, false)
+//   }
+// });
 
-const loggedIn = (req, res, next) => req.user ? next() : res.redirect('/')
+const loggedIn = (req, res, next) => req.isAuthenticated() ? next() : res.redirect('/')
+const logRequest = (req, res, next) => {
+  console.log('REQUEST')
+  console.log(req)
+  next()
+}
 
 // Routes
 app.use('/', indexRouter)
 app.use('/register', registerRouter)
 app.use('/login', passport.authenticate('local'), loginRouter)
 app.use('/users', usersRouter)
-app.use('/posts', upload.single('imageUrl'), photosRouter)
+app.use('/posts', logRequest, upload.single('imageUrl'), photosRouter)
 app.use('/likes', likesRouter)
 
 // catch 404 and forward to error handler
-app.use(function (req, res, next) {
+app.use( (req, res, next) => {
   next(createError(404));
 });
 
 // error handler
-app.use(function (err, req, res, next) {
+app.use((err, req, res, next) => {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
