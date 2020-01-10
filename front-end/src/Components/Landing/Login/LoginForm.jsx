@@ -40,7 +40,7 @@ class LoginForm extends Component {
             <div>
                 <form onSubmit={this.submitLogin}>
                     <input type="text" placeholder="Username" name="username" onChange={this.inputChange} />
-                    <input type="text" placeholder="Password" name="password" onChange={this.inputChange} />
+                    <input type="password" placeholder="Password" name="password" onChange={this.inputChange} />
                     <button>Login</button>
                 </form>
                 <Button

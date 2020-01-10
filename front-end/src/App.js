@@ -3,6 +3,11 @@ import Container from './Components/Landing/Container'
 import { Switch, Route } from 'react-router-dom'
 import Home from './pages/Home'
 import Profile from './pages/Profile'
+import { Buds } from './Components/Profile/Buds'
+import Settings from './pages/Settings'
+import { ThemeProvider } from 'styled-components'
+import { lightTheme, darkTheme } from './Components/themes/theme'
+import { GlobalStyles } from './Components/themes/global'
 
 class App extends Component {
     state = {
@@ -54,16 +59,20 @@ class App extends Component {
     render() {
 
         return (
-            <div>
-                <Switch>
-                    <Route exact path='/' component={this.renderContainer} />
-                    {/* {this.state.authenticated && <Route path='/home' component={Home} />}
-                    {this.state.authenticated && <Route path='/profile' component={Profile} />} */}
-                    <Route path='/home' component={Home} />
-                    <Route path='/profile' component={Profile} />
-                    <Route component={this.renderContainer} /> 
-                </Switch>
-            </div>
+            <ThemeProvider theme={lightTheme}>
+                <GlobalStyles />
+                <div>
+                    <Switch>
+                        <Route exact path='/' component={this.renderContainer} />
+                        {/* {this.state.authenticated && <Route path='/home' component={Home} />}
+                        {this.state.authenticated && <Route path='/profile' component={Profile} />} */}
+                        <Route path='/home' component={Home} />
+                        <Route path='/profile' component={Profile} />
+                        <Route path='/buds' component={Buds} />
+                        <Route path='/settings' component={Settings} />
+                    </Switch>
+                </div>
+            </ThemeProvider>
         )
     }
 }

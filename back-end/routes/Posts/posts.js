@@ -152,7 +152,59 @@ const searchByLocation = async (req, res, next) => {
 router.get('/search/location/:place', searchByLocation)
 
 
-//update post 
+const updatePost = async (req, res, next) => {
+    let post_id = Number(req.params.post_id)
+    let caption = req.body.caption
+    let location = req.body.location
+    let hashtag = req.body.hashtag
+
+    console.log('post_id: ', typeof post_id, typeof caption, location, hashtag)
+
+    try {
+        if (caption) {
+            let updatedCaption = await db.any(
+                `UPDATE posts
+                SET caption = $1 
+                WHERE id = $2
+                `,
+                [caption, post_id])
+            res.status(200)
+            res.json({
+                payload: updatedCaption,
+                message: `Success. Updated post # ${post_id}'s caption in posts table.`
+            });
+        } else if (location) {
+            let updatedLocation = await db.any(
+                `UPDATE posts 
+                SET location = $1 
+                WHERE id = $2 
+                RETURNING *`,
+                [location, Number(post_id)])
+            res.status(200)
+            res.json({
+                payload: updatedLocation,
+                message: `Success. Updated post # ${post_id}'s location in posts table.`
+            });
+        } else if (hashtag) {
+            let updatedHashtag = await db.any(
+                `UPDATE posts 
+                SET hashtag = array_append(hashtag, $1) 
+                WHERE id = $2 
+                RETURNING *`,
+                [hashtag, Number(post_id)])
+            res.status(200)
+            res.json({
+                payload: updatedHashtag,
+                message: `Success. Updated post # ${post_id}'s hashtag in posts table.`
+            });
+        }
+    } catch (error) {
+        console.log('BREAKING')
+        console.log(error);
+    }
+}
+
+router.patch('/update/:post_id', updatePost)
 
 
 module.exports = router;
