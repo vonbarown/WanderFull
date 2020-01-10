@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import Hamburger from '../Components/Shared/Hamburger'
 import { ThemeProvider } from 'styled-components'
 import { lightTheme, darkTheme } from '../themes/theme'
