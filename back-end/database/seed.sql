@@ -11,8 +11,8 @@ CREATE TABLE users (
     firstname VARCHAR, 
     lastname VARCHAR, 
     email VARCHAR UNIQUE,
-    profile_pic VARCHAR,
-    active BOOLEAN 
+    profile_pic VARCHAR DEFAULT NULL,
+    active BOOLEAN DEFAULT TRUE
 ); 
 
 CREATE TABLE posts (
@@ -40,17 +40,17 @@ CREATE TABLE hashtags (
 
 --- values for tables in db ---
 
-INSERT INTO users (username, password, firstname, lastname, email, profile_pic, active) VALUES 
-    ('test', '9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08', 'Test', 'Me', 'test@test.com',
-    'https://www.sackettwaconia.com/wp-content/uploads/default-profile.png', true),
-    ('Suzette', '3a6ac96d379e50d05016e511fcee24a556e969c6e036216c175ca2fc551b03cf', 'Suzette', 'Islam', 'suzetteislam@pursuit.org', 
-    'https://scholartutorials.com//wp-content/uploads/2018/11/default-profile-picture-woman-3.jpg', true),
-    ('Voniel', '510c9a42be49b865d25b2e9902fe840daec19eb5eab6e63bb055fdbb3f8075c2', 'Voniel', 'Brown', 'vonielbrown@pursuit.org',
-    'https://www.ibts.org/wp-content/uploads/2017/08/iStock-476085198.jpg', true), 
-    ('Jenesh', '55d6e5c44794f4ab970a89d3255e32c021be66159c2a908cb07ea52806a61a62', 'Jenesh', 'Napit', 'jeneshnapit@pursuit.org', 
-    'https://www.ibts.org/wp-content/uploads/2017/08/iStock-476085198.jpg', true),
-    ('Briany', '1f7378adb8c1ee2ed469e0c499859fb603a4643f10c98feb10be7f07ea6b47f3', 'Briany', 'Taveras', 'brianytaveras@pursuit.org',
-    'https://image.shutterstock.com/image-vector/profile-picture-illustration-woman-vector-260nw-438749650.jpg', true)
+INSERT INTO users (username, password, firstname, lastname, email, profile_pic) VALUES 
+    ('test', '$2b$10$k/9Qbd21k69Pd4Vj2yT04utnV3SSKbBr7JYYxB3HAb8jUYDFknCEe', 'Test', 'Me', 'test@test.com',
+    'https://www.sackettwaconia.com/wp-content/uploads/default-profile.png'),
+    ('Suzette', '$2b$10$eH/UGAgZWkc3J837iiGS.e8Oktl6Dyo2rsKQa3awxzKtMeU3o9OzC', 'Suzette', 'Islam', 'suzetteislam@pursuit.org', 
+    'https://scholartutorials.com//wp-content/uploads/2018/11/default-profile-picture-woman-3.jpg'),
+    ('Voniel', '$2b$10$vf.AbCrbunEvGSZxPyis2.kT3vkrdoAZ9nLXruKq1c8Z6/Max6uey', 'Voniel', 'Brown', 'vonielbrown@pursuit.org',
+    'https://www.ibts.org/wp-content/uploads/2017/08/iStock-476085198.jpg'), 
+    ('Jenesh', '$2b$10$CF6ooTI0rMfoxTC.fYX0vOfaMydFp5242i3rwHvW3QamgHfzU5TQu', 'Jenesh', 'Napit', 'jeneshnapit@pursuit.org', 
+    'https://www.ibts.org/wp-content/uploads/2017/08/iStock-476085198.jpg'),
+    ('Briany', '$2b$10$n7XYeGer/8S7XtKEXh.0kuaEVJNlJ6ULMwIJK917zW/GRAKm.bRie', 'Briany', 'Taveras', 'brianytaveras@pursuit.org',
+    'https://image.shutterstock.com/image-vector/profile-picture-illustration-woman-vector-260nw-438749650.jpg')
 ;
 
 INSERT INTO posts(user_id, img, caption, location, hashtag) VALUES
@@ -72,7 +72,7 @@ INSERT INTO likes (liker_id, post_id) VALUES
 ;
 
 INSERT INTO hashtags (tag, post_id) VALUES 
-    ('travel',[ 1, 2, 3, 4]),
+    ('travel', ARRAY[ 1, 2, 3, 4]),
     ('food', ARRAY[2, 3, 4]),
     ('happiness', ARRAY[2, 4]),
     ('Bliss', ARRAY[1])

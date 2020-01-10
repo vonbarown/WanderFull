@@ -76,11 +76,10 @@ class Home extends Component {
                                 postPic={el.img}
                                 pic={'https://media.newyorker.com/photos/5e06335ca15be900089fe632/master/pass/Brody-CatsReview.jpg'}
                                 caption={el.caption}
-                                key={el.username}
+                                key={el.id}
                                 className = 'imgCard'
                             />
                         })
-
                     }
                     </Container>
             

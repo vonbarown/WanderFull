@@ -12,16 +12,18 @@ import { GlobalStyles } from './Components/themes/global'
 class App extends Component {
     state = {
         firstRender: true,
-        login: false
+        login: false,
+        authenticated: false
     }
 
     handleChange = (event) => {
+        console.dir(event.target)
         const { firstRender } = this.state
         if (firstRender) {
             this.switchFirstRender()
         }
 
-        if (event.target.value === 'Login') {
+        if (event.target.value.includes('Login')) {
             this.setState({
                 login: true
             })
@@ -62,6 +64,8 @@ class App extends Component {
                 <div>
                     <Switch>
                         <Route exact path='/' component={this.renderContainer} />
+                        {/* {this.state.authenticated && <Route path='/home' component={Home} />}
+                        {this.state.authenticated && <Route path='/profile' component={Profile} />} */}
                         <Route path='/home' component={Home} />
                         <Route path='/profile' component={Profile} />
                         <Route path='/buds' component={Buds} />
