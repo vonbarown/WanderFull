@@ -4,6 +4,7 @@ const router = express.Router()
 const db = require('../../database/databasejs')
 
 
+// ADD New Post
 const addPic = async (req, res, next) => {
     console.log('req.file', req.file)
     try {
@@ -25,19 +26,20 @@ const addPic = async (req, res, next) => {
         console.log(error)
     }
 }
-//adding posts 
 router.post('/add', addPic)
 
 
+// GET All posts
 const getFeedPics = async (req, res, next) => {
-
+    console.log('Get all posts route hit')
     try {
         let pictures = await db.any(`
-            SELECT username, hashtag, caption, location, img, profile_pic 
+            SELECT posts.id, username, hashtag, caption, location, img, profile_pic 
             FROM posts 
             INNER JOIN users 
             ON posts.user_id = users.id
         `)
+        console.log(pictures)
 
         res.json({
             status: 'success',
@@ -49,10 +51,10 @@ const getFeedPics = async (req, res, next) => {
     }
 }
 
-//retrieving all posts
 router.get('/all', getFeedPics)
 
-const getUserPics = async (req, res, next) => {
+// GET Users information
+const getUserInfo = async (req, res, next) => {
 
     try {
         let userPics = await db.any(`
@@ -72,9 +74,10 @@ const getUserPics = async (req, res, next) => {
         console.log(error);
     }
 }
-//retrieving all user posts
-router.get('/profile/:username', getUserPics)
 
+router.get('/profile/:username', getUserInfo)
+
+// GET Posts based on a hashtag
 const searchByHashtag = async (req, res, next) => {
 
     try {
@@ -95,12 +98,13 @@ const searchByHashtag = async (req, res, next) => {
         console.log(error);
     }
 }
-//searching by hashtag
+
 //SELECT * FROM posts WHERE id IN (1, 2, 3);
 // SELECT * FROM posts WHERE '#this' = ANY(hashtag);
 router.get('/search/hashtag/:tag', searchByHashtag)
 
-const deletePhoto = async (req, res, next) => {
+// DELETE Post
+const deletePost = async (req, res, next) => {
     try {
         let deletedPhoto = await db.one(`
             DELETE from posts 
@@ -121,10 +125,9 @@ const deletePhoto = async (req, res, next) => {
     }
 }
 
-//delete pictures
-router.delete('/:post_id', deletePhoto)
+router.delete('/:post_id', deletePost)
 
- 
+// GET All posts based on location
 const searchByLocation = async (req, res, next) => {
 
     try {
@@ -146,7 +149,6 @@ const searchByLocation = async (req, res, next) => {
     }
 }
 
-// get post by location 
 router.get('/search/location/:place', searchByLocation)
 
 
