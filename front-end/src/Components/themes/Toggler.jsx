@@ -1,19 +1,22 @@
-// import React from 'react'
-// import { func, string } from 'prop-types';
-// import styled from 'styled-components';
+import React from 'react'
+import { func, string } from 'prop-types';
+import styled from 'styled-components';
 
-// const Toggle = ({ theme, toggleTheme }) => {
-//     const isLight = theme === 'light';
-//     return (
-//         <button onClick={toggleTheme} >
-//             <MoonIcon />
-//         </button>
-//     );
-// };
+import { ReactComponent as MoonIcon } from './icons/moon.svg';
+// import { ReactComponent as SunIcon } from 'icons/sun.svg';
 
-// Toggle.propTypes = {
-//     theme: string.isRequired,
-//     toggleTheme: func.isRequired,
-// }
+const Toggle = ({ theme, toggleTheme }) => {
+    const isLight = theme === 'light';
+    return (
+        <button onClick={toggleTheme} >
+            <MoonIcon />
+        </button>
+    );
+};
 
-// export default Toggle;
+Toggle.propTypes = {
+    theme: string.isRequired,
+    toggleTheme: func.isRequired,
+}
+
+export default Toggle;
