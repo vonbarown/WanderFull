@@ -12,13 +12,22 @@ class Home extends Component {
         this.state = {
             feed: true,
             feedArr: [],
-            input: ''
+            input: '',
+            hashtagArr: []
         }
     }
 
     componentDidMount() {
         this.getAllPhotos()
+        // this.searchHashtag()
+    }
+
+    componentDidUpdate(prevProps,prevState){
+        const {input} = this.state
+        if(!input === prevState.input){
         this.searchHashtag()
+
+        }
     }
 
     getAllPhotos = async () => {
@@ -34,15 +43,37 @@ class Home extends Component {
         }
     }
 
-    searchHashtag = async () => {
+    searchHashtag = async (input) => {
+       // const {input} = this.state
         try {
-            let tag = 'this'
-            const hashtagImgs = `http://localhost:8080/posts/search/hashtag/${tag}`
+            console.log(input)
+            const hashtagImgs = `http://localhost:8080/posts/search/hashtag/${input}`
             const { data: { payload } } = await axios.get(hashtagImgs)
+            // let urlsArr = payload.map(el=>{
+            //     return el.img
+            // })
+            this.setState({
+                feedArr:payload
+            })
             console.log(payload)
         } catch (error) {
             console.log(error)
         }
+    }
+
+    searchUser = async() =>{
+        const {input} = this.state
+        try{
+            const username = `http://localhost:8080/posts/profile/${input}`
+            const { data: { payload }} = await axios.get(username)
+            this.setState({
+                feedArr:payload
+            })
+            console.log('user2 info' , payload)
+        } catch(error) {
+            console.log(error)
+        }
+
     }
 
     handleInput = (event) => {
@@ -53,16 +84,19 @@ class Home extends Component {
     }
 
     render() {
-        console.log('state', this.state)
-        console.log('storage', window.sessionStorage);
+        //console.log('state', this.state)
+        //console.log('storage', window.sessionStorage);
 
-        const { feed, feedArr } = this.state
-        const { handleInput } = this
+        const { feed, feedArr, input } = this.state
+        const { handleInput, searchUser, searchHashtag } = this
         return (
             <div>
                 <div className='nav'>
                     <Hamburger
                         handleInput={handleInput}
+                        searchUser = {searchUser}
+                        searchHashtag = {searchHashtag}
+                        input = {input}
                         feed={feed} />
                 </div>
                 <div className='header'>
@@ -80,6 +114,7 @@ class Home extends Component {
                                 caption={el.caption}
                                 key={el.id}
                                 className='imgCard'
+                                hashtage = {el.hashtag}
                             />
                         })
                     }
