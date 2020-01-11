@@ -6,8 +6,12 @@ img {
 
 .userAvatar {
   display: flex;
-  gap: 40px;
+  gap: 200px;
   align-items: center;
+  margin-right: 400px;
+}
+.userAvatar:first-child {
+  font-size: 90px;
 }
 
 .profile {
