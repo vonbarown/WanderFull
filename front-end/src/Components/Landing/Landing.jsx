@@ -5,12 +5,13 @@ import Home from '../../pages/Home'
 import Profile from '../../pages/Profile'
 import { Buds } from '../../Components/Profile/Buds'
 import Settings from '../../pages/Settings'
+import './Landing.css'
 
 
 class Landing extends Component {
     state = {
-        firstRender: true,
-        login: false
+        firstRender: false,
+        login: true 
     }
 
     handleChange = (event) => {
@@ -43,6 +44,7 @@ class Landing extends Component {
         const { handleChange, submitLogin } = this
         return (
             <Container
+                id="container"
                 submitLogin={submitLogin}
                 handleChange={handleChange}
                 firstRender={firstRender}
