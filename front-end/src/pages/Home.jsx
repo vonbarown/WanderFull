@@ -34,13 +34,13 @@ class Home extends Component {
         }
     }
 
-    searchHashtag  = async () => {
+    searchHashtag = async () => {
         try {
             let tag = 'this'
             const hashtagImgs = `http://localhost:8080/posts/search/hashtag/${tag}`
-            const { data:{payload} }  = await axios.get(hashtagImgs)
+            const { data: { payload } } = await axios.get(hashtagImgs)
             console.log(payload)
-        } catch (error){
+        } catch (error) {
             console.log(error)
         }
     }
@@ -53,36 +53,38 @@ class Home extends Component {
     }
 
     render() {
-        console.log(this.state)
+        console.log('state', this.state)
+        console.log('storage', window.sessionStorage);
+
         const { feed, feedArr } = this.state
-        const {handleInput} = this
+        const { handleInput } = this
         return (
             <div>
                 <div className='nav'>
                     <Hamburger
-                        handleInput = {handleInput}
+                        handleInput={handleInput}
                         feed={feed} />
                 </div>
                 <div className='header'>
                     <h1>WanderFull</h1>
                 </div>
 
-               
+
                 <Container maxWidth='sm' className='feedContainer'>
 
                     {
                         feedArr.map(el => {
                             return <ImageCard
                                 postPic={el.img}
-                                pic={'https://media.newyorker.com/photos/5e06335ca15be900089fe632/master/pass/Brody-CatsReview.jpg'}
+                                pic={el.profile_pic}
                                 caption={el.caption}
                                 key={el.id}
-                                className = 'imgCard'
+                                className='imgCard'
                             />
                         })
                     }
-                    </Container>
-            
+                </Container>
+
 
 
 

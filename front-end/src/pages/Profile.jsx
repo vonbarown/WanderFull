@@ -87,12 +87,14 @@ class Profile extends Component {
 
     render() {
         const { album } = this.state
+        const username = sessionStorage.getItem('user')
+        const profile_pic = sessionStorage.getItem('profile_pic')
 
         return (
             <div className='profile'>
                 <div className='header'>
                     <div className='top'>
-                        <UserAvatar pic={'https://media.newyorker.com/photos/5e06335ca15be900089fe632/master/pass/Brody-CatsReview.jpg'} class_name={'classes.large'} userName={"Test"} />
+                        <UserAvatar pic={profile_pic} class_name={'classes.large'} userName={username} />
                         <Hamburger />
                     </div>
                     <NavBar renderNavBar={this.renderNavBar} />
@@ -102,7 +104,7 @@ class Profile extends Component {
                         album.map(el => {
                             return <ImageCard
                                 postPic={el.img}
-                                pic={'https://media.newyorker.com/photos/5e06335ca15be900089fe632/master/pass/Brody-CatsReview.jpg'}
+                                pic={profile_pic}
                                 caption={el.caption}
                                 hashtag={el.hashtag}
                             />
