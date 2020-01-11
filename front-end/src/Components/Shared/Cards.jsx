@@ -38,7 +38,7 @@ export default function ImageCard(props) {
                     </IconButton>
                 }
                 title={props.caption}
-                subheader="September 14, 2016"
+                subheader={props.time_post}
             />
             <CardMedia
                 className={classes.media}
