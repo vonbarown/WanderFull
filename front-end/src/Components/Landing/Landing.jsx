@@ -19,11 +19,13 @@ class Landing extends Component {
 
     handleChange = (event) => {
         const { firstRender } = this.state
+        console.log(event.target.value)
+        console.log(event.target.innerText)
         if (firstRender) {
             this.switchFirstRender()
         }
 
-        if (event.target.value === 'Login') {
+        if (event.target.innerText.includes('Login')) {
             this.setState({
                 login: true
             })

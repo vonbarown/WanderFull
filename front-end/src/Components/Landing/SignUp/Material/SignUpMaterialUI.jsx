@@ -156,8 +156,8 @@ export default function SignUpSide(props) {
                 </Link> */}
               </Grid>
               <Grid item>
-                <Link variant="body2" onClick={handleChange}>
-                  {"Already Have An Account? Log In"}
+                <Link variant="body2" onClick={handleChange} >
+                  {"Already Have An Account? Login"}
                 </Link>
               </Grid>
             </Grid>
