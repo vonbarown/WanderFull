@@ -111,7 +111,7 @@ app.use('/', indexRouter)
 app.use('/register', registerRouter)
 app.use('/login', passport.authenticate('local'), loginRouter)
 app.use('/users', usersRouter)
-app.use('/posts', logRequest, upload.single('imageUrl'), photosRouter)
+app.use('/posts', upload.single('imageUrl'), photosRouter)
 app.use('/likes', likesRouter)
 
 // catch 404 and forward to error handler
