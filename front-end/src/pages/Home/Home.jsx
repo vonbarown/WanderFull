@@ -1,11 +1,10 @@
 import React, { Component } from 'react'
-import Hamburger from '../Components/Shared/Hamburger'
+import Hamburger from '../../Components/Shared/Hamburger'
 import axios from 'axios'
-import ImageCard from '../Components/Shared/Cards'
-import '../styles/HomePage.css'
+import ImageCard from '../../Components/Shared/Cards'
+import '../../styles/HomePage.css'
 import { Container } from '@material-ui/core'
-import { EventEmitter } from 'events'
-
+import UploadModal from './Modal'
 class Home extends Component {
     constructor() {
         super()
@@ -22,10 +21,10 @@ class Home extends Component {
         // this.searchHashtag()
     }
 
-    componentDidUpdate(prevProps,prevState){
-        const {input} = this.state
-        if(!input === prevState.input){
-        this.searchHashtag()
+    componentDidUpdate(prevProps, prevState) {
+        const { input } = this.state
+        if (!input === prevState.input) {
+            this.searchHashtag()
 
         }
     }
@@ -44,7 +43,7 @@ class Home extends Component {
     }
 
     searchHashtag = async (input) => {
-       // const {input} = this.state
+        // const {input} = this.state
         try {
             console.log(input)
             const hashtagImgs = `http://localhost:8080/posts/search/hashtag/${input}`
@@ -53,7 +52,7 @@ class Home extends Component {
             //     return el.img
             // })
             this.setState({
-                feedArr:payload
+                feedArr: payload
             })
             console.log(payload)
         } catch (error) {
@@ -61,16 +60,16 @@ class Home extends Component {
         }
     }
 
-    searchUser = async() =>{
-        const {input} = this.state
-        try{
+    searchUser = async () => {
+        const { input } = this.state
+        try {
             const username = `http://localhost:8080/posts/profile/${input}`
-            const { data: { payload }} = await axios.get(username)
+            const { data: { payload } } = await axios.get(username)
             this.setState({
-                feedArr:payload
+                feedArr: payload
             })
-            console.log('user2 info' , payload)
-        } catch(error) {
+            console.log('user2 info', payload)
+        } catch (error) {
             console.log(error)
         }
 
@@ -94,9 +93,9 @@ class Home extends Component {
                 <div className='nav'>
                     <Hamburger
                         handleInput={handleInput}
-                        searchUser = {searchUser}
-                        searchHashtag = {searchHashtag}
-                        input = {input}
+                        searchUser={searchUser}
+                        searchHashtag={searchHashtag}
+                        input={input}
                         feed={feed} />
                 </div>
                 <div className='header'>
@@ -114,7 +113,7 @@ class Home extends Component {
                                 caption={el.caption}
                                 key={el.id}
                                 className='imgCard'
-                                hashtage = {el.hashtag}
+                                hashtage={el.hashtag}
                             />
                         })
                     }
@@ -122,7 +121,7 @@ class Home extends Component {
 
 
 
-
+                <UploadModal />
             </div>
         )
     }

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import Container from './Container'
 import { Switch, Route } from 'react-router-dom'
-import Home from '../../pages/Home'
+import Home from '../../pages/Home/Home'
 import Profile from '../../pages/Profile'
 import { Buds } from '../../Components/Profile/Buds'
 import Settings from '../../pages/Settings'
@@ -14,7 +14,7 @@ import Upload from '../TestComponents/UploadForm'
 class Landing extends Component {
     state = {
         firstRender: false,
-        login: true 
+        login: true
     }
 
     handleChange = (event) => {
