@@ -1,0 +1,11 @@
+.settingsPage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.toggleButton {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
