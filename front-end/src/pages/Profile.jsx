@@ -58,7 +58,6 @@ class Profile extends Component {
                 <div className='header'>
                     <div className='top'>
                         <UserAvatar pic={profile_pic} class_name={'classes.large'} userName={username} />
-                        <Hamburger />
                     </div>
                     <NavBar renderNavBar={this.renderNavBar} />
                 </div>
@@ -66,7 +65,7 @@ class Profile extends Component {
                     {
                         album.map(el => {
                             let time_post = el.time_post.replace('T05:00:00.000Z', '')
-                            return <ImageCard
+                            return <ImageCard className='profileCard'
                                 postPic={el.img}
                                 pic={profile_pic}
                                 caption={el.caption}

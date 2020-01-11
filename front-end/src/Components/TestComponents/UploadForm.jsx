@@ -60,7 +60,7 @@ class uploadForm extends Component {
                     <input name='hashtag' placeholder='hashtag' type="text" onChange={this.handleTextInput} />
                     <input name='location' placeholder='location' type="text" onChange={this.handleTextInput} />
                 </form>
-                <img src={this.state.imageUrl} alt="null" />
+                <img src={this.state.imageUrl} />
             </div>
         );
     }

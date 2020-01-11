@@ -5,6 +5,7 @@ import Home from '../../pages/Home/Home'
 import Profile from '../../pages/Profile'
 import { Buds } from '../../Components/Profile/Buds'
 import Settings from '../../pages/Settings'
+import AppNavBar from '../Shared/AppNavBar'
 
 import './Landing.css'
 
@@ -68,10 +69,12 @@ class Landing extends Component {
                     <Route path='/home' component={Home} />
                     {!!sessionStorage.getItem('user') && (
                         <>
-                            <Route path='/profile' component={Profile} />
                             <Route path='/buds' component={Buds} />
-                            <Route path='/settings' component={Settings} />
                             <Route path='/upload' component={Upload} />
+                            <AppNavBar>
+                                <Route path='/profile' component={Profile} />
+                                <Route path='/settings' component={Settings} />
+                            </AppNavBar>
                         </>
 
                     )}
