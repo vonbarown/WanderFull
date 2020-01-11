@@ -54,7 +54,9 @@ export default function UploadModal() {
                 open={open}
                 onClose={handleClose}
             >
-                <UploadForm />
+                <div style={modalStyle} className={classes.paper}>
+                    <UploadForm />
+                </div>
             </Modal>
         </div>
     );

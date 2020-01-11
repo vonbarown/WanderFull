@@ -121,7 +121,7 @@ class Home extends Component {
 
 
 
-                <UploadModal />
+                <UploadModal className='UploadForm' />
             </div>
         )
     }
