@@ -29,6 +29,7 @@ function Copyright() {
 const useStyles = makeStyles(theme => ({
   root: {
     height: '100vh',
+    width: '100vw'
   },
   image: {
     backgroundImage: 'url(https://source.unsplash.com/random)',
@@ -59,7 +60,7 @@ const useStyles = makeStyles(theme => ({
 
 export default function SignInSide(props) {
   const classes = useStyles();
-  const {submitLogin, inputChange, handleChange} = props
+  const { submitLogin, inputChange, handleChange } = props
 
   return (
     <Grid container maxWidth="sm" component="main" className={classes.root}>
