@@ -10,7 +10,7 @@ router.get('/', function (req, res, next) {
 
 router.post('/authenticate', async (req, res, next) => {
   console.log('Authentication route hit')
-  console.log('Request body: ', {...req.body})
+  // console.log('Request body: ', {...req.body})
   let { username, password } = req.body
   const hashedPassword = hash(password)
   console.log(password, hashedPassword)
@@ -48,17 +48,17 @@ router.get('/:username', getUser)
 const updateUserInfo = async (req, res, next) => {
   let user_id = req.params.user_id
   let username = req.body.username
-  let profile_pic = req.body.profile_pic 
-console.log(user_id, username)
+  let profile_pic = req.body.profile_pic
+  console.log(user_id, username)
 
   try {
     if (username) {
       let updatedUsername = await db.any(
-      `UPDATE users 
+        `UPDATE users 
       SET username = $1 
       WHERE id = $2
-      RETURNING *`, 
-      [username, Number(user_id)])
+      RETURNING *`,
+        [username, Number(user_id)])
       res.status(200)
       res.json({
         payload: updatedUsername,
@@ -66,11 +66,11 @@ console.log(user_id, username)
       });
     } else if (profile_pic) {
       let updatedProfile_pic = await db.any(
-      `UPDATE users 
+        `UPDATE users 
       SET profile_pic = $1 
       WHERE id = $2 
-      RETURNING *`, 
-      [profile_pic, Number(user_id)])
+      RETURNING *`,
+        [profile_pic, Number(user_id)])
       res.status(200)
       res.json({
         payload: updatedProfile_pic,
@@ -95,17 +95,17 @@ const deactivateUser = async (req, res, next) => {
     `, ['false', req.params.username])
 
     res.json({
-        status: 'success',
-        message: 'account deactivated',
-        payload: deactivatedUser
+      status: 'success',
+      message: 'account deactivated',
+      payload: deactivatedUser
     })
-} catch (error) {
+  } catch (error) {
     console.log(error);
     res.send({
-        status: 'failure',
-        message: 'you can\'t perform this operation'
+      status: 'failure',
+      message: 'you can\'t perform this operation'
     })
-}
+  }
 }
 
 router.patch('/deactivate/:username', deactivateUser)

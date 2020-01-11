@@ -15,10 +15,11 @@ const addPic = async (req, res, next) => {
         bodyCopy.hashtag = hashtag
 
         let data = await db.any(`
-            INSERT INTO posts (user_id, caption, hashtag) VALUES (
-                $/user_id/, $/caption/, $/hashtag/
+            INSERT INTO posts (user_id, caption, hashtag,img) VALUES (
+                $/user_id/, $/caption/, $/hashtag/,$/imageUrl/
             ) RETURNING (id, hashtag)
         `, bodyCopy)
+        console.log(data);
 
         res.json({
             message: 'image uploaded',
@@ -39,7 +40,7 @@ const getFeedPics = async (req, res, next) => {
     console.log('Get all posts route hit')
     try {
         let pictures = await db.any(`
-            SELECT posts.id, username, hashtag, caption, location, img, profile_pic 
+            SELECT posts.time_post,posts.id, username, hashtag, caption, location, img, profile_pic 
             FROM posts 
             INNER JOIN users 
             ON posts.user_id = users.id
@@ -63,7 +64,7 @@ const getUserInfo = async (req, res, next) => {
 
     try {
         let userPics = await db.any(`
-            SELECT username, hashtag, caption, location, img, profile_pic
+            SELECT posts.time_post,username, hashtag, caption, location, img, profile_pic
             FROM posts 
             INNER JOIN users 
             ON posts.user_id = users.id 
