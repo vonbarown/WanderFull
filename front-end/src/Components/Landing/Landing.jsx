@@ -5,7 +5,10 @@ import Home from '../../pages/Home'
 import Profile from '../../pages/Profile'
 import { Buds } from '../../Components/Profile/Buds'
 import Settings from '../../pages/Settings'
+
 import './Landing.css'
+
+import Upload from '../TestComponents/UploadForm'
 
 
 class Landing extends Component {
@@ -60,11 +63,17 @@ class Landing extends Component {
 
             <div>
                 <Switch>
-                    <Route exact path='/' component={this.renderContainer} />
                     <Route path='/home' component={Home} />
-                    <Route path='/profile' component={Profile} />
-                    <Route path='/buds' component={Buds} />
-                    <Route path='/settings' component={Settings} />
+                    {!!sessionStorage.getItem('user') && (
+                        <>
+                            <Route path='/profile' component={Profile} />
+                            <Route path='/buds' component={Buds} />
+                            <Route path='/settings' component={Settings} />
+                            <Route path='/upload' component={Upload} />
+                        </>
+
+                    )}
+                    <Route path='/' component={this.renderContainer} />
                 </Switch>
             </div>
         )

@@ -37,7 +37,7 @@ export default function ImageCard(props) {
                         <MoreVertIcon />
                     </IconButton>
                 }
-                title="Shrimp and Chorizo Paella"
+                title={props.caption}
                 subheader="September 14, 2016"
             />
             <CardMedia
@@ -46,7 +46,7 @@ export default function ImageCard(props) {
                 title="post"
             />
             <CardContent>
-                {props.caption}
+                {`#${props.hashtag} `}
             </CardContent>
             <CardActions disableSpacing>
                 <IconButton aria-label="add to favorites">

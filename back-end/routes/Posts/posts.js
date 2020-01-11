@@ -9,18 +9,23 @@ const addPic = async (req, res, next) => {
     console.log('req.file', req.file)
     try {
         let imageUrl = "http://localhost:8080/" + req.file.path.replace('public/', '')
+        const hashtag = [req.body.hashtag]
         let bodyCopy = Object.assign({}, req.body)
         bodyCopy.imageUrl = imageUrl
+        bodyCopy.hashtag = hashtag
 
-        await db.any(`
-            INSERT INTO posts (user_id, caption,hashtag) VALUES (
+        let data = await db.any(`
+            INSERT INTO posts (user_id, caption, hashtag) VALUES (
                 $/user_id/, $/caption/, $/hashtag/
             ) RETURNING (id, hashtag)
         `, bodyCopy)
 
         res.json({
             message: 'image uploaded',
-            imageUrl: imageUrl
+            payload: {
+                imageUrl: imageUrl,
+                data: data
+            }
         })
     } catch (error) {
         console.log(error)
