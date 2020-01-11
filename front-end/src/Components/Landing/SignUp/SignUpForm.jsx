@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import Button from '../../Shared/Button'
 import axios from 'axios'
+import SignUpSide from './Material/SignUpMaterialUI'
 
 class SignUpForm extends Component {
     state = {}
@@ -28,20 +29,25 @@ class SignUpForm extends Component {
     }
 
     render() {
-        const { submitSignUp } = this
+        const { submitSignUp, inputChange } = this
         return (
             <div>
-                <form onSubmit={submitSignUp}>
-                    <input type="text" placeholder="Username" name="username" onChange={ this.inputChange } />
-                    <input type="text" placeholder="Password" name="password" onChange={ this.inputChange } />
-                    <input type="text" placeholder="First name" name="firstname" onChange={ this.inputChange } />
-                    <input type="text" placeholder="Last name" name="lastname" onChange={ this.inputChange } />
-                    <input type="text" placeholder="Email" name="email" onChange={ this.inputChange } />
+                {/* <form onSubmit={submitSignUp}>
+                    <input type="text" placeholder="Username" name="username" onChange={ inputChange } />
+                    <input type="text" placeholder="Password" name="password" onChange={ inputChange } />
+                    <input type="text" placeholder="First name" name="firstname" onChange={ inputChange } />
+                    <input type="text" placeholder="Last name" name="lastname" onChange={ inputChange } />
+                    <input type="text" placeholder="Email" name="email" onChange={ inputChange } />
                     <Button value='Signup' />
-                </form>
-                <Button
+                </form> */}
+                {/* <Button
                     value='Login Instead?'
                     handleChange={this.props.handleChange}
+                /> */}
+                <SignUpSide 
+                submitSignUp = {submitSignUp}
+                inputChange = {inputChange}
+                handleChange = {this.props.handleChange}
                 />
             </div>
         )
