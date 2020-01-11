@@ -12,13 +12,22 @@ class Home extends Component {
         this.state = {
             feed: true,
             feedArr: [],
-            input: ''
+            input: '',
+            hashtagArr: []
         }
     }
 
     componentDidMount() {
         this.getAllPhotos()
+        // this.searchHashtag()
+    }
+
+    componentDidUpdate(prevProps,prevState){
+        const {input} = this.state
+        if(!input === prevState.input){
         this.searchHashtag()
+
+        }
     }
 
     getAllPhotos = async () => {
@@ -34,15 +43,37 @@ class Home extends Component {
         }
     }
 
-    searchHashtag  = async () => {
+    searchHashtag = async (input) => {
+       // const {input} = this.state
         try {
-            let tag = 'this'
-            const hashtagImgs = `http://localhost:8080/posts/search/hashtag/${tag}`
-            const { data:{payload} }  = await axios.get(hashtagImgs)
+            console.log(input)
+            const hashtagImgs = `http://localhost:8080/posts/search/hashtag/${input}`
+            const { data: { payload } } = await axios.get(hashtagImgs)
+            // let urlsArr = payload.map(el=>{
+            //     return el.img
+            // })
+            this.setState({
+                feedArr:payload
+            })
             console.log(payload)
-        } catch (error){
+        } catch (error) {
             console.log(error)
         }
+    }
+
+    searchUser = async() =>{
+        const {input} = this.state
+        try{
+            const username = `http://localhost:8080/posts/profile/${input}`
+            const { data: { payload }} = await axios.get(username)
+            this.setState({
+                feedArr:payload
+            })
+            console.log('user2 info' , payload)
+        } catch(error) {
+            console.log(error)
+        }
+
     }
 
     handleInput = (event) => {
@@ -53,36 +84,42 @@ class Home extends Component {
     }
 
     render() {
-        console.log(this.state)
-        const { feed, feedArr } = this.state
-        const {handleInput} = this
+        //console.log('state', this.state)
+        //console.log('storage', window.sessionStorage);
+
+        const { feed, feedArr, input } = this.state
+        const { handleInput, searchUser, searchHashtag } = this
         return (
             <div>
                 <div className='nav'>
                     <Hamburger
-                        handleInput = {handleInput}
+                        handleInput={handleInput}
+                        searchUser = {searchUser}
+                        searchHashtag = {searchHashtag}
+                        input = {input}
                         feed={feed} />
                 </div>
                 <div className='header'>
                     <h1>WanderFull</h1>
                 </div>
 
-               
+
                 <Container maxWidth='sm' className='feedContainer'>
 
                     {
                         feedArr.map(el => {
                             return <ImageCard
                                 postPic={el.img}
-                                pic={'https://media.newyorker.com/photos/5e06335ca15be900089fe632/master/pass/Brody-CatsReview.jpg'}
+                                pic={el.profile_pic}
                                 caption={el.caption}
                                 key={el.id}
-                                className = 'imgCard'
+                                className='imgCard'
+                                hashtage = {el.hashtag}
                             />
                         })
                     }
-                    </Container>
-            
+                </Container>
+
 
 
 

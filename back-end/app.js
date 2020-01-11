@@ -101,8 +101,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 const loggedIn = (req, res, next) => req.isAuthenticated() ? next() : res.redirect('/')
 const logRequest = (req, res, next) => {
-  console.log('REQUEST')
-  console.log(req)
+  // console.log('REQUEST')
+  // console.log(req)
   next()
 }
 
@@ -115,12 +115,14 @@ app.use('/posts', logRequest, upload.single('imageUrl'), photosRouter)
 app.use('/likes', likesRouter)
 
 // catch 404 and forward to error handler
-app.use( (req, res, next) => {
+app.use((req, res, next) => {
   next(createError(404));
 });
 
 // error handler
 app.use((err, req, res, next) => {
+  console.log(err);
+
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};

@@ -15,7 +15,7 @@ router.post('/', async (req, res, next) => {
 
     try {
         const data = await db.one(query, [username])
-        console.log('User Query response data: ', data)
+        // console.log('User Query response data: ', data)
         delete data.password
         res.json({
             status: 'success',
