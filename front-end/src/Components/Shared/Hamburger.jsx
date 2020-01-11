@@ -4,14 +4,14 @@ import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 // import Axios from 'axios';
-// import '../../styles/Hamburger.css'
+import '../../styles/Hamburger.css'
 
 
 
 const ITEM_HEIGHT = 48;
 
 const Hamburger = (props) => {
-console.log('hamburger props' , props)
+    console.log('hamburger props', props)
     const options = [
         <a href='/home'>Home</a>,
         <a href='/profile'>Profile</a>,
@@ -31,12 +31,22 @@ console.log('hamburger props' , props)
         setAnchorEl(null);
     };
 
-    const handleKeyPress =  (event) => {
-        if (event.key === 'Enter') {
-    }
+    const handleKeyPress = (event) => {
+        const { input } = props
+        // if (event.key === 'Enter') {
+            if (input[0] === '#') {
+                let tagInput = input.substr(1)
+                props.searchHashtag(tagInput)
+            } 
+            else {
+                props.searchUser()
+                console.log( 'input')
+            }
+
+        // }
     }
 
-   
+
     return (
         <div>
             <IconButton
