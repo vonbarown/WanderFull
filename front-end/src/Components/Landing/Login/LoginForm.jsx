@@ -18,7 +18,10 @@ class LoginForm extends Component {
         const { username, password } = this.state
         try {
             const data = await axios.post(`http://localhost:8080/login`, { username, password })
-            console.log(data.data)
+            console.log('data', data.data)
+            sessionStorage.setItem('user', username)
+            sessionStorage.setItem('profile_pic', data.data.payload.profile_pic)
+
             this.setState({
                 renderComponent: true
             })
