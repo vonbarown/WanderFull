@@ -46,7 +46,8 @@ export default function ImageCard(props) {
                 title="post"
             />
             <CardContent>
-                {props.caption}
+                {props.caption} <br />
+                {`#${props.hashtag} `}
             </CardContent>
             <CardActions disableSpacing>
                 <IconButton aria-label="add to favorites">

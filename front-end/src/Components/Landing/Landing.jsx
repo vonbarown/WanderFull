@@ -5,7 +5,7 @@ import Home from '../../pages/Home'
 import Profile from '../../pages/Profile'
 import { Buds } from '../../Components/Profile/Buds'
 import Settings from '../../pages/Settings'
-
+import Upload from '../TestComponents/UploadForm'
 
 class Landing extends Component {
     state = {
@@ -63,6 +63,7 @@ class Landing extends Component {
                     <Route path='/profile' component={Profile} />
                     <Route path='/buds' component={Buds} />
                     <Route path='/settings' component={Settings} />
+                    <Route path='/upload' component={Upload} />
                 </Switch>
             </div>
         )

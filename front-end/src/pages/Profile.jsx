@@ -56,9 +56,9 @@ class Profile extends Component {
         }
     }
 
-    // componentDidMount() {
-    //     this.getUserAlbum()
-    // }
+    componentDidMount() {
+        this.getUserAlbum()
+    }
 
     // Retrieves all the pictures that a user uploaded
     getUserAlbum = async () => {
@@ -104,6 +104,7 @@ class Profile extends Component {
                                 postPic={el.img}
                                 pic={'https://media.newyorker.com/photos/5e06335ca15be900089fe632/master/pass/Brody-CatsReview.jpg'}
                                 caption={el.caption}
+                                hashtag={el.hashtag}
                             />
                         })
 
