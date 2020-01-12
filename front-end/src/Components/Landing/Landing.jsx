@@ -10,7 +10,8 @@ import AppNavBar from '../Shared/AppNavBar'
 import './Landing.css'
 
 import Upload from '../TestComponents/UploadForm'
-
+// import GoogleMap from '../Map/Map'
+import MapBox from '../Map/MapBox'
 
 class Landing extends Component {
     state = {
@@ -67,6 +68,7 @@ class Landing extends Component {
             <div>
                 <Switch>
                     <Route path='/home' component={Home} />
+                    <Route path='/geocode' component={MapBox} />
                     {!!sessionStorage.getItem('user') && (
                         <>
                             <Route path='/buds' component={Buds} />
