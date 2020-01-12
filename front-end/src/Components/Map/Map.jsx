@@ -1,17 +1,13 @@
 import React, { Component } from 'react'
 import ApiKey from './apiKey'
-
-import './MapBox.jsx'
+import './MapBox.css'
+import geocoder from 'geocoder'
 
 class GoogleMap extends Component {
 
-
-    state = {
-        venues: []
-    }
-
     componentDidMount() {
         this.renderMap()
+        this.geocoder()
     }
 
     renderMap = () => {
@@ -19,64 +15,19 @@ class GoogleMap extends Component {
         window.initMap = this.initMap
     }
 
-    // getVenues = () => {
-    //     const endPoint = "https://api.foursquare.com/v2/venues/explore?"
-    //     const parameters = {
-    //         client_id: "PMHC2WA1VCBHVYOPPSJ0QSBYTLRF4PNJ04OWVWV0PZJ0QFIR",
-    //         client_secret: "CULSZZ44YAEBOWBFGPB4BF5ISRXXSNYR0EE3JV3CNE2ZWHV0",
-    //         query: "food",
-    //         near: "Sydney",
-    //         v: "20182507"
-    //     }
-
-    //     axios.get(endPoint + new URLSearchParams(parameters))
-    //         .then(response => {
-    //             this.setState({
-    //                 venues: response.data.response.groups[0].items
-    //             }, this.renderMap())
-    //         })
-    //         .catch(error => {
-    //             console.log("ERROR!! " + error)
-    //         })
-
-    // }
-
     initMap = () => {
-
-        // Create A Map
         var map = new window.google.maps.Map(document.getElementById('map'), {
             center: { lat: -34.397, lng: 150.644 },
             zoom: 8
         })
+    }
 
-        // Create An InfoWindow
-        var infowindow = new window.google.maps.InfoWindow()
+    geocoder() {
+        let code = geocoder.geocode("Atlanta, GA", function (err, data) {
+            return data
+        });
 
-        // Display Dynamic Markers
-        // this.state.venues.map(myVenue => {
-
-        //     var contentString = `${myVenue.venue.name}`
-
-        //     // Create A Marker
-        //     var marker = new window.google.maps.Marker({
-        //         position: { lat: myVenue.venue.location.lat, lng: myVenue.venue.location.lng },
-        //         map: map,
-        //         title: myVenue.venue.name
-        //     })
-
-        //     // Click on A Marker!
-        //     marker.addListener('click', function () {
-
-        //         // Change the content
-        //         infowindow.setContent(contentString)
-
-        //         // Open An InfoWindow
-        //         infowindow.open(map, marker)
-        //     })
-
-        // })
-
-
+        console.log(code);
 
     }
 
@@ -99,3 +50,4 @@ function loadScript(url) {
 }
 
 export default GoogleMap;
+
