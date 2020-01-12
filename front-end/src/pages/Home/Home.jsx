@@ -89,17 +89,19 @@ class Home extends Component {
         const { feed, feedArr, input } = this.state
         const { handleInput, searchUser, searchHashtag } = this
         return (
-            <div>
+            <div className='home'>
                 <div className='nav'>
-                    <Hamburger
-                        handleInput={handleInput}
-                        searchUser={searchUser}
-                        searchHashtag={searchHashtag}
-                        input={input}
-                        feed={feed} />
-                </div>
-                <div className='header'>
-                    <h1>WanderFull</h1>
+                    <div className='header'>
+                        <h1>WanderFull</h1>
+                    </div>
+                    <div className='hamburger'>
+                        <Hamburger
+                            handleInput={handleInput}
+                            searchUser={searchUser}
+                            searchHashtag={searchHashtag}
+                            input={input}
+                            feed={feed} />
+                    </div>
                 </div>
 
 

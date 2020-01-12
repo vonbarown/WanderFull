@@ -27,7 +27,7 @@ const useStyles = makeStyles(theme => ({
 export default function ImageCard(props) {
     const classes = useStyles();
     return (
-        <Card className={classes.card}>
+        <Card className={classes.card, 'cards'}>
             <CardHeader
                 avatar={
                     <Avatar src={props.pic} aria-label="card" className={classes.avatar}></Avatar>
@@ -37,7 +37,7 @@ export default function ImageCard(props) {
                         <MoreVertIcon />
                     </IconButton>
                 }
-                title={props.caption}
+                title={props.username}
                 subheader={props.time_post}
             />
             <CardMedia
@@ -46,6 +46,8 @@ export default function ImageCard(props) {
                 title="post"
             />
             <CardContent>
+                {props.caption}
+                <br />
                 {`#${props.hashtag} `}
             </CardContent>
             <CardActions disableSpacing>

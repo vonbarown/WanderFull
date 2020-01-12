@@ -67,6 +67,7 @@ class Profile extends Component {
                             let time_post = el.time_post.replace('T05:00:00.000Z', '')
                             return <ImageCard className='profileCard'
                                 postPic={el.img}
+                                username={username}
                                 pic={profile_pic}
                                 caption={el.caption}
                                 hashtag={el.hashtag}
