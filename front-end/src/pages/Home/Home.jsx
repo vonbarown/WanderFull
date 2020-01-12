@@ -109,14 +109,16 @@ class Home extends Component {
 
                     {
                         feedArr.map(el => {
-                            return <ImageCard
-                                postPic={el.img}
-                                pic={el.profile_pic}
-                                caption={el.caption}
-                                key={el.id}
-                                className='imgCard'
-                                hashtage={el.hashtag}
-                            />
+                            return <div className='cards'>
+                                <ImageCard
+                                    postPic={el.img}
+                                    pic={el.profile_pic}
+                                    caption={el.caption}
+                                    key={el.id}
+                                    className='imgCard'
+                                    hashtag={el.hashtag}
+                                />
+                            </div>
                         })
                     }
                 </Container>

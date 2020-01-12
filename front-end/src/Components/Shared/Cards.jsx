@@ -27,7 +27,7 @@ const useStyles = makeStyles(theme => ({
 export default function ImageCard(props) {
     const classes = useStyles();
     return (
-        <Card className={classes.card, 'cards'}>
+        <Card className={classes.card}>
             <CardHeader
                 avatar={
                     <Avatar src={props.pic} aria-label="card" className={classes.avatar}></Avatar>
