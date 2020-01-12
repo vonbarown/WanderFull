@@ -60,8 +60,8 @@ const useStyles = makeStyles(theme => ({
 
 export default function SignUpSide(props) {
   const classes = useStyles();
-  const {submitSignUp, inputChange, handleChange} = props
-  
+  const { submitSignUp, inputChange, handleChange } = props
+
   return (
     <Grid container maxWidth="sm" component="main" className={classes.root}>
       <CssBaseline />
@@ -162,7 +162,7 @@ export default function SignUpSide(props) {
               </Grid>
             </Grid>
             <Box mt={5}>
-              <Copyright />
+              {`Copyright © WanderFull ${new Date().getFullYear()}.`}
             </Box>
           </form>
         </div>

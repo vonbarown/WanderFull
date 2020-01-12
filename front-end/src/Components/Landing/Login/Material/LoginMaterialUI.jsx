@@ -125,7 +125,7 @@ export default function SignInSide(props) {
               </Grid>
             </Grid>
             <Box mt={5}>
-              <Copyright />
+              {`Copyright © WanderFull ${new Date().getFullYear()}.`}
             </Box>
           </form>
         </div>
