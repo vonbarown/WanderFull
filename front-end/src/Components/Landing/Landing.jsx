@@ -6,7 +6,6 @@ import Profile from '../../pages/Profile'
 import { Buds } from '../../Components/Profile/Buds'
 import Settings from '../../pages/Settings'
 import AppNavBar from '../Shared/AppNavBar'
-
 import './Landing.css'
 
 import Upload from '../TestComponents/UploadForm'
@@ -69,7 +68,8 @@ class Landing extends Component {
             <div>
                 <Switch>
                     <Route path='/home' component={Home} />
-                    <Route path='/geocode' component={MapContainer} />
+                    { // <Route path='/geocode' component={MapContainer} />
+                    }
                     {!!sessionStorage.getItem('user') && (
                         <>
                             <Route path='/buds' component={Buds} />

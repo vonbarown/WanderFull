@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import Button from '../../Shared/Button'
 import axios from 'axios'
 import SignUpSide from './Material/SignUpMaterialUI'
 import { Redirect } from 'react-router-dom'
