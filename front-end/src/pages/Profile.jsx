@@ -23,7 +23,7 @@ class Profile extends Component {
 
     // Retrieves all the pictures that a user uploaded
     getUserAlbum = async () => {
-        let username = 'Voniel'
+        let username = sessionStorage.getItem('user')
         let { album } = this.state
         try {
             const { data } = await axios.get(`http://localhost:8080/posts/profile/${username}`, {
@@ -58,7 +58,6 @@ class Profile extends Component {
                 <div className='header'>
                     <div className='top'>
                         <UserAvatar pic={profile_pic} class_name={'classes.large'} userName={username} />
-                        <Hamburger />
                     </div>
                     <NavBar renderNavBar={this.renderNavBar} />
                 </div>
@@ -66,13 +65,16 @@ class Profile extends Component {
                     {
                         album.map(el => {
                             let time_post = el.time_post.replace('T05:00:00.000Z', '')
-                            return <ImageCard
-                                postPic={el.img}
-                                pic={profile_pic}
-                                caption={el.caption}
-                                hashtag={el.hashtag}
-                                time_post={time_post}
-                            />
+                            return <div className='profileCard'>
+                                <ImageCard
+                                    postPic={el.img}
+                                    username={username}
+                                    pic={profile_pic}
+                                    caption={el.caption}
+                                    hashtag={el.hashtag}
+                                    time_post={time_post}
+                                />
+                            </div>
                         })
 
                     }

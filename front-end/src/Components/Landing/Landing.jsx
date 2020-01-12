@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
 import Container from './Container'
 import { Switch, Route } from 'react-router-dom'
-import Home from '../../pages/Home'
+import Home from '../../pages/Home/Home'
 import Profile from '../../pages/Profile'
 import { Buds } from '../../Components/Profile/Buds'
 import Settings from '../../pages/Settings'
+import AppNavBar from '../Shared/AppNavBar'
 
 import './Landing.css'
 
@@ -14,7 +15,7 @@ import Upload from '../TestComponents/UploadForm'
 class Landing extends Component {
     state = {
         firstRender: false,
-        login: true 
+        login: true
     }
 
     handleChange = (event) => {
@@ -68,10 +69,12 @@ class Landing extends Component {
                     <Route path='/home' component={Home} />
                     {!!sessionStorage.getItem('user') && (
                         <>
-                            <Route path='/profile' component={Profile} />
                             <Route path='/buds' component={Buds} />
-                            <Route path='/settings' component={Settings} />
                             <Route path='/upload' component={Upload} />
+                            <AppNavBar>
+                                <Route path='/profile' component={Profile} />
+                                <Route path='/settings' component={Settings} />
+                            </AppNavBar>
                         </>
 
                     )}

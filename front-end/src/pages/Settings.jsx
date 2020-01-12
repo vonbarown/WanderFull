@@ -27,7 +27,6 @@ const Settings = () => {
         <div className='settingsPage'>
             <ThemeProvider theme={themeMode} >
                 <GlobalStyles />
-                <Hamburger />
                 <h1>Settings</h1>
                 <div className='toggleButton'>
                     <p>Dark Theme</p>

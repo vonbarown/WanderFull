@@ -2,12 +2,17 @@ import React, { Component } from 'react'
 import Button from '../../Shared/Button'
 import axios from 'axios'
 import SignUpSide from './Material/SignUpMaterialUI'
-
+import { Redirect } from 'react-router-dom'
 class SignUpForm extends Component {
-    state = {}
+    constructor(props) {
+        super()
+        this.state = {
+            renderComponent: false,
+        }
+    }
 
     inputChange = e => {
-        this.setState({[e.target.name]: e.target.value})
+        this.setState({ [e.target.name]: e.target.value })
     }
 
     submitSignUp = async (event) => {
@@ -23,13 +28,14 @@ class SignUpForm extends Component {
             console.log('Signup failed.')
             console.log(err)
         }
-        // this.setState({
-        //     renderComponent: true
-        // })
+        this.setState({
+            renderComponent: true
+        })
     }
 
     render() {
         const { submitSignUp, inputChange } = this
+        const { renderComponent } = this.state
         return (
             <div>
                 {/* <form onSubmit={submitSignUp}>
@@ -44,11 +50,12 @@ class SignUpForm extends Component {
                     value='Login Instead?'
                     handleChange={this.props.handleChange}
                 /> */}
-                <SignUpSide 
-                submitSignUp = {submitSignUp}
-                inputChange = {inputChange}
-                handleChange = {this.props.handleChange}
+                <SignUpSide
+                    submitSignUp={submitSignUp}
+                    inputChange={inputChange}
+                    handleChange={this.props.handleChange}
                 />
+                {renderComponent ? <Redirect to='/home' /> : null}
             </div>
         )
     }
