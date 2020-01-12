@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import Button from '../../Shared/Button'
 // import Home from '../../../pages/Home'
 import { Redirect } from 'react-router-dom'
 import axios from 'axios'
@@ -41,7 +40,7 @@ class LoginForm extends Component {
     render() {
         // console.log(this.state)
         const { renderComponent } = this.state
-        const {submitLogin, inputChange} = this
+        const { submitLogin, inputChange } = this
         return (
             <div>
                 {/* <form onSubmit={this.submitLogin}>
@@ -53,10 +52,10 @@ class LoginForm extends Component {
                     value='Sign up'
                     handleChange={this.props.handleChange} // TODO
                 /> */}
-                <SignInSide 
-                submitLogin = {submitLogin}
-                inputChange = {inputChange}
-                handleChange = {this.props.handleChange}
+                <SignInSide
+                    submitLogin={submitLogin}
+                    inputChange={inputChange}
+                    handleChange={this.props.handleChange}
                 />
                 {renderComponent ? <Redirect to='/home' /> : null}
             </div>

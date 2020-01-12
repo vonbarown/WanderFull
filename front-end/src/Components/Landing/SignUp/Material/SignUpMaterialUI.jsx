@@ -17,8 +17,8 @@ function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
       {'Copyright © '}
-      <Link color="inherit" href="https://material-ui.com/">
-        Your Website
+      <Link color="inherit" href="http://localhost:3000">
+        WanderFull
       </Link>{' '}
       {new Date().getFullYear()}
       {'.'}
@@ -162,7 +162,7 @@ export default function SignUpSide(props) {
               </Grid>
             </Grid>
             <Box mt={5}>
-              {`Copyright © WanderFull ${new Date().getFullYear()}.`}
+              <Copyright />
             </Box>
           </form>
         </div>

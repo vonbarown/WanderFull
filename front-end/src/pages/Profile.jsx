@@ -3,7 +3,6 @@ import React, { Component } from 'react'
 import UserAvatar from '../Components/Shared/Avatar'
 import NavBar from '../Components/Profile/NavBar'
 import ImageCard from '../Components/Shared/Cards'
-import Hamburger from '../Components/Shared/Hamburger'
 import { Container } from '@material-ui/core'
 import { Buds } from '../Components/Profile/Buds'
 import '../styles/profile.css'
@@ -24,7 +23,6 @@ class Profile extends Component {
     // Retrieves all the pictures that a user uploaded
     getUserAlbum = async () => {
         let username = sessionStorage.getItem('user')
-        let { album } = this.state
         try {
             const { data } = await axios.get(`http://localhost:8080/posts/profile/${username}`, {
                 params: {

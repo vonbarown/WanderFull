@@ -1,5 +1,4 @@
 import React from 'react'
-import Hamburger from '../Components/Shared/Hamburger'
 import { ThemeProvider } from 'styled-components'
 import { lightTheme, darkTheme } from '../themes/theme'
 import { GlobalStyles } from '../themes/global'

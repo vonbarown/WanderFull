@@ -30,7 +30,7 @@ router.post('/authenticate', async (req, res, next) => {
 const getUser = async (req, res, next) => {
 
   try {
-    let user = await db.any('SELECT * FROM users WHERE username = $1', req.params.username)
+    let user = await db.any('SELECT username, firstname,lastname,id,email,profile_pic,active FROM users WHERE username = $1', req.params.username)
 
     res.json({
       status: 'success',
@@ -49,30 +49,20 @@ const updateUserInfo = async (req, res, next) => {
   let user_id = req.params.user_id
   let username = req.body.username
   let profile_pic = req.body.profile_pic
-  console.log(user_id, username)
+  console.log("req body", user_id, username)
 
   try {
     if (username) {
-      let updatedUsername = await db.any(
-        `UPDATE users 
-      SET username = $1 
-      WHERE id = $2
-      RETURNING *`,
-        [username, Number(user_id)])
-      res.status(200)
-      res.json({
+      console.log("triggered 1")
+      let updatedUsername = await db.none("UPDATE users SET username = $1 WHERE id = $2", [username, Number(user_id)])
+      res.status(200).json({
         payload: updatedUsername,
         message: `Success. Updated ${username} in users table.`
       });
     } else if (profile_pic) {
-      let updatedProfile_pic = await db.any(
-        `UPDATE users 
-      SET profile_pic = $1 
-      WHERE id = $2 
-      RETURNING *`,
-        [profile_pic, Number(user_id)])
-      res.status(200)
-      res.json({
+      console.log("triggered 2")
+      let updatedProfile_pic = await db.none(`UPDATE users SET profile_pic = $1 WHERE id = $2`, [profile_pic, Number(user_id)])
+      res.status(200).json({
         payload: updatedProfile_pic,
         message: `Success. Updated user ${user_id}'s profile pic in users table.`
       });
@@ -87,12 +77,7 @@ router.patch('/update/:user_id', updateUserInfo)
 
 const deactivateUser = async (req, res, next) => {
   try {
-    let deactivatedUser = await db.one(`
-        UPDATE users
-        SET active = $1
-        WHERE username = $2
-        RETURNING username, active 
-    `, ['false', req.params.username])
+    let deactivatedUser = await db.one(`UPDATE users SET active = $1 WHERE username = $2 RETURNING username, active `, ['false', req.params.username])
 
     res.json({
       status: 'success',
