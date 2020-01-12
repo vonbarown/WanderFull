@@ -117,6 +117,7 @@ class Home extends Component {
                                     key={el.id}
                                     className='imgCard'
                                     hashtag={el.hashtag}
+                                    username={el.username}
                                 />
                             </div>
                         })
