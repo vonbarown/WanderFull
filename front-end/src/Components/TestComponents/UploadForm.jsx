@@ -7,7 +7,11 @@ class uploadForm extends Component {
         caption: '',
         hashtag: '',
         location: '',
-        imageFile: null
+        imageFile: null,
+        coords: {
+            lat: '',
+            long: ''
+        }
     }
 
     handleFileInput = e => {
@@ -18,7 +22,8 @@ class uploadForm extends Component {
     handleTextInput = e => {
         this.setState({
             hashtag: e.target.value,
-            caption: e.target.value
+            caption: e.target.value,
+            location: e.target.value
         })
     }
 

@@ -22,7 +22,9 @@ export class MapContainer extends Component {
             { latitude: 47.2052192687988, longitude: -121.988426208496 },
             { latitude: 47.6307081, longitude: -122.1434325 },
             { latitude: 47.3084488, longitude: -122.2140121 },
-            { latitude: 47.5524695, longitude: -122.0425407 }]
+            { latitude: 47.5524695, longitude: -122.0425407 },
+            { latitude: 48.85837009999999, longitude: 2.2944813 }
+            ]
         }
     }
 

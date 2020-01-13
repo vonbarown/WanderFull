@@ -4,13 +4,13 @@ img {
   /* border-radius: 50%; */
 }
 
-.userAvatar {
+#userAvatar {
   display: flex;
   gap: 200px;
   align-items: center;
   margin-right: 500px;
 }
-.userAvatar:first-child {
+#userAvatar:first-child {
   font-size: 90px;
 }
 

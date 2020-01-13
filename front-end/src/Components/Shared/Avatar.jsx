@@ -19,7 +19,7 @@ export default function UserAvatars(props) {
     const classes = useStyles();
 
     return (
-        <div className={classes.root, 'userAvatar'}>
+        <div className={classes.root} id='userAvatar'>
             <Avatar alt="user" src={props.pic} className={classes.large} />
             <p>{props.userName}</p>
         </div>

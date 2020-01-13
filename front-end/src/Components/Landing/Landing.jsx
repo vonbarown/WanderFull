@@ -68,7 +68,7 @@ class Landing extends Component {
             <div>
                 <Switch>
                     <Route path='/home' component={Home} />
-                    { // <Route path='/geocode' component={MapContainer} />
+                    {  // <Route path='/geocode' component={MapContainer} />
                     }
                     {!!sessionStorage.getItem('user') && (
                         <>
