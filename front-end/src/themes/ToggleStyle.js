@@ -19,7 +19,7 @@ const ToggleContainer = styled.button`
   svg {
     height: auto;
     width: 2.5rem;
-    transition: all 0.3s linear;
+    transition: all 1.09s linear;
     
    
     &:first-child {

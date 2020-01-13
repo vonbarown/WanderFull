@@ -1,5 +1,4 @@
 import React from 'react'
-import Hamburger from '../Components/Shared/Hamburger'
 import { ThemeProvider } from 'styled-components'
 import { lightTheme, darkTheme } from '../themes/theme'
 import { GlobalStyles } from '../themes/global'
@@ -27,7 +26,6 @@ const Settings = () => {
         <div className='settingsPage'>
             <ThemeProvider theme={themeMode} >
                 <GlobalStyles />
-                <Hamburger />
                 <h1>Settings</h1>
                 <div className='toggleButton'>
                     <p>Dark Theme</p>
@@ -40,6 +38,9 @@ const Settings = () => {
                     <button>Submit</button>
                 </form>
             </ThemeProvider >
+            <div>Moon Icon made by<a href="https://www.flaticon.com/authors/smalllikeart" title="smalllikeart">smalllikeart</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a>
+                {' '} Sun Icon made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>
+            </div>
         </div>
     )
     // }
