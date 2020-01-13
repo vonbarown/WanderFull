@@ -11,9 +11,10 @@ import { blueGrey } from '@material-ui/core/colors';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import ShareIcon from '@material-ui/icons/Share';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
+
 const useStyles = makeStyles(theme => ({
     card: {
-        maxWidth: 500
+        width: 800,
     },
     media: {
         height: 0,
