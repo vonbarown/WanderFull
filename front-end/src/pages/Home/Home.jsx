@@ -1,11 +1,10 @@
 import React, { Component } from 'react'
-import Hamburger from '../Components/Shared/Hamburger'
+import Hamburger from '../../Components/Shared/Hamburger'
 import axios from 'axios'
-import ImageCard from '../Components/Shared/Cards'
-import '../styles/HomePage.css'
+import ImageCard from '../../Components/Shared/Cards'
+import '../../styles/HomePage.css'
 import { Container } from '@material-ui/core'
-import { EventEmitter } from 'events'
-
+import UploadModal from './Modal'
 class Home extends Component {
     constructor() {
         super()
@@ -22,10 +21,10 @@ class Home extends Component {
         // this.searchHashtag()
     }
 
-    componentDidUpdate(prevProps,prevState){
-        const {input} = this.state
-        if(!input === prevState.input){
-        this.searchHashtag()
+    componentDidUpdate(prevProps, prevState) {
+        const { input } = this.state
+        if (!input === prevState.input) {
+            this.searchHashtag()
 
         }
     }
@@ -44,7 +43,7 @@ class Home extends Component {
     }
 
     searchHashtag = async (input) => {
-       // const {input} = this.state
+        // const {input} = this.state
         try {
             console.log(input)
             const hashtagImgs = `http://localhost:8080/posts/search/hashtag/${input}`
@@ -53,7 +52,7 @@ class Home extends Component {
             //     return el.img
             // })
             this.setState({
-                feedArr:payload
+                feedArr: payload
             })
             console.log(payload)
         } catch (error) {
@@ -61,17 +60,16 @@ class Home extends Component {
         }
     }
 
-    searchUser = async() =>{
-        const {input} = this.state
-        try{
+    searchUser = async () => {
+        const { input } = this.state
+        try {
             const username = `http://localhost:8080/posts/profile/${input}`
-            const { data: { payload }} = await axios.get(username)
-            let hashtag = payload.hashtag.split(',')
+            const { data: { payload } } = await axios.get(username)
             this.setState({
-                feedArr:payload
+                feedArr: payload
             })
-            console.log('user2 info' , payload)
-        } catch(error) {
+            console.log('user2 info', payload)
+        } catch (error) {
             console.log(error)
         }
 
@@ -91,17 +89,19 @@ class Home extends Component {
         const { feed, feedArr, input } = this.state
         const { handleInput, searchUser, searchHashtag } = this
         return (
-            <div>
+            <div className='home'>
                 <div className='nav'>
-                    <Hamburger
-                        handleInput={handleInput}
-                        searchUser = {searchUser}
-                        searchHashtag = {searchHashtag}
-                        input = {input}
-                        feed={feed} />
-                </div>
-                <div className='header'>
-                    <h1>WanderFull</h1>
+                    <div className='header'>
+                        <h1>WanderFull</h1>
+                    </div>
+                    <div className='hamburger'>
+                        <Hamburger
+                            handleInput={handleInput}
+                            searchUser={searchUser}
+                            searchHashtag={searchHashtag}
+                            input={input}
+                            feed={feed} />
+                    </div>
                 </div>
 
 
@@ -109,23 +109,24 @@ class Home extends Component {
 
                     {
                         feedArr.map(el => {
-                            return <ImageCard
-                            // let hashtag = {el.hashtag.split(',')}
-                                postPic={el.img}
-                                pic={el.profile_pic}
-                                caption={el.caption}
-                                key={el.id}
-                                className='imgCard'
-                                hashtag = {el.hashtag}
-                                username = {el.username}
-                            />
+                            return <div className='cards'>
+                                <ImageCard
+                                    postPic={el.img}
+                                    pic={el.profile_pic}
+                                    caption={el.caption}
+                                    key={el.id}
+                                    className='imgCard'
+                                    hashtag={el.hashtag}
+                                    username={el.username}
+                                />
+                            </div>
                         })
                     }
                 </Container>
 
 
 
-
+                <UploadModal className='UploadForm' />
             </div>
         )
     }

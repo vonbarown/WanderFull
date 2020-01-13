@@ -22,7 +22,7 @@ CREATE TABLE posts (
     caption VARCHAR, 
     location VARCHAR, 
     hashtag text[],
-    time_post TEXT DEFAULT NOW()
+    time_post TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE TABLE likes (

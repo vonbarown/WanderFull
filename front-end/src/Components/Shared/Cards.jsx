@@ -39,7 +39,7 @@ export default function ImageCard(props) {
                     </IconButton>
                 }
                 title={props.username}
-                subheader="September 14, 2016"
+                subheader={props.time_post}
             />
             <CardMedia
                 className={classes.media}
@@ -47,8 +47,9 @@ export default function ImageCard(props) {
                 title="post"
             />
             <CardContent>
-                {`${props.caption}`}
-                {` #${props.hashtag} `}
+                {props.caption}
+                <br />
+                {`#${props.hashtag} `}
             </CardContent>
             <CardActions disableSpacing>
                 <IconButton aria-label="add to favorites">

@@ -1,25 +1,33 @@
 import React, { Component } from 'react'
 import Container from './Container'
 import { Switch, Route } from 'react-router-dom'
-import Home from '../../pages/Home'
+import Home from '../../pages/Home/Home'
 import Profile from '../../pages/Profile'
 import { Buds } from '../../Components/Profile/Buds'
 import Settings from '../../pages/Settings'
+import AppNavBar from '../Shared/AppNavBar'
+import './Landing.css'
+
 import Upload from '../TestComponents/UploadForm'
+// import GoogleMap from '../Map/Map'
+// import MapBox from '../Map/MapBox'
+import MapContainer from '../Map/MapOfficial'
 
 class Landing extends Component {
     state = {
-        firstRender: true,
-        login: false
+        firstRender: false,
+        login: true
     }
 
     handleChange = (event) => {
         const { firstRender } = this.state
+        console.log(event.target.value)
+        console.log(event.target.innerText)
         if (firstRender) {
             this.switchFirstRender()
         }
 
-        if (event.target.value === 'Login') {
+        if (event.target.innerText.includes('Login')) {
             this.setState({
                 login: true
             })
@@ -43,6 +51,7 @@ class Landing extends Component {
         const { handleChange, submitLogin } = this
         return (
             <Container
+                id="container"
                 submitLogin={submitLogin}
                 handleChange={handleChange}
                 firstRender={firstRender}
@@ -59,12 +68,16 @@ class Landing extends Component {
             <div>
                 <Switch>
                     <Route path='/home' component={Home} />
+                    { // <Route path='/geocode' component={MapContainer} />
+                    }
                     {!!sessionStorage.getItem('user') && (
                         <>
-                            <Route path='/profile' component={Profile} />
                             <Route path='/buds' component={Buds} />
-                            <Route path='/settings' component={Settings} />
                             <Route path='/upload' component={Upload} />
+                            <AppNavBar>
+                                <Route path='/profile' component={Profile} />
+                                <Route path='/settings' component={Settings} />
+                            </AppNavBar>
                         </>
 
                     )}

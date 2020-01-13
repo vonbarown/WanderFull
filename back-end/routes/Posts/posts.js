@@ -15,10 +15,11 @@ const addPic = async (req, res, next) => {
         bodyCopy.hashtag = hashtag
 
         let data = await db.any(`
-            INSERT INTO posts (user_id, caption, hashtag) VALUES (
-                $/user_id/, $/caption/, $/hashtag/
+            INSERT INTO posts (user_id, caption, hashtag,img) VALUES (
+                $/user_id/, $/caption/, $/hashtag/,$/imageUrl/
             ) RETURNING (id, hashtag)
         `, bodyCopy)
+        console.log(data);
 
         res.json({
             message: 'image uploaded',
@@ -39,7 +40,7 @@ const getFeedPics = async (req, res, next) => {
     console.log('Get all posts route hit')
     try {
         let pictures = await db.any(`
-            SELECT posts.id, username, hashtag, caption, location, img, profile_pic 
+            SELECT posts.time_post,posts.id, username, hashtag, caption, location, img, profile_pic 
             FROM posts 
             INNER JOIN users 
             ON posts.user_id = users.id
@@ -63,7 +64,7 @@ const getUserInfo = async (req, res, next) => {
 
     try {
         let userPics = await db.any(`
-            SELECT username, hashtag, caption, location, img, profile_pic
+            SELECT posts.time_post,username, hashtag, caption, location, img, profile_pic
             FROM posts 
             INNER JOIN users 
             ON posts.user_id = users.id 
@@ -167,24 +168,14 @@ const updatePost = async (req, res, next) => {
 
     try {
         if (caption) {
-            let updatedCaption = await db.any(
-                `UPDATE posts
-                SET caption = $1 
-                WHERE id = $2
-                `,
-                [caption, post_id])
+            let updatedCaption = await db.any(`UPDATE posts SET caption = $1 WHERE id =$2 RETURNING *`, [caption, post_id])
             res.status(200)
             res.json({
                 payload: updatedCaption,
                 message: `Success. Updated post # ${post_id}'s caption in posts table.`
             });
         } else if (location) {
-            let updatedLocation = await db.any(
-                `UPDATE posts 
-                SET location = $1 
-                WHERE id = $2 
-                RETURNING *`,
-                [location, Number(post_id)])
+            let updatedLocation = await db.any(`UPDATE posts SET location = $1 WHERE id =$2 RETURNING *`, [location, Number(post_id)])
             res.status(200)
             res.json({
                 payload: updatedLocation,
@@ -192,10 +183,7 @@ const updatePost = async (req, res, next) => {
             });
         } else if (hashtag) {
             let updatedHashtag = await db.any(
-                `UPDATE posts 
-                SET hashtag = array_append(hashtag, $1) 
-                WHERE id = $2 
-                RETURNING *`,
+                `UPDATE posts SET hashtag = array_append(hashtag,$1) WHERE id = $2 RETURNING *`,
                 [hashtag, Number(post_id)])
             res.status(200)
             res.json({
