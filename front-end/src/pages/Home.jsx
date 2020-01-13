@@ -66,6 +66,7 @@ class Home extends Component {
         try{
             const username = `http://localhost:8080/posts/profile/${input}`
             const { data: { payload }} = await axios.get(username)
+            let hashtag = payload.hashtag.split(',')
             this.setState({
                 feedArr:payload
             })
@@ -109,12 +110,14 @@ class Home extends Component {
                     {
                         feedArr.map(el => {
                             return <ImageCard
+                            // let hashtag = {el.hashtag.split(',')}
                                 postPic={el.img}
                                 pic={el.profile_pic}
                                 caption={el.caption}
                                 key={el.id}
                                 className='imgCard'
-                                hashtage = {el.hashtag}
+                                hashtag = {el.hashtag}
+                                username = {el.username}
                             />
                         })
                     }
