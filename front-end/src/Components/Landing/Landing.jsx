@@ -11,7 +11,7 @@ import './Landing.css'
 import Upload from '../TestComponents/UploadForm'
 // import GoogleMap from '../Map/Map'
 // import MapBox from '../Map/MapBox'
-import MapContainer from '../Map/MapOfficial'
+// import MapContainer from '../Map/MapOfficial'
 
 class Landing extends Component {
     state = {
