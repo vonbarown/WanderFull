@@ -38,6 +38,7 @@ router.post('/add', addPic)
 // GET All posts
 const getFeedPics = async (req, res, next) => {
     console.log('Get all posts route hit')
+    // console.log('USER PASSPORT', req)
     try {
         let pictures = await db.any(`
             SELECT posts.time_post,posts.id, username, hashtag, caption, location, img, profile_pic 
@@ -45,7 +46,7 @@ const getFeedPics = async (req, res, next) => {
             INNER JOIN users 
             ON posts.user_id = users.id
         `)
-        console.log(pictures)
+        // console.log(pictures)
 
         res.json({
             status: 'success',
