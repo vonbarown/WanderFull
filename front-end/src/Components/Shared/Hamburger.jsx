@@ -6,17 +6,24 @@ import MoreVertIcon from '@material-ui/icons/MoreVert';
 // import Axios from 'axios';
 import '../../styles/Hamburger.css'
 
-
-
 const ITEM_HEIGHT = 48;
 
 const Hamburger = (props) => {
     console.log('hamburger props', props)
+
+    const handleLogout = () => {
+        console.log('Logout')
+        sessionStorage.clear()
+        window.location.href = '/'
+        // this.props.history.push('/asdf')
+    }
+
     const options = [
         <a href='/home'>Home</a>,
         <a href='/profile'>Profile</a>,
         <a href='/settings'>Settings</a>,
-        <input type='text' onChange={props.handleInput} ></input>
+        <input type='text' onChange={props.handleInput} placeholder="Search #'s" ></input>,
+        <button onClick={handleLogout}>Logout</button>
     ];
 
     const [anchorEl, setAnchorEl] = React.useState(null);
@@ -24,7 +31,6 @@ const Hamburger = (props) => {
 
     const handleClick = event => {
         setAnchorEl(event.currentTarget)
-
     };
 
     const handleClose = () => {
@@ -55,7 +61,7 @@ const Hamburger = (props) => {
                 aria-haspopup="true"
                 onClick={handleClick}
             >
-                <MoreVertIcon />
+            <MoreVertIcon />
             </IconButton>
             <Menu
                 id="long-menu"
