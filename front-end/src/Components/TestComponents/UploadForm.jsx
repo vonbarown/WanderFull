@@ -1,16 +1,18 @@
 import React, { Component } from 'react';
+import Geocode from 'react-geocode'
 import axios from 'axios'
+import ApiKey from '../Map/apiKey'
 
 class uploadForm extends Component {
     state = {
         imageUrl: '',
         caption: '',
         hashtag: '',
-        location: '',
+        local: '',
         imageFile: null,
         coords: {
-            lat: '',
-            long: ''
+            latitude: '',
+            longitude: ''
         }
     }
 
@@ -20,11 +22,45 @@ class uploadForm extends Component {
         })
     }
     handleTextInput = e => {
+        const value = e.target.value;
         this.setState({
-            hashtag: e.target.value,
-            caption: e.target.value,
-            location: e.target.value
-        })
+            ...this.prevState,
+            [e.target.name]: value
+        });
+    }
+
+    componentDidUpdate(prevProps, prevState) {
+        if (this.state.local !== prevState.local) {
+            this.geoCodeSetUp()
+        }
+    }
+    geoCodeSetUp = () => {
+        console.log('hit');
+
+        Geocode.setApiKey(ApiKey);
+
+        Geocode.setLanguage("en");
+
+        Geocode.enableDebug();
+
+        const { local } = this.state
+
+        const test = Geocode.fromAddress(local).then(
+            response => {
+                const { lat, lng } = response.results[0].geometry.location;
+                console.log(lat, lng);
+                this.setState({
+                    coords: {
+                        latitude: lat,
+                        longitude: lng
+                    }
+                })
+            },
+            error => {
+                console.error(error);
+            }
+        );
+
     }
 
     handleSubmit = async (e) => {
@@ -63,7 +99,7 @@ class uploadForm extends Component {
                     <input type="submit" value='upload' />
                     <input name='caption' placeholder='caption' type="text" onChange={this.handleTextInput} />
                     <input name='hashtag' placeholder='hashtag' type="text" onChange={this.handleTextInput} />
-                    <input name='location' placeholder='location' type="text" onChange={this.handleTextInput} />
+                    <input name='local' placeholder='location' type="text" onChange={this.handleTextInput} />
                 </form>
                 <img src={this.state.imageUrl} alt="null" />
             </div>

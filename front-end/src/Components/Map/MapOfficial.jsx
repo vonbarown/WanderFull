@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { Map, GoogleApiWrapper, Marker } from 'google-maps-react';
-import GeoCoder from './GeoCode'
 import ApiKey from "./apiKey";
 
 import './MapBox.css'
@@ -49,7 +48,7 @@ export class MapContainer extends Component {
                 >
                     {this.displayMarkers()}
                 </Map>
-                <GeoCoder />
+
             </div>
         );
     }
