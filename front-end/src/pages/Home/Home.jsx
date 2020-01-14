@@ -5,6 +5,7 @@ import ImageCard from '../../Components/Shared/Cards'
 import '../../styles/HomePage.css'
 import { Container } from '@material-ui/core'
 import UploadModal from './Modal'
+
 class Home extends Component {
     constructor() {
         super()
@@ -12,12 +13,15 @@ class Home extends Component {
             feed: true,
             feedArr: [],
             input: '',
-            hashtagArr: []
+            hashtagArr: [],
+            loggedIn: false
         }
+        // checkStorage()
     }
 
     componentDidMount() {
         this.getAllPhotos()
+        this.checkStorage()
         // this.searchHashtag()
     }
 
@@ -26,6 +30,16 @@ class Home extends Component {
         if (!input === prevState.input) {
             this.searchHashtag()
 
+        }
+    }
+
+    checkStorage = () => {
+        const user = sessionStorage.getItem('user')
+        console.log(user)
+        if (!user) {
+            window.location.href = '/'
+        } else {
+            this.setState({ loggedIn: true })
         }
     }
 
@@ -88,7 +102,8 @@ class Home extends Component {
 
         const { feed, feedArr, input } = this.state
         const { handleInput, searchUser, searchHashtag } = this
-        return (
+
+        return (this.state.loggedIn ? (
             <div className='home'>
                 <div className='nav'>
                     <div className='header'>
@@ -128,7 +143,7 @@ class Home extends Component {
 
                 <UploadModal className='UploadForm' />
             </div>
-        )
+        ) : <div></div>)
     }
 }
 

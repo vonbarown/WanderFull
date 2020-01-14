@@ -41,14 +41,15 @@ const photosRouter = require('./routes/Posts/posts')
 const likesRouter = require('./routes/Likes/likes')
 const registerRouter = require('./routes/Users/register')
 const loginRouter = require('./routes/Users/login')
+const logoutRouter = require('./routes/Users/logout')
 
 // Init Express
 const app = express();
 
 // Passport setup
 app.use(session({ secret: 'meow', resave: false, saveUninitialized: false })); // Import secret from .env
-app.use(passport.initialize());
-app.use(passport.session());
+// app.use(passport.initialize());
+// app.use(passport.session());
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -62,44 +63,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-
-// PASSPORT
-// passport.use(new LocalStrategy(async (username, password, cb) => {
-//   try {
-//     const data = await db.one('SELECT id, username, password FROM users WHERE username=$1', [username])
-//     console.log('Incoming U/P: ', username, password)
-//     console.log('Passport: ', data)
-//     if (hash(password) === data.password) {
-//       cb(null, { id: data.id, username: data.username })
-//     } else {
-//       cb(null, false)
-//     }
-//   } catch (err) {
-//     console.error('Error when selecting user on login', err)
-//     cb(null, false)
-//   }
-// }))
-
-// passport.serializeUser((user, done) => {
-//   console.log('Serialize Hit', user)
-//   done(null, user.id);
-// });
-
-// // DESERIALIZE NOT COMPLETE YET
-// passport.deserializeUser( async (id, done) => {
-//   console.log('De-Serialize Hit')
-//   try {
-//     const data = await db.query('SELECT id, username FROM users WHERE id = $1', [parseInt(id, 10)])
-//     console.log(data)
-//     done(null, false)
-//   } catch (err) {
-//     console.error('Error when selecting user on session deserialize', err)
-//     res.send('Invalid sign-in')
-//     done(null, false)
-//   }
-// });
-
-const loggedIn = (req, res, next) => req.isAuthenticated() ? next() : res.redirect('/')
+// const loggedIn = (req, res, next) => req.isAuthenticated() ? next() : res.redirect('/')
 const logRequest = (req, res, next) => {
   // console.log('REQUEST')
   // console.log(req)
@@ -109,7 +73,9 @@ const logRequest = (req, res, next) => {
 // Routes
 app.use('/', indexRouter)
 app.use('/register', registerRouter)
-app.use('/login', passport.authenticate('local'), loginRouter)
+// app.use('/login', passport.authenticate('local'), loginRouter)
+app.use('/login', loginRouter)
+app.use('/logout', logoutRouter)
 app.use('/users', usersRouter)
 app.use('/posts', upload.single('imageUrl'), photosRouter)
 app.use('/likes', likesRouter)
