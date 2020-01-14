@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { Map, GoogleApiWrapper, Marker } from 'google-maps-react';
-import GeoCoder from './GeoCode'
 import ApiKey from "./apiKey";
 
 import './MapBox.css'
@@ -22,7 +21,9 @@ export class MapContainer extends Component {
             { latitude: 47.2052192687988, longitude: -121.988426208496 },
             { latitude: 47.6307081, longitude: -122.1434325 },
             { latitude: 47.3084488, longitude: -122.2140121 },
-            { latitude: 47.5524695, longitude: -122.0425407 }]
+            { latitude: 47.5524695, longitude: -122.0425407 },
+            { latitude: 48.85837009999999, longitude: 2.2944813 }
+            ]
         }
     }
 
@@ -47,7 +48,7 @@ export class MapContainer extends Component {
                 >
                     {this.displayMarkers()}
                 </Map>
-                <GeoCoder />
+
             </div>
         );
     }
