@@ -29,13 +29,12 @@ class uploadForm extends Component {
         });
     }
 
-    componentDidUpdate(prevProps, prevState) {
-        if (this.state.local !== prevState.local) {
-            this.geoCodeSetUp()
-        }
-    }
+    // componentDidUpdate(prevProps, prevState) {
+    //     if (this.state.local !== prevState.local) {
+    //         this.geoCodeSetUp()
+    //     }
+    // }
     geoCodeSetUp = () => {
-        console.log('hit');
 
         Geocode.setApiKey(ApiKey);
 
@@ -45,7 +44,7 @@ class uploadForm extends Component {
 
         const { local } = this.state
 
-        const test = Geocode.fromAddress(local).then(
+        Geocode.fromAddress(local).then(
             response => {
                 const { lat, lng } = response.results[0].geometry.location;
                 console.log(lat, lng);
