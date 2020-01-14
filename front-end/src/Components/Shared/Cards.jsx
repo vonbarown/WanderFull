@@ -11,9 +11,12 @@ import { blueGrey } from '@material-ui/core/colors';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import ShareIcon from '@material-ui/icons/Share';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
+
 const useStyles = makeStyles(theme => ({
     card: {
-        maxWidth: 500
+        width: 800,
     },
     media: {
         height: 0,
@@ -25,17 +28,65 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export default function ImageCard(props) {
+    // code for menu on individual card
+    const [anchorEl, setAnchorEl] = React.useState(null);
+    const open = Boolean(anchorEl);
+
+    const handleClick = event => {
+    let parent = event.target.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.id
+    
+    if(parent === sessionStorage.getItem('user')){
+        console.log('hello');
+        setAnchorEl(event.currentTarget)
+    }
+    };
+
+    const handleClose = () => {
+        setAnchorEl(null);
+    };
+
+const options = [
+    <a href = '/update/'>Update</a>, 
+    <a href = '/delete'>Delete</a>
+]
+
+
     const classes = useStyles();
     return (
-        <Card className={classes.card}>
+        <Card className={classes.card} value ={props.postOwner}>
             <CardHeader
                 avatar={
                     <Avatar src={props.pic} aria-label="card" className={classes.avatar}></Avatar>
                 }
                 action={
-                    <IconButton aria-label="settings">
-                        <MoreVertIcon />
-                    </IconButton>
+                    <div>
+                        <IconButton aria-label="settings"
+                            onClick={handleClick}
+                        >
+                            <MoreVertIcon />
+                        </IconButton>
+                        <Menu
+                            anchorEl={anchorEl}
+                            open={open}
+                            keepMounted
+                            onClose={handleClose}
+                            PaperProps={{
+                                style: {
+                                    height: 100,
+                                    width: 200,
+                                },
+                            }}
+                        >
+                     {options.map(option => (
+                    <MenuItem key={option}>
+                        {option}
+                    </MenuItem>
+                ))}
+
+
+                        </Menu>
+                    </div>
+
                 }
                 title={props.username}
                 subheader={props.time_post}

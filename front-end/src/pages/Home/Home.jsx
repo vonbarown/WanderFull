@@ -109,7 +109,7 @@ class Home extends Component {
 
                     {
                         feedArr.map(el => {
-                            return <div className='cards'>
+                            return <div className='cards' id={el.username}>
                                 <ImageCard
                                     postPic={el.img}
                                     pic={el.profile_pic}
@@ -118,6 +118,7 @@ class Home extends Component {
                                     className='imgCard'
                                     hashtag={el.hashtag}
                                     username={el.username}
+                                    postOwner ={el.username}
                                 />
                             </div>
                         })
