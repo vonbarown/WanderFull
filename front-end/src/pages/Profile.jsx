@@ -7,17 +7,28 @@ import { Container } from '@material-ui/core'
 import { Buds } from '../Components/Profile/Buds'
 import '../styles/profile.css'
 class Profile extends Component {
-
     constructor(props) {
         super(props)
 
         this.state = {
-            album: []
+            album: [],
+            loggedIn: false
         }
     }
 
     componentDidMount() {
         this.getUserAlbum()
+        this.checkStorage()
+    }
+
+    checkStorage = () => {
+        const user = sessionStorage.getItem('user')
+        console.log(user)
+        if (!user) {
+            window.location.href = '/'
+        } else {
+            this.setState({ loggedIn: true })
+        }
     }
 
     // Retrieves all the pictures that a user uploaded
@@ -51,7 +62,7 @@ class Profile extends Component {
         console.log(this.state);
 
 
-        return (
+        return (this.state.loggedIn ? (
             <div className='profile'>
                 <div className='header'>
                     <div className='top'>
@@ -78,7 +89,7 @@ class Profile extends Component {
                     }
                 </Container>
             </div>
-        )
+        ) : <div></div> )
     }
 }
 
