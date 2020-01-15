@@ -3,6 +3,13 @@ import Geocode from 'react-geocode'
 import axios from 'axios'
 import ApiKey from '../Map/apiKey'
 
+
+Geocode.setApiKey(ApiKey);
+
+Geocode.setLanguage("en");
+
+Geocode.enableDebug();
+
 class uploadForm extends Component {
     state = {
         imageUrl: '',
@@ -13,7 +20,8 @@ class uploadForm extends Component {
         coords: {
             latitude: '',
             longitude: ''
-        }
+        },
+        setInput: false
     }
 
     handleFileInput = e => {
@@ -34,37 +42,32 @@ class uploadForm extends Component {
     //         this.geoCodeSetUp()
     //     }
     // }
-    geoCodeSetUp = () => {
 
-        Geocode.setApiKey(ApiKey);
-
-        Geocode.setLanguage("en");
-
-        Geocode.enableDebug();
-
+    geoCodeSetUp = async () => {
         const { local } = this.state
 
-        Geocode.fromAddress(local).then(
-            response => {
-                const { lat, lng } = response.results[0].geometry.location;
-                console.log(lat, lng);
-                this.setState({
-                    coords: {
-                        latitude: lat,
-                        longitude: lng
-                    }
-                })
-            },
-            error => {
-                console.error(error);
-            }
-        );
+        try {
+            let res = await Geocode.fromAddress(local)
+            const { lat, lng } = res.results[0].geometry.location;
+            console.log(lat, lng);
+            this.setState({
+                coords: {
+                    latitude: lat,
+                    longitude: lng
+                }
+            })
+        } catch (error) {
+            console.log(error);
+
+        }
+
 
     }
 
     handleSubmit = async (e) => {
         e.preventDefault()
 
+        await this.geoCodeSetUp()
         let { imageFile, caption, hashtag, coords } = this.state
         const user_id = sessionStorage.getItem('user_id')
 
@@ -73,7 +76,7 @@ class uploadForm extends Component {
         data.append('caption', caption)
         data.append('hashtag', hashtag)
         data.append('user_id', user_id)
-        data.append('coordinates', coords)
+        data.append('coords', JSON.stringify(coords))
 
 
         try {
