@@ -65,7 +65,7 @@ class uploadForm extends Component {
     handleSubmit = async (e) => {
         e.preventDefault()
 
-        let { imageFile, caption, hashtag } = this.state
+        let { imageFile, caption, hashtag, coords } = this.state
         const user_id = sessionStorage.getItem('user_id')
 
         const data = new FormData()
@@ -73,6 +73,7 @@ class uploadForm extends Component {
         data.append('caption', caption)
         data.append('hashtag', hashtag)
         data.append('user_id', user_id)
+        data.append('coordinates', coords)
 
 
         try {
@@ -90,6 +91,9 @@ class uploadForm extends Component {
 
     render() {
         console.log(this.state);
+
+        console.log(JSON.stringify(this.state.coords));
+
 
         return (
             <div className="App">

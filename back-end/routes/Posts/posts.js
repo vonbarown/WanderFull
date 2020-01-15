@@ -13,10 +13,11 @@ const addPic = async (req, res, next) => {
         let bodyCopy = Object.assign({}, req.body)
         bodyCopy.imageUrl = imageUrl
         bodyCopy.hashtag = hashtag
+        bodyCopy.coords = coords
 
         let data = await db.any(`
-            INSERT INTO posts (user_id, caption, hashtag,img) VALUES (
-                $/user_id/, $/caption/, $/hashtag/,$/imageUrl/
+            INSERT INTO posts (user_id, caption, hashtag,img,coordinates) VALUES (
+                $/user_id/, $/caption/, $/hashtag/,$/imageUrl/,$/coords/
             ) RETURNING (id, hashtag)
         `, bodyCopy)
         console.log(data);

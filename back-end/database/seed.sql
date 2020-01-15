@@ -20,7 +20,8 @@ CREATE TABLE posts (
     user_id INT REFERENCES users(id), 
     img VARCHAR, 
     caption VARCHAR, 
-    location VARCHAR, 
+    location VARCHAR,
+    coords VARCHAR, 
     hashtag text[],
     time_post TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
