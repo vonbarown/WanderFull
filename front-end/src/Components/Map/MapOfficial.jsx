@@ -51,8 +51,8 @@ export class MapContainer extends Component {
     displayMarkers = () => {
         return this.state.stores.map((store, index) => {
             return <Marker key={index} id={index} position={{
-                lat: parseFloat(store.coords.latitude),
-                lng: parseFloat(store.coords.longitude)
+                lat: store.coords.latitude,
+                lng: store.coords.longitude
             }}
                 onClick={() => console.log("You clicked me!")} />
         })
@@ -65,7 +65,7 @@ export class MapContainer extends Component {
                     google={this.props.google}
                     zoom={8}
                     style={mapStyles}
-                    initialCenter={{ lat: 47.444, lng: -122.176 }}
+                    initialCenter={{ lat: 40.748817, lng: -73.985428 }}
                 >
                     {this.displayMarkers()}
                 </Map>
