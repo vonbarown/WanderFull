@@ -134,6 +134,7 @@ class Home extends Component {
                                     hashtag={el.hashtag}
                                     username={el.username}
                                     postOwner={el.username}
+                                    postId ={el.id}
                                 />
                             </div>
                         })

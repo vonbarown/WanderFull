@@ -32,12 +32,26 @@ export default function ImageCard(props) {
     const [anchorEl, setAnchorEl] = React.useState(null);
     const open = Boolean(anchorEl);
 
+    const handleCardMenu = (option) =>{
+        if(option === 'Update'){
+// show the input
+            console.log('will update')
+        } else{
+            // let postId = event.target.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.id
+            console.log('will delete')
+//call localhost:8080/post/delete/"id"
+        }
+    }
+
     const handleClick = event => {
-    let parent = event.target.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.id
+    let userCardName = event.target.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.id
+
+    console.log('postId',event.target.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.id);
     
-    if(parent === sessionStorage.getItem('user')){
-        console.log('hello');
+    
+    if(userCardName === sessionStorage.getItem('user')){
         setAnchorEl(event.currentTarget)
+        handleCardMenu('Update')
     }
     };
 
@@ -46,14 +60,14 @@ export default function ImageCard(props) {
     };
 
 const options = [
-    <a href = '/update/'>Update</a>, 
-    <a href = '/delete'>Delete</a>
+    <a href = '#'>Update</a>, 
+    <a href = '#'>Delete</a>
 ]
 
 
     const classes = useStyles();
     return (
-        <Card className={classes.card} value ={props.postOwner}>
+        <Card className={classes.card} id ={props.postId}>
             <CardHeader
                 avatar={
                     <Avatar src={props.pic} aria-label="card" className={classes.avatar}></Avatar>
@@ -96,11 +110,13 @@ const options = [
                 image={props.postPic}
                 title="post"
             />
+            <form>
             <CardContent>
                 {props.caption}
                 <br />
                 {`#${props.hashtag} `}
             </CardContent>
+            </form>
             <CardActions disableSpacing>
                 <IconButton aria-label="add to favorites">
                     <FavoriteIcon />
