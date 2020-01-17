@@ -116,7 +116,8 @@ class Home extends Component {
                             searchUser={searchUser}
                             searchHashtag={searchHashtag}
                             input={input}
-                            feed={feed} />
+                            feed={feed}
+                        />
                     </div>
                 </div>
 
