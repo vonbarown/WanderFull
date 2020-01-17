@@ -3,6 +3,7 @@ import Hamburger from '../../Components/Shared/Hamburger'
 import axios from 'axios'
 import ImageCard from '../../Components/Shared/Cards'
 import '../../styles/HomePage.css'
+import '../../styles/AppNavBar.css'
 import { Container } from '@material-ui/core'
 import UploadModal from './Modal'
 import Quote from './Quote'
@@ -108,18 +109,20 @@ class Home extends Component {
 
         return (this.state.loggedIn ? (
             <div className='home'>
-                <div className='nav'>
-                    <div className='header'>
-                        <h1>WanderFull</h1>
-                    </div>
-                    <div className='hamburger'>
-                        <Hamburger
-                            handleInput={handleInput}
-                            searchUser={searchUser}
-                            searchHashtag={searchHashtag}
-                            input={input}
-                            feed={feed}
-                        />
+                <div className='appNavBar' >
+                    <div className='appNavBarItems'>
+                        <div className='appName'>
+                            <h1>WanderFull</h1>
+                        </div>
+                        <div className='hamburger'>
+                            <Hamburger
+                                handleInput={handleInput}
+                                searchUser={searchUser}
+                                searchHashtag={searchHashtag}
+                                input={input}
+                                feed={feed}
+                            />
+                        </div>
                     </div>
                 </div>
 
@@ -139,8 +142,9 @@ class Home extends Component {
                                     hashtag={el.hashtag}
                                     username={el.username}
                                     postId={el.id}
-                                    getAllPhotos = {this.getAllPhotos}
-                                    //  handleCardMenu = {this.handleCardMenu}
+                                    getAllPhotos={this.getAllPhotos}
+                                    home={true}
+                                //  handleCardMenu = {this.handleCardMenu}
                                 />
                             </div>
                         })

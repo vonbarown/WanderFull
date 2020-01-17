@@ -83,8 +83,8 @@ class Profile extends Component {
                                     caption={el.caption}
                                     hashtag={el.hashtag}
                                     time_post={time_post}
-                                    postOwner={el.username}
                                     postId={el.id}
+                                    getUserAlbum={this.getUserAlbum}
                                 />
                             </div>
                         })
