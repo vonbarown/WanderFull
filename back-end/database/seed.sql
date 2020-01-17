@@ -55,10 +55,10 @@ INSERT INTO users (username, password, firstname, lastname, email, profile_pic) 
 ;
 
 INSERT INTO posts(user_id, img, caption, location, hashtag,coords) VALUES
-    (1, 'https://www.desktodirtbag.com/wp-content/uploads/2019/05/best-cartagena-beaches-playa-blanca-0003.jpeg', 'Bliss', 'Cartagena', ARRAY['this', 'is', 'a', 'hashtag'],'{"latitude":47.6091765,"longitude":-122.3178465}'),
-    (2, 'https://www.maremmaguide.com/image-files/maremma_restaurants_500.jpg', 'AUTHENTIC', 'New York', ARRAY['is', 'a'],'{"latitude":47.6091765,"longitude":-122.3178465}' ),
-    (3, 'https://3tsll33cscvk11pae33oze51-wpengine.netdna-ssl.com/wp-content/uploads/2018/01/tokyo-street-food-takoyaki.png', 'Japanese street food', 'Japan', ARRAY['this','hashtag'],'{"latitude":47.6091765,"longitude":-122.3178465}'),
-    (4, 'https://i.ytimg.com/vi/y8hXqoK8LuI/maxresdefault.jpg', 'Kats Deli', 'California', ARRAY['this', 'is'],'{"latitude":47.6091765,"longitude":-122.3178465}')
+    (1, 'https://www.desktodirtbag.com/wp-content/uploads/2019/05/best-cartagena-beaches-playa-blanca-0003.jpeg', 'Bliss', 'Cartagena', ARRAY['this', 'is', 'a', 'hashtag'],'{"latitude":40.7484405,"longitude":-73.98566439999999}'),
+    (2, 'https://www.maremmaguide.com/image-files/maremma_restaurants_500.jpg', 'AUTHENTIC', 'New York', ARRAY['is', 'a'],'{"latitude":40.7484405,"longitude":-73.98566439999999}' ),
+    (3, 'https://3tsll33cscvk11pae33oze51-wpengine.netdna-ssl.com/wp-content/uploads/2018/01/tokyo-street-food-takoyaki.png', 'Japanese street food', 'Japan', ARRAY['this','hashtag'],'{"latitude":40.7484405,"longitude":-73.98566439999999}'),
+    (4, 'https://i.ytimg.com/vi/y8hXqoK8LuI/maxresdefault.jpg', 'Kats Deli', 'California', ARRAY['this', 'is'],'{"latitude":40.7484405,"longitude":-73.98566439999999}')
 ;
 
 INSERT INTO likes (liker_id, post_id) VALUES
