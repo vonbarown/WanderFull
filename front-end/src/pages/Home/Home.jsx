@@ -5,6 +5,7 @@ import ImageCard from '../../Components/Shared/Cards'
 import '../../styles/HomePage.css'
 import { Container } from '@material-ui/core'
 import UploadModal from './Modal'
+import Quote from './Quote'
 
 class Home extends Component {
     constructor() {
@@ -119,6 +120,7 @@ class Home extends Component {
                     </div>
                 </div>
 
+                <Quote />
 
                 <Container maxWidth='md' className='feedContainer'>
 
@@ -134,7 +136,7 @@ class Home extends Component {
                                     hashtag={el.hashtag}
                                     username={el.username}
                                     postOwner={el.username}
-                                    postId ={el.id}
+                                    postId={el.id}
                                 />
                             </div>
                         })
