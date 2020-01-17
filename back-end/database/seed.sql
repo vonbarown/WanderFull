@@ -78,5 +78,20 @@ INSERT INTO hashtags (tag, post_id) VALUES
     ('Bliss', ARRAY[1])
 ;
 
+
+
+-- INSERT INTO hashtags (tag, post_id)
+-- VALUES ('travel', ARRAY[9])
+-- ON CONFLICT (tag)
+-- DO UPDATE SET post_id =
+-- (SELECT post_id FROM hashtags WHERE tag = 'travel') || 9;
+
+-- INSERT INTO hashtags (tag, post_id)
+-- VALUES ('goodness', ARRAY[9])
+-- ON CONFLICT (tag)
+-- DO UPDATE SET post_id =
+-- (SELECT post_id FROM hashtags WHERE tag = 'goodness') || 9;
+
+
 -- SELECT * FROM posts WHERE id IN (1, 2, 3);
 -- SELECT * FROM posts WHERE '#this' = ANY(hashtag);
