@@ -74,7 +74,7 @@ class Profile extends Component {
                     {
                         album.map(el => {
                             let time_post = el.time_post.replace('T05:00:00.000Z', '')
-                            return <div className='profileCard'>
+                            return <div className='profileCard' id={el.username}>
                                 <ImageCard
                                     key={el.caption}
                                     postPic={el.img}
@@ -83,6 +83,8 @@ class Profile extends Component {
                                     caption={el.caption}
                                     hashtag={el.hashtag}
                                     time_post={time_post}
+                                    postOwner={el.username}
+                                    postId={el.id}
                                 />
                             </div>
                         })
