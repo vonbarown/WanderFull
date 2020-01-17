@@ -176,7 +176,7 @@ const deletePost = async (req, res, next) => {
     }
 }
 
-router.delete('/:post_id', deletePost)
+router.delete('/delete/:post_id', deletePost)
 
 // GET All posts based on location
 const searchByLocation = async (req, res, next) => {
