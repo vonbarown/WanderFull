@@ -10,14 +10,16 @@ const addPic = async (req, res, next) => {
     try {
         let imageUrl = "http://localhost:8080/" + req.file.path.replace('public/', '')
         const hashtag = [req.body.hashtag]
+        const coords = req.body.coords
         let bodyCopy = Object.assign({}, req.body)
         bodyCopy.imageUrl = imageUrl
         bodyCopy.hashtag = hashtag
+        bodyCopy.coords = coords
 
         let data = await db.any(`
-            INSERT INTO posts (user_id, caption, hashtag, img) VALUES (
-                $/user_id/, $/caption/, $/hashtag/, $/imageUrl/
-            ) RETURNING *
+            INSERT INTO posts (user_id, caption, hashtag,img,coords) VALUES (
+                $/user_id/, $/caption/, $/hashtag/,$/imageUrl/,$/coords/
+            ) RETURNING (id, hashtag)
         `, bodyCopy)
         // console.log(data);
 
@@ -64,11 +66,31 @@ const getFeedPics = async (req, res, next) => {
     // console.log('USER PASSPORT', req)
     try {
         let pictures = await db.any(`
-            SELECT posts.time_post,posts.id, username, hashtag, caption, location, img, profile_pic 
+            SELECT posts.time_post,posts.id, username, hashtag, caption, location, img, coords, profile_pic 
             FROM posts 
             INNER JOIN users 
             ON posts.user_id = users.id
         `)
+        // console.log(pictures)
+
+        res.json({
+            status: 'success',
+            message: 'retrieved all post',
+            payload: pictures
+        })
+        next
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+router.get('/all', getFeedPics)
+
+const getAllCoords = async (req, res, next) => {
+    console.log('Get all posts route hit')
+    // console.log('USER PASSPORT', req)
+    try {
+        let pictures = await db.any(`SELECT  coords FROM posts INNER JOIN users ON posts.user_id = users.id WHERE username = $1`, [req.params.username])
         // console.log(pictures)
 
         res.json({
@@ -81,7 +103,7 @@ const getFeedPics = async (req, res, next) => {
     }
 }
 
-router.get('/all', getFeedPics)
+router.get('/all/coords/:username', getAllCoords)
 
 // GET Users information
 const getUserInfo = async (req, res, next) => {
