@@ -28,19 +28,6 @@ h1 {
   display: flex;
 }
 
-/* .quote {
-  border: 1px solid red;
-  margin-left: -80px;
-  border-radius: 1.5%;
-  height: 90px;
-  display: flex;
-  justify-content: center;
-}
-
-.quoteBody {
-  margin-left: 50px;
-} */
-
 .quote {
   background: #efefef;
   -webkit-border-radius: 4px;
