@@ -98,15 +98,13 @@ export default function ImageCard(props) {
         //console.log('postId', userCardName);
         if (userCardName === sessionStorage.getItem('user')) {
             setAnchorEl(event.currentTarget)
+
         }
     };
 
     const handleClose = () => {
         setAnchorEl(null);
     };
-
-
-
 
     const classes = useStyles();
     return (
@@ -138,10 +136,6 @@ export default function ImageCard(props) {
                                     {option}
                                 </MenuItem>
                             ))}
-
-
-
-
                         </Menu>
                     </div>
 

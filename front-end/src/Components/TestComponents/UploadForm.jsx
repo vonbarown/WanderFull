@@ -1,13 +1,27 @@
 import React, { Component } from 'react';
+import Geocode from 'react-geocode'
 import axios from 'axios'
+import ApiKey from '../Map/apiKey'
+
+
+Geocode.setApiKey(ApiKey);
+
+Geocode.setLanguage("en");
+
+Geocode.enableDebug();
 
 class uploadForm extends Component {
     state = {
         imageUrl: '',
         caption: '',
         hashtag: '',
-        location: '',
-        imageFile: null
+        local: '',
+        imageFile: null,
+        coords: {
+            latitude: '',
+            longitude: ''
+        },
+        setInput: false
     }
 
     handleFileInput = e => {
@@ -16,16 +30,45 @@ class uploadForm extends Component {
         })
     }
     handleTextInput = e => {
+        const value = e.target.value;
         this.setState({
-            hashtag: e.target.value,
-            caption: e.target.value
-        })
+            ...this.prevState,
+            [e.target.name]: value
+        });
+    }
+
+    // componentDidUpdate(prevProps, prevState) {
+    //     if (this.state.local !== prevState.local) {
+    //         this.geoCodeSetUp()
+    //     }
+    // }
+
+    geoCodeSetUp = async () => {
+        const { local } = this.state
+
+        try {
+            let res = await Geocode.fromAddress(local)
+            const { lat, lng } = res.results[0].geometry.location;
+            console.log(lat, lng);
+            this.setState({
+                coords: {
+                    latitude: lat,
+                    longitude: lng
+                }
+            })
+        } catch (error) {
+            console.log(error);
+
+        }
+
+
     }
 
     handleSubmit = async (e) => {
         e.preventDefault()
 
-        let { imageFile, caption, hashtag } = this.state
+        await this.geoCodeSetUp()
+        let { imageFile, caption, hashtag, coords } = this.state
         const user_id = sessionStorage.getItem('user_id')
 
         const data = new FormData()
@@ -33,6 +76,7 @@ class uploadForm extends Component {
         data.append('caption', caption)
         data.append('hashtag', hashtag)
         data.append('user_id', user_id)
+        data.append('coords', JSON.stringify(coords))
 
 
         try {
@@ -51,6 +95,9 @@ class uploadForm extends Component {
     render() {
         console.log(this.state);
 
+        console.log(JSON.stringify(this.state.coords));
+
+
         return (
             <div className="App">
                 <form onSubmit={this.handleSubmit}>
@@ -58,7 +105,7 @@ class uploadForm extends Component {
                     <input type="submit" value='upload' />
                     <input name='caption' placeholder='caption' type="text" onChange={this.handleTextInput} />
                     <input name='hashtag' placeholder='hashtag' type="text" onChange={this.handleTextInput} />
-                    <input name='location' placeholder='location' type="text" onChange={this.handleTextInput} />
+                    <input name='local' placeholder='location' type="text" onChange={this.handleTextInput} />
                 </form>
                 <img src={this.state.imageUrl} alt="null" />
             </div>

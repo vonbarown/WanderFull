@@ -9,9 +9,9 @@ import AppNavBar from '../Shared/AppNavBar'
 import './Landing.css'
 
 import Upload from '../TestComponents/UploadForm'
-// import GoogleMap from '../Map/Map'
-// import MapBox from '../Map/MapBox'
-// import MapContainer from '../Map/MapOfficial'
+import GoogleMap from '../Map/Map'
+import MapBox from '../Map/MapBox'
+import MapContainer from '../Map/MapOfficial'
 
 class Landing extends Component {
     state = {
@@ -23,6 +23,7 @@ class Landing extends Component {
         const { firstRender } = this.state
         console.log(event.target.value)
         console.log(event.target.innerText)
+
         if (firstRender) {
             this.switchFirstRender()
         }
@@ -38,6 +39,12 @@ class Landing extends Component {
         }
     }
 
+    handleLogout = () => {
+        console.clear()
+        console.log('Logout')
+        console.log(this.props)
+        // this.props.history.push('/asdf')
+    }
 
     switchFirstRender = () => {
         this.setState({
@@ -48,7 +55,7 @@ class Landing extends Component {
     renderContainer = (routeProps) => {
         // console.log(routeProps)
         const { firstRender, login, signUp } = this.state
-        const { handleChange, submitLogin } = this
+        const { handleChange, submitLogin, handleLogout } = this
         return (
             <Container
                 id="container"
@@ -57,29 +64,29 @@ class Landing extends Component {
                 firstRender={firstRender}
                 login={login}
                 signUp={signUp}
+                handleLogout={handleLogout}
             />
         )
     }
 
     render() {
+        console.log('Landing props:', this.props)
 
         return (
-
             <div>
                 <Switch>
                     <Route path='/home' component={Home} />
-                    { // <Route path='/geocode' component={MapContainer} />
-                    }
                     {!!sessionStorage.getItem('user') && (
                         <>
                             <Route path='/buds' component={Buds} />
                             <Route path='/upload' component={Upload} />
+                            {// <Route path='/map' component={MapContainer} />
+                            }
                             <AppNavBar>
                                 <Route path='/profile' component={Profile} />
                                 <Route path='/settings' component={Settings} />
                             </AppNavBar>
                         </>
-
                     )}
                     <Route path='/' component={this.renderContainer} />
                 </Switch>
