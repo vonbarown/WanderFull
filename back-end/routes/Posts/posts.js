@@ -18,9 +18,10 @@ const addPic = async (req, res, next) => {
         bodyCopy.coords = coords
 
         let data = await db.any(`
-            INSERT INTO posts (user_id, caption, hashtag, img, coords) VALUES (
-                $/user_id/, $/caption/, $/hashtag/, $/imageUrl/, $/coords/
-            ) RETURNING (id, hashtag)
+            INSERT INTO posts (user_id, caption, hashtag,img,coords) VALUES (
+                $/user_id/, $/caption/, $/hashtag/,$/imageUrl/,$/coords/
+            ) RETURNING *
+
         `, bodyCopy)
         // console.log(data);
 
@@ -46,6 +47,7 @@ const addHashtag = async (req, res, next, data) => {
     try {
         hashtags.forEach(async el => {
             console.log(el)
+
             let data = await db.any(`
                 INSERT INTO hashtags (tag, post_id)
                 VALUES ($1, ARRAY[$2])
@@ -56,6 +58,7 @@ const addHashtag = async (req, res, next, data) => {
                 ) 
                 || $2 RETURNING *;
             `, [el, post_id])
+            
             console.log(data)
         })
     } catch (error) {
@@ -120,7 +123,7 @@ const getUserInfo = async (req, res, next) => {
 
     try {
         let userPics = await db.any(`
-            SELECT posts.time_post,username, hashtag, caption, location, img, profile_pic
+            SELECT posts.time_post,username, hashtag, caption, location, img, profile_pic, posts.id
             FROM posts 
             INNER JOIN users 
             ON posts.user_id = users.id 
@@ -186,7 +189,7 @@ const deletePost = async (req, res, next) => {
     }
 }
 
-router.delete('/:post_id', deletePost)
+router.delete('/delete/:post_id', deletePost)
 
 // GET All posts based on location
 const searchByLocation = async (req, res, next) => {
