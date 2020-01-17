@@ -70,10 +70,10 @@ export default function ImageCard(props) {
     //     const newInfo = { hashtag, caption }
 
     // }
-    
+
     const updatePost = async (event) => {
-        // const { hashtag, caption } = this.props
-        // const newInfo = { hashtag, caption }
+        const { hashtag, caption } = this.props
+        const newInfo = { hashtag, caption }
         let postId = event.target.id
         this.editPost()
 
@@ -153,7 +153,7 @@ export default function ImageCard(props) {
                     {props.caption}
                     <br />
                     {/* //sparates each hashtag in arr */}
-                    {`#${props.hashtag}`.split(',').join(' #')} 
+                    {`#${props.hashtag}`.split(',').join(' #')}
                 </CardContent>
             </form>
             <CardActions disableSpacing>
