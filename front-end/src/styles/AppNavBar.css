@@ -1,0 +1,13 @@
+.appNavBarItems {
+  border: 1px solid wheat;
+  flex-direction: row;
+  display: flex;
+  gap: 80vw;
+  padding-left: 20px;
+  margin-bottom: 30px;
+  background-color: teal;
+}
+.appNavBar {
+  width: 100vw;
+  border-radius: 5px;
+}
