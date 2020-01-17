@@ -139,8 +139,9 @@ class Home extends Component {
                                     hashtag={el.hashtag}
                                     username={el.username}
                                     postId={el.id}
-                                    getAllPhotos = {this.getAllPhotos}
-                                    //  handleCardMenu = {this.handleCardMenu}
+                                    getAllPhotos={this.getAllPhotos}
+                                    home={true}
+                                //  handleCardMenu = {this.handleCardMenu}
                                 />
                             </div>
                         })

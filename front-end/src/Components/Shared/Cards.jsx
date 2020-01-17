@@ -58,7 +58,9 @@ export default function ImageCard(props) {
                 let deletePost = `http://localhost:8080/posts/delete/${postId}`
                 const { data: { payload } } = await axios.delete(deletePost)
                 console.log('deleted')
-                props.getAllPhotos()
+
+                props.home ? props.getAllPhotos() : props.getUserAlbum()
+
             } catch (error) {
                 console.log(error)
             }

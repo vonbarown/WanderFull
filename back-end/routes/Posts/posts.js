@@ -110,7 +110,7 @@ const getUserInfo = async (req, res, next) => {
 
     try {
         let userPics = await db.any(`
-            SELECT posts.time_post,username, hashtag, caption, location, img, profile_pic
+            SELECT posts.time_post,username, hashtag, caption, location, img, profile_pic, posts.id
             FROM posts 
             INNER JOIN users 
             ON posts.user_id = users.id 
