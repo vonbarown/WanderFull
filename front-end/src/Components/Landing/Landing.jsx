@@ -9,9 +9,9 @@ import AppNavBar from '../Shared/AppNavBar'
 import './Landing.css'
 
 import Upload from '../TestComponents/UploadForm'
-// import GoogleMap from '../Map/Map'
-// import MapBox from '../Map/MapBox'
-// import MapContainer from '../Map/MapOfficial'
+import GoogleMap from '../Map/Map'
+import MapBox from '../Map/MapBox'
+import MapContainer from '../Map/MapOfficial'
 
 class Landing extends Component {
     state = {
@@ -73,11 +73,10 @@ class Landing extends Component {
         console.log('Landing props:', this.props)
 
         return (
-
             <div>
                 <Switch>
                     <Route path='/home' component={Home} />
-                    {// <Route path='/geocode' component={MapContainer} />
+                    { <Route path='/geocode' component={MapContainer} />
                     }
                     {!!sessionStorage.getItem('user') && (
                         <>
@@ -88,7 +87,6 @@ class Landing extends Component {
                                 <Route path='/settings' component={Settings} />
                             </AppNavBar>
                         </>
-
                     )}
                     <Route path='/' component={this.renderContainer} />
                 </Switch>

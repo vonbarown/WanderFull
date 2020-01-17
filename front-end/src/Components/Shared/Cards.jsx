@@ -32,42 +32,42 @@ export default function ImageCard(props) {
     const [anchorEl, setAnchorEl] = React.useState(null);
     const open = Boolean(anchorEl);
 
-    const handleCardMenu = (option) =>{
-        if(option === 'Update'){
-// show the input
+    const handleCardMenu = (option) => {
+        if (option === 'Update') {
+            // show the input
             console.log('will update')
-        } else{
+        } else {
             // let postId = event.target.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.id
             console.log('will delete')
-//call localhost:8080/post/delete/"id"
+            //call localhost:8080/post/delete/"id"
         }
     }
 
     const handleClick = event => {
-    let userCardName = event.target.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.id
+        let userCardName = event.target.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.id
 
-    console.log('postId',event.target.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.id);
-    
-    
-    if(userCardName === sessionStorage.getItem('user')){
-        setAnchorEl(event.currentTarget)
-        handleCardMenu('Update')
-    }
+        console.log('postId', event.target.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.id);
+
+
+        if (userCardName === sessionStorage.getItem('user')) {
+            setAnchorEl(event.currentTarget)
+            handleCardMenu('Update')
+        }
     };
 
     const handleClose = () => {
         setAnchorEl(null);
     };
 
-const options = [
-    <a href = '#'>Update</a>, 
-    <a href = '#'>Delete</a>
-]
+    const options = [
+        <a href='#'>Update</a>,
+        <a href='#'>Delete</a>
+    ]
 
 
     const classes = useStyles();
     return (
-        <Card className={classes.card} id ={props.postId}>
+        <Card className={classes.card} id={props.postId}>
             <CardHeader
                 avatar={
                     <Avatar src={props.pic} aria-label="card" className={classes.avatar}></Avatar>
@@ -91,11 +91,11 @@ const options = [
                                 },
                             }}
                         >
-                     {options.map(option => (
-                    <MenuItem key={option}>
-                        {option}
-                    </MenuItem>
-                ))}
+                            {options.map(option => (
+                                <MenuItem key={option}>
+                                    {option}
+                                </MenuItem>
+                            ))}
 
 
                         </Menu>
@@ -111,11 +111,11 @@ const options = [
                 title="post"
             />
             <form>
-            <CardContent>
-                {props.caption}
-                <br />
-                {`#${props.hashtag} `}
-            </CardContent>
+                <CardContent>
+                    {props.caption}
+                    <br />
+                    {`#${props.hashtag} `}
+                </CardContent>
             </form>
             <CardActions disableSpacing>
                 <IconButton aria-label="add to favorites">
