@@ -30,6 +30,7 @@ class Home extends Component {
     }
 
     getAllPhotos = async () => {
+        console.log('oop')
         let allPhotos = `http://localhost:8080/posts/all`
         try {
             const { data: { payload } } = await axios.get(allPhotos)
@@ -37,6 +38,7 @@ class Home extends Component {
             this.setState({
                 feedArr: payload
             })
+            console.log(payload)
         } catch (error) {
             console.log(error)
         }
@@ -118,7 +120,9 @@ class Home extends Component {
                                     className='imgCard'
                                     hashtag={el.hashtag}
                                     username={el.username}
-                                    postId ={el.id}
+                                    postId={el.id}
+                                    getAllPhotos = {this.getAllPhotos}
+                                    //  handleCardMenu = {this.handleCardMenu}
                                 />
                             </div>
                         })
