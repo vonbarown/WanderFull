@@ -1,5 +1,4 @@
 .appNavBarItems {
-  border: 1px solid wheat;
   flex-direction: row;
   display: flex;
   gap: 80vw;
