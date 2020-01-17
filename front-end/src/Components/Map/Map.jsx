@@ -28,7 +28,6 @@ class GoogleMap extends Component {
         });
 
         console.log(code);
-
     }
 
     render() {
