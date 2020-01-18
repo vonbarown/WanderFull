@@ -5,6 +5,8 @@ import ImageCard from '../../Components/Shared/Cards'
 import '../../styles/HomePage.css'
 import { Container } from '@material-ui/core'
 import UploadModal from './Modal'
+import UpdateForm from '../../Components/TestComponents/UploadForm'
+
 class Home extends Component {
     constructor() {
         super()
@@ -18,7 +20,6 @@ class Home extends Component {
 
     componentDidMount() {
         this.getAllPhotos()
-        // this.searchHashtag()
     }
 
     componentDidUpdate(prevProps, prevState) {
@@ -30,7 +31,6 @@ class Home extends Component {
     }
 
     getAllPhotos = async () => {
-        console.log('oop')
         let allPhotos = `http://localhost:8080/posts/all`
         try {
             const { data: { payload } } = await axios.get(allPhotos)
@@ -85,9 +85,6 @@ class Home extends Component {
     }
 
     render() {
-        //console.log('state', this.state)
-        //console.log('storage', window.sessionStorage);
-
         const { feed, feedArr, input } = this.state
         const { handleInput, searchUser, searchHashtag } = this
         return (
@@ -131,7 +128,7 @@ class Home extends Component {
 
 
 
-                <UploadModal className='UploadForm' />
+                <UploadModal className='UploadForm' updateForm={false}/>
             </div>
         )
     }
