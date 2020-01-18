@@ -33,15 +33,16 @@ img {
 }
 
 .navItems {
-  border: 1px solid black;
+  /* border: 1px solid black; */
   display: flex;
   flex-direction: row;
-  gap: 200px;
+  gap: 150px;
   border-radius: 6px;
   justify-content: center;
   width: 70vw;
   height: 90px;
   align-items: center;
+  padding-left: 10px;
 }
 
 .navItems button {
