@@ -55,7 +55,7 @@ export default function ImageCard(props) {
 
     const options = [
         <div>
-            <UpdateForm postId = {props.postId}/>
+            <UpdateForm postId = {props.postId} getAllPhotos={props.getAllPhotos}/>
             <p id={props.postId} onClick={deleteCard} value='Delete'>Delete</p>
         </div>
         // <p id={props.postId} onClick={handleCardMenu} value='Update'>Update</p>,

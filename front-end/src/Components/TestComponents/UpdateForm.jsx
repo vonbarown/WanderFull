@@ -1,5 +1,5 @@
 import React,{Component} from 'react'
-
+import axios from 'axios'
 
 class UpdateForm extends Component{
 constructor(){
@@ -19,33 +19,37 @@ this.setState({
 
 }
 
+updatePost = async (event) => {
+    let {hashtag, caption} = this.state
+    // let newInfo = {
+    //     hashtag: hashtag,
+    //     caption: caption
+    // }
+    // let postId = props.postId
 
-
-// updatePost = async (event) => {
-//     let {hashtag, caption} = this.state
-//     let newInfo = {
-//         hashtag: hashtag,
-//         caption: caption
-//     }
-//     // let postId = props.postId
-
-//     try {
-//         let updatePost = (`http://localhost:8080/posts/update/${props.postId}`, newInfo)
-//         const { data: { payload } } = await axios.patch(updatePost)
-//         console.log('updated')
-//         props.getAllPhotos()
-//     } catch (error) {
-//         console.log(error)
-//     }
-// }
+    try {
+        const { data: { payload } } = await axios.patch(`http://localhost:8080/posts/update/${this.props.postId}`, 
+        {
+        hashtag: hashtag,
+        caption: caption
+        })
+        console.log('updated', payload)
+        this.props.getAllPhotos()
+    } catch (error) {
+        console.log(error)
+    }
+}
 
 render(){
+    console.log(this.state);
+    console.log(this.props.postId)
+    
 return(
     <div>
         <form onSubmit={e => e.preventDefault()}>
             <input name ='caption' type = 'text' placeholder='caption' onChange={this.handleInput} />
             <input name = 'hashtag' type = 'text' placeholder ='hashtag' onChange={this.handleInput} />
-            <button> Submit!</button>
+            <button onClick={this.updatePost}> Submit!</button>
         </form>
     </div>
 )
