@@ -1,0 +1,21 @@
+.appNavBarItems {
+  flex-direction: row;
+  display: flex;
+  gap: 80vw;
+  padding-left: 20px;
+  margin-bottom: 30px;
+  background-color: teal;
+}
+.appNavBar {
+  width: 100vw;
+  border-radius: 5px;
+}
+
+.logo {
+  display: flex;
+}
+
+h3 {
+  position: relative;
+  top: 50px;
+}

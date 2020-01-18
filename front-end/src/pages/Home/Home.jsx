@@ -3,9 +3,11 @@ import Hamburger from '../../Components/Shared/Hamburger'
 import axios from 'axios'
 import ImageCard from '../../Components/Shared/Cards'
 import '../../styles/HomePage.css'
+import '../../styles/AppNavBar.css'
+import logo from '../../themes/Logo/f537d019-e1b6-4e42-8275-2c9c5c7b8075_200x200.png'
 import { Container } from '@material-ui/core'
 import UploadModal from './Modal'
-import UpdateForm from '../../Components/TestComponents/UploadForm'
+import Quote from './Quote'
 
 class Home extends Component {
     constructor() {
@@ -14,8 +16,10 @@ class Home extends Component {
             feed: true,
             feedArr: [],
             input: '',
-            hashtagArr: []
+            hashtagArr: [],
+            loggedIn: false
         }
+        // checkStorage()
     }
 
     componentDidMount() {
@@ -30,15 +34,24 @@ class Home extends Component {
         }
     }
 
+    checkStorage = () => {
+        const user = sessionStorage.getItem('user')
+        console.log(user)
+        if (!user) {
+            window.location.href = '/'
+        } else {
+            this.setState({ loggedIn: true })
+        }
+    }
+
     getAllPhotos = async () => {
         let allPhotos = `http://localhost:8080/posts/all`
         try {
             const { data: { payload } } = await axios.get(allPhotos)
-            console.log(payload);
+          //  console.log(payload);
             this.setState({
                 feedArr: payload
             })
-            console.log(payload)
         } catch (error) {
             console.log(error)
         }
@@ -87,24 +100,32 @@ class Home extends Component {
     render() {
         const { feed, feedArr, input } = this.state
         const { handleInput, searchUser, searchHashtag } = this
-        return (
+
+        return (this.state.loggedIn ? (
             <div className='home'>
-                <div className='nav'>
-                    <div className='header'>
-                        <h1>WanderFull</h1>
-                    </div>
-                    <div className='hamburger'>
-                        <Hamburger
-                            handleInput={handleInput}
-                            searchUser={searchUser}
-                            searchHashtag={searchHashtag}
-                            input={input}
-                            feed={feed} />
+                <div className='appNavBar' >
+                    <div className='appNavBarItems'>
+                        <div className='appName'>
+                            <div className='logo'>
+                                <img src={logo} alt="logo" />
+                                <h3>WanderFull</h3>
+                            </div>
+                        </div>
+                        <div className='hamburger'>
+                            <Hamburger
+                                handleInput={handleInput}
+                                searchUser={searchUser}
+                                searchHashtag={searchHashtag}
+                                input={input}
+                                feed={feed}
+                            />
+                        </div>
                     </div>
                 </div>
 
+                <Quote />
 
-                <Container maxWidth='sm' className='feedContainer'>
+                <Container maxWidth='md' className='feedContainer'>
 
                     {
                         feedArr.map(el => {
@@ -118,8 +139,9 @@ class Home extends Component {
                                     hashtag={el.hashtag}
                                     username={el.username}
                                     postId={el.id}
-                                    getAllPhotos = {this.getAllPhotos}
-                                    //  handleCardMenu = {this.handleCardMenu}
+                                    getAllPhotos={this.getAllPhotos}
+                                    home={true}
+                                //  handleCardMenu = {this.handleCardMenu}
                                 />
                             </div>
                         })
@@ -130,7 +152,7 @@ class Home extends Component {
 
                 <UploadModal className='UploadForm' updateForm={false}/>
             </div>
-        )
+        ) : <div></div>)
     }
 }
 

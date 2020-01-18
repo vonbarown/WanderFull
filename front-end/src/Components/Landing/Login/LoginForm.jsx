@@ -43,15 +43,6 @@ class LoginForm extends Component {
         const { submitLogin, inputChange } = this
         return (
             <div>
-                {/* <form onSubmit={this.submitLogin}>
-                    <input type="text" placeholder="Username" name="username" onChange={this.inputChange} />
-                    <input type="password" placeholder="Password" name="password" onChange={this.inputChange} />
-                    <button>Login</button>
-                </form> */}
-                {/* <Button
-                    value='Sign up'
-                    handleChange={this.props.handleChange} // TODO
-                /> */}
                 <SignInSide
                     submitLogin={submitLogin}
                     inputChange={inputChange}
