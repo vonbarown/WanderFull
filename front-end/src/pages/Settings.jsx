@@ -4,9 +4,9 @@ import { lightTheme, darkTheme } from '../themes/theme'
 import { GlobalStyles } from '../themes/global'
 import Toggle from '../themes/Toggler'
 import { useDarkMode } from '../themes/useDarkMode'
-import axios from 'axios'
 import '../styles/settings.css'
-import { Button } from '@material-ui/core';
+import { Button } from '@material-ui/core'
+import axios from 'axios'
 
 
 const useStyles = {
@@ -62,8 +62,6 @@ const Settings = () => {
 
     return (
 
-
-
         <div className='settingsPage'>
             <ThemeProvider theme={themeMode} >
                 <GlobalStyles />
@@ -84,7 +82,6 @@ const Settings = () => {
             </form>
 
             <form noValidate autoComplete="off" onSubmit={handleProfilePicUpdate}>
-                <h3>Upload/Change Profile Picture</h3>
                 <input
                     accept="image/*"
                     id="contained-button-file"
@@ -102,6 +99,6 @@ const Settings = () => {
             </div>
         </div>
     )
-}
+     }
 
 export default Settings 

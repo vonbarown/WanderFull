@@ -105,6 +105,6 @@ class uploadForm extends Component {
             </div>
         );
     }
-}
+ }
 
 export default uploadForm;
