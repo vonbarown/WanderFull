@@ -4,7 +4,6 @@ import { lightTheme, darkTheme } from '../themes/theme'
 import { GlobalStyles } from '../themes/global'
 import Toggle from '../themes/Toggler'
 import { useDarkMode } from '../themes/useDarkMode'
-// import { useForm } from 'react-hook-form'
 import axios from 'axios'
 import '../styles/settings.css'
 
@@ -15,24 +14,27 @@ const Settings = () => {
     const themeMode = theme === 'light' ? lightTheme : darkTheme;
 
     const [data, setData] = useState({ hits: [] })
-    const [query, setQuery] = useState('1');
-    // const { register, handleSubmit, watch, errors } = useForm();
+    const [username, setUsername] = useState('');
 
-    const fetchData = async () => {
-        const result = await axios(
-            `http://localhost:8080/posts/profile/${Number(query)}`,
-        );
-        setData(result.data);
-    }
 
-    const onSubmit = data
 
     useEffect(() => {
+        const fetchData = async () => {
+            const { data: { payload } } = await axios.patch(`http://localhost:8080/users/update/${sessionStorage.getItem('user_id')}`,
+                {
+                    username: username
+                }
+
+            );
+            sessionStorage.setItem('user', payload.username)
+            setData(payload);
+        }
+
         fetchData()
-    }, [])
+    }, [username])
 
 
-    console.log(data);
+    console.log(username);
 
 
     if (!componentMounted) {
@@ -52,7 +54,7 @@ const Settings = () => {
                 </div>
                 <p>Edit Profile info</p>
                 <form onSubmit={e => e.preventDefault()} >
-                    <input type="text" placeholder="username" onChange={e => setQuery(e.target.value)}></input>
+                    <input type="text" placeholder="username" onChange={e => setUsername(e.target.value)}></input>
                     <input type="text" placeholder="profile pic url"></input>
                     <button>Submit</button>
                 </form>
