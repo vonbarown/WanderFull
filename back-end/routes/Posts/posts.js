@@ -18,22 +18,9 @@ const addPic = async (req, res, next) => {
         bodyCopy.coords = coords
 
         let data = await db.any(`
-<<<<<<< HEAD
-<<<<<<< HEAD
-            INSERT INTO posts (user_id, caption, hashtag, img) VALUES (
-                $/user_id/, $/caption/, $/hashtag/, $/imageUrl/
-            ) RETURNING *
-=======
             INSERT INTO posts (user_id, caption, hashtag,img,coords) VALUES (
                 $/user_id/, $/caption/, $/hashtag/,$/imageUrl/,$/coords/
             ) RETURNING (id, hashtag)
->>>>>>> bfb265e37b22f5c12e4231d37104ff4711611945
-=======
-            INSERT INTO posts (user_id, caption, hashtag,img,coords) VALUES (
-                $/user_id/, $/caption/, $/hashtag/,$/imageUrl/,$/coords/
-            ) RETURNING *
-
->>>>>>> 3398840bca7ae9a9a5f664327bbe59d0bd7e539e
         `, bodyCopy)
         // console.log(data);
 
@@ -87,7 +74,7 @@ const getFeedPics = async (req, res, next) => {
     // console.log('USER PASSPORT', req)
     try {
         let pictures = await db.any(`
-            SELECT posts.time_post,posts.id, username, hashtag, caption, location, img, profile_pic 
+            SELECT posts.time_post, posts.id, username, hashtag, caption, location, img, profile_pic
             FROM posts 
             INNER JOIN users 
             ON posts.user_id = users.id
@@ -107,26 +94,6 @@ const getFeedPics = async (req, res, next) => {
 
 router.get('/all', getFeedPics)
 
-<<<<<<< HEAD
-// const getAllCoords = async (req, res, next) => {
-//     console.log('Get all posts route hit')
-//     // console.log('USER PASSPORT', req)
-//     try {
-//         let pictures = await db.any(`SELECT  coords FROM posts INNER JOIN users ON posts.user_id = users.id WHERE username = $1`, [req.params.username])
-//         // console.log(pictures)
-
-//         res.json({
-//             status: 'success',
-//             message: 'retrieved all post',
-//             payload: pictures
-//         })
-//     } catch (error) {
-//         console.log(error);
-//     }
-// }
-
-// router.get('/all/coords/:username', getAllCoords)
-=======
 const getAllCoords = async (req, res, next) => {
     console.log('Get all posts route hit')
     // console.log('USER PASSPORT', req)
@@ -149,10 +116,10 @@ const getAllCoords = async (req, res, next) => {
 }
 
 router.get('/all/coords/:username', getAllCoords)
->>>>>>> 3398840bca7ae9a9a5f664327bbe59d0bd7e539e
+
 
 // GET Users information
-const getUserInfo = async (req, res, next) => {
+const getUserPosts = async (req, res, next) => {
 
     try {
         let userPics = await db.any(`
@@ -173,7 +140,7 @@ const getUserInfo = async (req, res, next) => {
     }
 }
 
-router.get('/profile/:username', getUserInfo)
+router.get('/profile/:username', getUserPosts)
 
 // GET Posts based on a hashtag
 const searchByHashtag = async (req, res, next) => {

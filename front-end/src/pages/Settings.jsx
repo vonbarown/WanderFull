@@ -70,7 +70,7 @@ const Settings = () => {
                 </form>
 
                 <form  noValidate autoComplete="off" onSubmit={handleProfilePicUpdate}>
-                <h3>Change Profile Picture</h3>   
+                <h3>Upload/Change Profile Picture</h3>   
                 <input
                 accept="image/*"
                 id="contained-button-file"
