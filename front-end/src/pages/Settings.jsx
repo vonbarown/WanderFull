@@ -54,8 +54,9 @@ const Settings = () => {
                 <p>Edit Profile info</p>
                 <form onSubmit={e => e.preventDefault()} >
                     <input type="text" placeholder="username" onChange={e => setUsername(e.target.value)}></input>
-                    <input type="text" placeholder="profile pic url"></input>
-                    <button>Submit</button>
+                    {// <input type="text" placeholder="profile pic url"></input>
+                    }
+                    <button onClick={() => setUsername(username)}>Submit</button>
                 </form>
             </ThemeProvider >
             <div>Moon Icon made by<a href="https://www.flaticon.com/authors/smalllikeart" title="smalllikeart">smalllikeart</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a>
