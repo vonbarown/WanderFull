@@ -56,10 +56,6 @@ h1 {
   margin-bottom: 0;
 }
 
-.hamburger {
-  /* background-color: aquamarine; */
-}
-
 .quote::after {
   border-left: 20px solid transparent;
   border-top: 20px solid #efefef;
