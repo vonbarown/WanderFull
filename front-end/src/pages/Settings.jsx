@@ -1,10 +1,10 @@
-import React from 'react'
-import axios from 'axios'
+import React, { useState, useEffect } from 'react'
 import { ThemeProvider } from 'styled-components'
 import { lightTheme, darkTheme } from '../themes/theme'
 import { GlobalStyles } from '../themes/global'
 import Toggle from '../themes/Toggler'
 import { useDarkMode } from '../themes/useDarkMode'
+import axios from 'axios'
 import '../styles/settings.css'
 import {TextField} from '@material-ui/core';
 import { Button } from '@material-ui/core';
@@ -19,6 +19,30 @@ const Settings = () => {
 
     const [theme, toggleTheme, componentMounted] = useDarkMode();
     const themeMode = theme === 'light' ? lightTheme : darkTheme;
+
+    const [data, setData] = useState({ data: [] })
+    const [username, setUsername] = useState('');
+
+
+
+    useEffect(() => {
+        const fetchData = async () => {
+            const { data: { payload } } = await axios.patch(`http://localhost:8080/users/update/${sessionStorage.getItem('user_id')}`,
+                {
+                    username: username
+                }
+
+            );
+            sessionStorage.setItem('user', payload.username)
+            setData(payload);
+        }
+
+        fetchData()
+    }, [username])
+
+
+    console.log(data);
+
 
     if (!componentMounted) {
         return <div />
@@ -50,6 +74,7 @@ const Settings = () => {
 
 
     // render() {
+
     return (
 
         
@@ -63,10 +88,13 @@ const Settings = () => {
                 <div className='toggleButton'>
                 <h3>Change Theme</h3> <Toggle theme={theme} toggleTheme={toggleTheme} />
                 </div>
-     
-                <form  noValidate autoComplete="off" onSubmit={handleUserNameUpdate}>
-                <h3>Change UserName</h3>
-                <TextField label="Old Username" variant="outlined"/><TextField label="New Username" variant="outlined" /><Button variant="contained">Submit</Button>
+
+                <p>Edit Profile info</p>
+                <form onSubmit={e => e.preventDefault()} >
+                    <input type="text" placeholder="username" onChange={e => setUsername(e.target.value)}></input>
+                    {// <input type="text" placeholder="profile pic url"></input>
+                    }
+                    <button onClick={() => setUsername(username)}>Submit</button>
                 </form>
 
                 <form  noValidate autoComplete="off" onSubmit={handleProfilePicUpdate}>
@@ -88,7 +116,6 @@ const Settings = () => {
                 </div>
         </div>
     )
-    // }
 }
 
 export default Settings 
