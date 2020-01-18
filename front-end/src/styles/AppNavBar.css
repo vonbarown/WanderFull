@@ -10,3 +10,12 @@
   width: 100vw;
   border-radius: 5px;
 }
+
+.logo {
+  display: flex;
+}
+
+h3 {
+  position: relative;
+  top: 50px;
+}
