@@ -10,3 +10,12 @@
   align-items: center;
   gap: 10px;
 }
+
+.copyRight {
+  position: fixed;
+  bottom: 0;
+}
+
+h3 {
+  text-align: center;
+}

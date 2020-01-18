@@ -62,8 +62,9 @@ class Quote extends Component {
         return (
             <div className={'quote'}>
                 <div className='quoteBody'>
-                    <p>{quote.text}</p>
-                    <p>{`By: ${quote.author}`}</p>
+                    <i>"{quote.text}"</i>
+                    <br></br>
+                    <i>{`-${quote.author}`}</i>
                 </div>
             </div>
         )

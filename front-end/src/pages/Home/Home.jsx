@@ -47,15 +47,13 @@ class Home extends Component {
     }
 
     getAllPhotos = async () => {
-        console.log('oop')
         let allPhotos = `http://localhost:8080/posts/all`
         try {
             const { data: { payload } } = await axios.get(allPhotos)
-            console.log(payload);
+          //  console.log(payload);
             this.setState({
                 feedArr: payload
             })
-            console.log(payload)
         } catch (error) {
             console.log(error)
         }

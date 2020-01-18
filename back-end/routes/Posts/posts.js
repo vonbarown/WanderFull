@@ -20,8 +20,7 @@ const addPic = async (req, res, next) => {
         let data = await db.any(`
             INSERT INTO posts (user_id, caption, hashtag,img,coords) VALUES (
                 $/user_id/, $/caption/, $/hashtag/,$/imageUrl/,$/coords/
-            ) RETURNING *
-
+            ) RETURNING (id, hashtag)
         `, bodyCopy)
         // console.log(data);
 
@@ -75,7 +74,7 @@ const getFeedPics = async (req, res, next) => {
     // console.log('USER PASSPORT', req)
     try {
         let pictures = await db.any(`
-            SELECT posts.time_post,posts.id, username, hashtag, caption, location, img, coords, profile_pic 
+            SELECT posts.time_post, posts.id, username, hashtag, caption, location, img, profile_pic
             FROM posts 
             INNER JOIN users 
             ON posts.user_id = users.id
@@ -118,8 +117,9 @@ const getAllCoords = async (req, res, next) => {
 
 router.get('/all/coords/:username', getAllCoords)
 
+
 // GET Users information
-const getUserInfo = async (req, res, next) => {
+const getUserPosts = async (req, res, next) => {
 
     try {
         let userPics = await db.any(`
@@ -140,7 +140,7 @@ const getUserInfo = async (req, res, next) => {
     }
 }
 
-router.get('/profile/:username', getUserInfo)
+router.get('/profile/:username', getUserPosts)
 
 // GET Posts based on a hashtag
 const searchByHashtag = async (req, res, next) => {
@@ -170,15 +170,14 @@ router.get('/search/hashtag/:tag', searchByHashtag)
 // DELETE Post
 const deletePost = async (req, res, next) => {
     try {
-        let deletedPhoto = await db.one(`
+            await db.none(`
             DELETE from posts 
-            WHERE id = $1 RETURNING *
+            WHERE id = $1 
         `, req.params.post_id)
 
         res.json({
             status: 'success',
-            message: 'image deleted',
-            payload: deletedPhoto
+            message: 'image deleted'
         })
     } catch (error) {
         console.log(error);

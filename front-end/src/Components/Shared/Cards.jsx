@@ -13,6 +13,7 @@ import ShareIcon from '@material-ui/icons/Share';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
+import { Typography } from '@material-ui/core';
 import axios from 'axios'
 
 const useStyles = makeStyles(theme => ({
@@ -26,7 +27,11 @@ const useStyles = makeStyles(theme => ({
     avatar: {
         backgroundColor: blueGrey[500],
     },
+    // favoriteIcon: {
+    //     color: 'red',
+    // }
 }));
+
 
 export default function ImageCard(props) {
     // code for menu on individual card
@@ -49,7 +54,7 @@ export default function ImageCard(props) {
         console.log('in function')
         //let postId = event.target.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.id
         let postId = event.target.id
-        console.log('POSTID')
+       // console.log('POSTID')
 
         if (button.value === 'Update') {
             updatePost();
@@ -108,6 +113,47 @@ export default function ImageCard(props) {
         setAnchorEl(null);
     };
 
+// const options = [
+//     <a >Update</a>, 
+//     <a >Delete</a>
+// ]
+
+    const handleLike = async (event) => {
+        let postId = event.target.id
+        let username = sessionStorage.getItem('user')
+        try {
+           const { data : {payload} } = await axios.get(`http://localhost:8080/users/${username}`)
+            let userId = payload[0].id
+            handleAddingLike(postId, userId)
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    const handleAddingLike = async (postId, userId) => {
+     console.log('postId:', postId, 'userId:', userId)
+     try {
+        const { data : {payload} } = await axios.post(`http://localhost:8080/likes/add/${postId}/${userId}`)
+         console.log(payload)
+         getNumOfLikes(postId)
+     } catch (error) {
+         console.log(error)
+     }
+    }
+
+    const getNumOfLikes = async () => {
+        try {
+            const { data : {payload} } = await axios.get(`http://localhost:8080/likes/${4}`)
+             let num = payload.length 
+             return num
+         } catch (error) {
+             console.log(error)
+         }
+    }
+
+    let likes = getNumOfLikes();
+    console.log(likes)
+
     const classes = useStyles();
     return (
         <Card className={classes.card} id={props.postId}>
@@ -152,15 +198,22 @@ export default function ImageCard(props) {
             />
             <form>
                 <CardContent>
+                <Typography variant="h6" color="inherit">
                     {props.caption}
+                </Typography>
                     <br />
+                <Typography variant="body1" color="primary">
                     {/* //sparates each hashtag in arr */}
                     {`#${props.hashtag}`.split(',').join(' #')}
+                </Typography>
                 </CardContent>
             </form>
             <CardActions disableSpacing>
-                <IconButton aria-label="add to favorites">
+                <IconButton aria-label="add to favorites" onClick={handleLike} color="secondary" id={props.postId}>
                     <FavoriteIcon />
+                    <Typography variant="subtitle1">
+                    {} likes
+                    </Typography>
                 </IconButton>
                 <IconButton aria-label="share">
                     <ShareIcon />
