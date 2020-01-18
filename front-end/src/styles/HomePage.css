@@ -32,6 +32,7 @@ h1 {
 
 .quote {
   background: #efefef;
+  color: black;
   -webkit-border-radius: 4px;
   border-radius: 4px;
   font-size: 1.2rem;
