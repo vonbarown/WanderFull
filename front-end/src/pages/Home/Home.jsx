@@ -24,8 +24,6 @@ class Home extends Component {
 
     componentDidMount() {
         this.getAllPhotos()
-        this.checkStorage()
-        // this.searchHashtag()
     }
 
     componentDidUpdate(prevProps, prevState) {
@@ -100,9 +98,6 @@ class Home extends Component {
     }
 
     render() {
-        //console.log('state', this.state)
-        //console.log('storage', window.sessionStorage);
-
         const { feed, feedArr, input } = this.state
         const { handleInput, searchUser, searchHashtag } = this
 
@@ -155,7 +150,7 @@ class Home extends Component {
 
 
 
-                <UploadModal className='UploadForm' />
+                <UploadModal className='UploadForm' updateForm={false}/>
             </div>
         ) : <div></div>)
     }
