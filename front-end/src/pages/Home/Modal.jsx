@@ -36,7 +36,7 @@ const useStyles = makeStyles(theme => ({
         width: '60px',
         textAlign: "center",
         borderRadius: '50%',
-        backgroundColor: '#228B22'
+        backgroundColor: 'teal'
     },
     plus: {
         fontSize: '40px',
