@@ -40,7 +40,10 @@ h1 {
   min-width: 600px;
   max-width: 900px;
   padding: 15px;
-  position: static;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .quote p {
@@ -55,7 +58,6 @@ h1 {
   /* background-color: aquamarine; */
 }
 
-/* 
 .quote::after {
   border-left: 20px solid transparent;
   border-top: 20px solid #efefef;
@@ -63,4 +65,4 @@ h1 {
   content: "";
   position: absolute;
   right: 20px;
-} */
+}

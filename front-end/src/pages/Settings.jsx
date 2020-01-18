@@ -13,7 +13,7 @@ const Settings = () => {
     const [theme, toggleTheme, componentMounted] = useDarkMode();
     const themeMode = theme === 'light' ? lightTheme : darkTheme;
 
-    const [data, setData] = useState({ hits: [] })
+    const [data, setData] = useState({ data: [] })
     const [username, setUsername] = useState('');
 
 
@@ -34,7 +34,7 @@ const Settings = () => {
     }, [username])
 
 
-    console.log(username);
+    console.log(data);
 
 
     if (!componentMounted) {
@@ -42,7 +42,6 @@ const Settings = () => {
     }
 
 
-    // render() {
     return (
         <div className='settingsPage'>
             <ThemeProvider theme={themeMode} >
@@ -64,7 +63,6 @@ const Settings = () => {
             </div>
         </div>
     )
-    // }
 }
 
 export default Settings 
