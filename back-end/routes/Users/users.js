@@ -54,7 +54,7 @@ const updateUserInfo = async (req, res, next) => {
   try {
     if (username) {
       console.log("triggered 1")
-      let updatedUsername = await db.none("UPDATE users SET username = $1 WHERE id = $2", [username, Number(user_id)])
+      let updatedUsername = await db.one("UPDATE users SET username = $1 WHERE id = $2 RETURNING *", [username, Number(user_id)])
       res.status(200).json({
         payload: updatedUsername,
         message: `Success. Updated ${username} in users table.`

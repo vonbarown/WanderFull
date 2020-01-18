@@ -1,9 +1,10 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { ThemeProvider } from 'styled-components'
 import { lightTheme, darkTheme } from '../themes/theme'
 import { GlobalStyles } from '../themes/global'
 import Toggle from '../themes/Toggler'
 import { useDarkMode } from '../themes/useDarkMode'
+import axios from 'axios'
 import '../styles/settings.css'
 
 
@@ -12,16 +13,35 @@ const Settings = () => {
     const [theme, toggleTheme, componentMounted] = useDarkMode();
     const themeMode = theme === 'light' ? lightTheme : darkTheme;
 
+    const [data, setData] = useState({ data: [] })
+    const [username, setUsername] = useState('');
+
+
+
+    useEffect(() => {
+        const fetchData = async () => {
+            const { data: { payload } } = await axios.patch(`http://localhost:8080/users/update/${sessionStorage.getItem('user_id')}`,
+                {
+                    username: username
+                }
+
+            );
+            sessionStorage.setItem('user', payload.username)
+            setData(payload);
+        }
+
+        fetchData()
+    }, [username])
+
+
+    console.log(data);
+
+
     if (!componentMounted) {
         return <div />
     }
-    const handleSubmit = (event) => {
-        // make patch network request to /users endpoint
-        // event.preventDefault()
-        console.log('form was submitted')
-    }
 
-    // render() {
+
     return (
         <div className='settingsPage'>
             <ThemeProvider theme={themeMode} >
@@ -32,10 +52,11 @@ const Settings = () => {
                     <Toggle theme={theme} toggleTheme={toggleTheme} />
                 </div>
                 <p>Edit Profile info</p>
-                <form onSubmit={handleSubmit()}>
-                    <input type="text" placeholder="username"></input>
-                    <input type="text" placeholder="profile pic url"></input>
-                    <button>Submit</button>
+                <form onSubmit={e => e.preventDefault()} >
+                    <input type="text" placeholder="username" onChange={e => setUsername(e.target.value)}></input>
+                    {// <input type="text" placeholder="profile pic url"></input>
+                    }
+                    <button onClick={() => setUsername(username)}>Submit</button>
                 </form>
             </ThemeProvider >
             <div>Moon Icon made by<a href="https://www.flaticon.com/authors/smalllikeart" title="smalllikeart">smalllikeart</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a>
@@ -43,7 +64,6 @@ const Settings = () => {
             </div>
         </div>
     )
-    // }
 }
 
 export default Settings 

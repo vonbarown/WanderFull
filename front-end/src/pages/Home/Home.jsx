@@ -4,6 +4,7 @@ import axios from 'axios'
 import ImageCard from '../../Components/Shared/Cards'
 import '../../styles/HomePage.css'
 import '../../styles/AppNavBar.css'
+import logo from '../../themes/Logo/f537d019-e1b6-4e42-8275-2c9c5c7b8075_200x200.png'
 import { Container } from '@material-ui/core'
 import UploadModal from './Modal'
 import Quote from './Quote'
@@ -112,7 +113,10 @@ class Home extends Component {
                 <div className='appNavBar' >
                     <div className='appNavBarItems'>
                         <div className='appName'>
-                            <h1>WanderFull</h1>
+                            <div className='logo'>
+                                <img src={logo} alt="logo" />
+                                <h3>WanderFull</h3>
+                            </div>
                         </div>
                         <div className='hamburger'>
                             <Hamburger
