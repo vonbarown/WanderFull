@@ -36,7 +36,7 @@ const useStyles = makeStyles(theme => ({
         width: '60px',
         textAlign: "center",
         borderRadius: '50%',
-        backgroundColor: '#228B22'
+        backgroundColor: 'teal'
     },
     plus: {
         fontSize: '40px',
@@ -44,7 +44,7 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-export default function UploadModal() {
+export default function UploadModal(props) {
     const classes = useStyles();
     const [modalStyle] = React.useState(getModalStyle);
     const [open, setOpen] = React.useState(false);

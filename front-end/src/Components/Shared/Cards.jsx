@@ -14,12 +14,9 @@ import MoreVertIcon from '@material-ui/icons/MoreVert';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import { Typography } from '@material-ui/core';
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-// import { faHeart } from '@fortawesome/free-solid-svg-icons'
 import axios from 'axios'
+import UpdateForm from '../TestComponents/UpdateForm';
 import NumOfLikes from './NumofLikes'
-
-// let numOfLikes =''
 
 const useStyles = makeStyles(theme => ({
     card: {
@@ -43,16 +40,12 @@ export default function ImageCard(props) {
     const [anchorEl, setAnchorEl] = React.useState(null);
     const open = Boolean(anchorEl);
 
-    const handleCardMenu = async (event) => {
+    const deleteCard = async (event) => {
         let button = event.target
         console.log('in function')
         //let postId = event.target.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.id
         let postId = event.target.id
-       // console.log('POSTID')
-
-        if (button.value === 'Update') {
-            updatePost();
-        } else {
+        if (button.value === 'Delete') {
             try {
                 let deletePost = `http://localhost:8080/posts/delete/${postId}`
                 const { data: { payload } } = await axios.delete(deletePost)
@@ -63,7 +56,7 @@ export default function ImageCard(props) {
             } catch (error) {
                 console.log(error)
             }
-        }
+        } 
     }
 
     const updatePost = async (event) => {
@@ -83,8 +76,11 @@ export default function ImageCard(props) {
     }
 
     const options = [
-        <p id={props.postId} onClick={handleCardMenu} value='Update'>Update</p>,
-        <p id={props.postId} onClick={handleCardMenu} value='Delete'>Delete</p>
+        <div>
+            <UpdateForm postId = {props.postId} getAllPhotos={props.getAllPhotos}/>
+            <p id={props.postId} onClick={deleteCard} value='Delete'>Delete</p>
+        </div>
+        // <p id={props.postId} onClick={handleCardMenu} value='Update'>Update</p>,
     ]
 
     const handleClick = event => {
