@@ -5,7 +5,7 @@ const NavBar = (props) => {
     return (<div className='navItems'>
 
         <button>Travel</button>
-        <button>Locations</button>
+        <button>{<a href="/map">Location</a>}</button>
         <button>WishList</button>
         <button>{<a href="/buds">Buds</a>}</button>
     </div>

@@ -120,7 +120,7 @@ class Home extends Component {
                 </div>
 
 
-                <Container maxWidth='sm' className='feedContainer'>
+                <Container maxWidth='md' className='feedContainer'>
 
                     {
                         feedArr.map(el => {
@@ -133,7 +133,8 @@ class Home extends Component {
                                     className='imgCard'
                                     hashtag={el.hashtag}
                                     username={el.username}
-                                    postOwner ={el.username}
+                                    postOwner={el.username}
+                                    postId ={el.id}
                                 />
                             </div>
                         })

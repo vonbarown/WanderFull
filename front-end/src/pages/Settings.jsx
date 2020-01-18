@@ -1,10 +1,18 @@
 import React from 'react'
+import axios from 'axios'
 import { ThemeProvider } from 'styled-components'
 import { lightTheme, darkTheme } from '../themes/theme'
 import { GlobalStyles } from '../themes/global'
 import Toggle from '../themes/Toggler'
 import { useDarkMode } from '../themes/useDarkMode'
 import '../styles/settings.css'
+import {TextField} from '@material-ui/core';
+import { Button } from '@material-ui/core';
+
+
+const useStyles = {
+  display: 'none',
+}
 
 
 const Settings = () => {
@@ -15,32 +23,69 @@ const Settings = () => {
     if (!componentMounted) {
         return <div />
     }
-    const handleSubmit = (event) => {
-        // make patch network request to /users endpoint
-        // event.preventDefault()
-        console.log('form was submitted')
+
+    const handleUserNameUpdate = async (event) => {
+        event.preventDefault()
+        console.log('updating username')
+        
+        // try {
+            
+        // } catch (error) {
+
+        // }
     }
+
+    const handleProfilePicUpdate = async (event) => {
+         event.preventDefault()
+        console.log('updating profile pic')
+        // let imageFile = event.target.files[0]
+        // const data = new FormData()
+        // data.append('profile_pic', imageFile)
+        // try {
+        //     const {data: {payload}} = await axios.post(`http://localhost:8080/users/update/`, data)
+        // } catch (error) {
+
+        // }
+    }
+
 
     // render() {
     return (
+
+        
+
         <div className='settingsPage'>
             <ThemeProvider theme={themeMode} >
                 <GlobalStyles />
+            </ThemeProvider >
+
                 <h1>Settings</h1>
                 <div className='toggleButton'>
-                    <p>Dark Theme</p>
-                    <Toggle theme={theme} toggleTheme={toggleTheme} />
+                <h3>Change Theme</h3> <Toggle theme={theme} toggleTheme={toggleTheme} />
                 </div>
-                <p>Edit Profile info</p>
-                <form onSubmit={handleSubmit()}>
-                    <input type="text" placeholder="username"></input>
-                    <input type="text" placeholder="profile pic url"></input>
-                    <button>Submit</button>
+     
+                <form  noValidate autoComplete="off" onSubmit={handleUserNameUpdate}>
+                <h3>Change UserName</h3>
+                <TextField label="Old Username" variant="outlined"/><TextField label="New Username" variant="outlined" /><Button variant="contained">Submit</Button>
                 </form>
-            </ThemeProvider >
-            <div>Moon Icon made by<a href="https://www.flaticon.com/authors/smalllikeart" title="smalllikeart">smalllikeart</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a>
+
+                <form  noValidate autoComplete="off" onSubmit={handleProfilePicUpdate}>
+                <h3>Change Profile Picture</h3>   
+                <input
+                accept="image/*"
+                id="contained-button-file"
+                multiple
+                type="file"
+                style={useStyles}
+                />
+                <label htmlFor="contained-button-file">
+               <Button variant="contained" color="primary" component="span"> Upload Photo </Button>
+                </label>
+                </form>
+
+                <div className="copyRight">Moon Icon made by<a href="https://www.flaticon.com/authors/smalllikeart" title="smalllikeart">smalllikeart</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a>
                 {' '} Sun Icon made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>
-            </div>
+                </div>
         </div>
     )
     // }

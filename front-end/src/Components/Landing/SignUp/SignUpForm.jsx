@@ -23,6 +23,11 @@ class SignUpForm extends Component {
                 { username, password, firstname, lastname, email }
             )
             console.log('Data', data.data)
+            // if (data.message === 'success') {
+            //     sessionStorage.setItem('user', username)
+            //     // sessionStorage.setItem('profile_pic', payload.profile_pic)
+            //     sessionStorage.setItem('user_id', payload.id)
+            // }
         } catch (err) {
             console.log('Signup failed.')
             console.log(err)

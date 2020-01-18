@@ -76,6 +76,7 @@ class Profile extends Component {
                             let time_post = el.time_post.replace('T05:00:00.000Z', '')
                             return <div className='profileCard'>
                                 <ImageCard
+                                    key={el.caption}
                                     postPic={el.img}
                                     username={username}
                                     pic={profile_pic}
@@ -89,7 +90,7 @@ class Profile extends Component {
                     }
                 </Container>
             </div>
-        ) : <div></div> )
+        ) : <div></div>)
     }
 }
 

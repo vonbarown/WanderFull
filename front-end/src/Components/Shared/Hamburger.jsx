@@ -39,17 +39,17 @@ const Hamburger = (props) => {
 
     const handleKeyPress = (event) => {
         const { input } = props
-        // if (event.key === 'Enter') {
+        if (event.key === 'Enter') {
             if (input[0] === '#') {
                 let tagInput = input.substr(1)
                 props.searchHashtag(tagInput)
-            } 
+            }
             else {
                 props.searchUser()
-                console.log( 'input')
+                console.log('input')
             }
 
-        // }
+        }
     }
 
 
@@ -61,7 +61,7 @@ const Hamburger = (props) => {
                 aria-haspopup="true"
                 onClick={handleClick}
             >
-            <MoreVertIcon />
+                <MoreVertIcon />
             </IconButton>
             <Menu
                 id="long-menu"
