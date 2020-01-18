@@ -14,7 +14,12 @@ import MoreVertIcon from '@material-ui/icons/MoreVert';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import { Typography } from '@material-ui/core';
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+// import { faHeart } from '@fortawesome/free-solid-svg-icons'
 import axios from 'axios'
+import NumOfLikes from './NumofLikes'
+
+// let numOfLikes =''
 
 const useStyles = makeStyles(theme => ({
     card: {
@@ -38,17 +43,6 @@ export default function ImageCard(props) {
     const [anchorEl, setAnchorEl] = React.useState(null);
     const open = Boolean(anchorEl);
 
-    // const handleCardMenu = (option) => {
-    //     // if (option === 'Update') {
-    //     //     // show the input
-    //     //     console.log('will update')
-    //     // } else {
-    //     //     // let postId = event.target.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.id
-    //     //     console.log('will delete')
-    //     //     //call localhost:8080/post/delete/"id"
-    //     // }
-    // }
-
     const handleCardMenu = async (event) => {
         let button = event.target
         console.log('in function')
@@ -71,12 +65,6 @@ export default function ImageCard(props) {
             }
         }
     }
-
-    // const editPost = () =>{
-    //     const { hashtag, caption } = this.props
-    //     const newInfo = { hashtag, caption }
-
-    // }
 
     const updatePost = async (event) => {
         const { hashtag, caption } = this.props
@@ -113,49 +101,24 @@ export default function ImageCard(props) {
         setAnchorEl(null);
     };
 
-// const options = [
-//     <a >Update</a>, 
-//     <a >Delete</a>
-// ]
+    const handleAddingLike = async (event) => {
+     let userId = sessionStorage.getItem('user_id')
+     let postId = event.target.id
+     console.log('userid', userId, 'postId', postId)
 
-    const handleLike = async (event) => {
-        let postId = event.target.id
-        let username = sessionStorage.getItem('user')
-        try {
-           const { data : {payload} } = await axios.get(`http://localhost:8080/users/${username}`)
-            let userId = payload[0].id
-            handleAddingLike(postId, userId)
-        } catch (error) {
-            console.log(error)
-        }
-    }
-
-    const handleAddingLike = async (postId, userId) => {
-     console.log('postId:', postId, 'userId:', userId)
      try {
-        const { data : {payload} } = await axios.post(`http://localhost:8080/likes/add/${postId}/${userId}`)
-         console.log(payload)
-         getNumOfLikes(postId)
+        const { data : {payload} } = await axios.post(`http://localhost:8080/likes/add/${Number(postId)}/${userId}`)
+         console.log('payload',payload)
+         window.location.reload(true);
+         
      } catch (error) {
          console.log(error)
      }
     }
 
-    const getNumOfLikes = async () => {
-        try {
-            const { data : {payload} } = await axios.get(`http://localhost:8080/likes/${4}`)
-             let num = payload.length 
-             return num
-         } catch (error) {
-             console.log(error)
-         }
-    }
-
-    let likes = getNumOfLikes();
-    console.log(likes)
-
     const classes = useStyles();
     return (
+        
         <Card className={classes.card} id={props.postId}>
             <CardHeader
                 avatar={
@@ -209,12 +172,18 @@ export default function ImageCard(props) {
                 </CardContent>
             </form>
             <CardActions disableSpacing>
-                <IconButton aria-label="add to favorites" onClick={handleLike} color="secondary" id={props.postId}>
-                    <FavoriteIcon />
-                    <Typography variant="subtitle1">
+                {/* <IconButton aria-label="add to favorites" onClick={handleLike} color="secondary" id={props.postId}>
+                        <FavoriteIcon id={props.postId}/>
+                    <Typography variant="subtitle1" id={props.postId}>
                     {} likes
                     </Typography>
-                </IconButton>
+                </IconButton> */}
+                <div>
+                <button id={props.postId} onClick={handleAddingLike}><img id={props.postId} src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f1/Heart_coraz%C3%B3n.svg/1200px-Heart_coraz%C3%B3n.svg.png"/></button>
+                <NumOfLikes
+                postId={props.postId}
+                />
+                </div>
                 <IconButton aria-label="share">
                     <ShareIcon />
                 </IconButton>

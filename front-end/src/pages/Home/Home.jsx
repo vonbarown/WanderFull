@@ -134,6 +134,7 @@ class Home extends Component {
 
                     {
                         feedArr.map(el => {
+                            console.log(el)
                             return <div className='cards' id={el.username}>
                                 <ImageCard
                                     postPic={el.img}
@@ -146,7 +147,6 @@ class Home extends Component {
                                     postId={el.id}
                                     getAllPhotos={this.getAllPhotos}
                                     home={true}
-                                //  handleCardMenu = {this.handleCardMenu}
                                 />
                             </div>
                         })
