@@ -27,9 +27,9 @@ img {
   align-items: center;
   gap: 40px;
   margin-bottom: 20px;
-  border: 1px solid white;
   border-radius: 4px;
   padding: 15px;
+  box-shadow: 0 3px 10px 2px rgb(59, 155, 179);
 }
 
 .navItems {
@@ -55,7 +55,7 @@ img {
 .top {
   display: flex;
   gap: 400px;
-  border: 1px solid red;
+  /* border: 1px solid red; */
 }
 
 .imgContainer {
@@ -69,7 +69,9 @@ img {
 .profileCard {
   width: 350px;
   display: flex;
-  justify-content: center;
+  /* justify-content: space-between;
+  align-content: space-between; */
+  margin: 20px;
 }
 
 a {
