@@ -12,11 +12,13 @@ const addPic = async (req, res, next) => {
         const hashtag = [req.body.hashtag]
         const coords = req.body.coords
         let bodyCopy = Object.assign({}, req.body)
+
         bodyCopy.imageUrl = imageUrl
         bodyCopy.hashtag = hashtag
         bodyCopy.coords = coords
 
         let data = await db.any(`
+<<<<<<< HEAD
 <<<<<<< HEAD
             INSERT INTO posts (user_id, caption, hashtag, img) VALUES (
                 $/user_id/, $/caption/, $/hashtag/, $/imageUrl/
@@ -26,6 +28,12 @@ const addPic = async (req, res, next) => {
                 $/user_id/, $/caption/, $/hashtag/,$/imageUrl/,$/coords/
             ) RETURNING (id, hashtag)
 >>>>>>> bfb265e37b22f5c12e4231d37104ff4711611945
+=======
+            INSERT INTO posts (user_id, caption, hashtag,img,coords) VALUES (
+                $/user_id/, $/caption/, $/hashtag/,$/imageUrl/,$/coords/
+            ) RETURNING *
+
+>>>>>>> 3398840bca7ae9a9a5f664327bbe59d0bd7e539e
         `, bodyCopy)
         // console.log(data);
 
@@ -36,31 +44,38 @@ const addPic = async (req, res, next) => {
                 data: data
             }
         })
-       next(data)
+        next(data)
     } catch (error) {
-      console.log(error)
+        console.log(error)
     }
-    
+
 }
 
 const addHashtag = async (req, res, next, data) => {
-     let hashtags = req[0].hashtag[0].split(',')
-     let post_id = Number(req[0].id)
-     console.log(hashtags, post_id)
+    let hashtags = req[0].hashtag[0].split(',')
+    let post_id = Number(req[0].id)
+    console.log(hashtags, post_id)
 
-  try {
-   hashtags.forEach(async el => {
-       console.log(el)
-    let data = await db.any(`INSERT INTO hashtags (tag, post_id)
-    VALUES ($1, ARRAY[$2])
-    ON CONFLICT (tag)
-    DO UPDATE SET post_id =
-   (SELECT post_id FROM hashtags WHERE tag = $1) || $2 RETURNING *;`, [el, post_id ])
-   console.log(data)
- })
- } catch (error) {
- console.log(error)
- }
+    try {
+        hashtags.forEach(async el => {
+            console.log(el)
+
+            let data = await db.any(`
+                INSERT INTO hashtags (tag, post_id)
+                VALUES ($1, ARRAY[$2])
+                ON CONFLICT (tag)
+                DO UPDATE SET post_id = (
+                    SELECT post_id FROM hashtags 
+                    WHERE tag = $1
+                ) 
+                || $2 RETURNING *;
+            `, [el, post_id])
+            
+            console.log(data)
+        })
+    } catch (error) {
+        console.log(error)
+    }
 }
 
 router.post('/add', addPic, addHashtag)
@@ -92,6 +107,7 @@ const getFeedPics = async (req, res, next) => {
 
 router.get('/all', getFeedPics)
 
+<<<<<<< HEAD
 // const getAllCoords = async (req, res, next) => {
 //     console.log('Get all posts route hit')
 //     // console.log('USER PASSPORT', req)
@@ -110,13 +126,37 @@ router.get('/all', getFeedPics)
 // }
 
 // router.get('/all/coords/:username', getAllCoords)
+=======
+const getAllCoords = async (req, res, next) => {
+    console.log('Get all posts route hit')
+    // console.log('USER PASSPORT', req)
+    try {
+        let pictures = await db.any(`
+        SELECT  coords FROM posts 
+        INNER JOIN users ON posts.user_id = users.id 
+        WHERE username = $1
+        `, [req.params.username])
+        // console.log(pictures)
+
+        res.json({
+            status: 'success',
+            message: 'retrieved all post',
+            payload: pictures
+        })
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+router.get('/all/coords/:username', getAllCoords)
+>>>>>>> 3398840bca7ae9a9a5f664327bbe59d0bd7e539e
 
 // GET Users information
 const getUserInfo = async (req, res, next) => {
 
     try {
         let userPics = await db.any(`
-            SELECT posts.time_post,username, hashtag, caption, location, img, profile_pic
+            SELECT posts.time_post,username, hashtag, caption, location, img, profile_pic, posts.id
             FROM posts 
             INNER JOIN users 
             ON posts.user_id = users.id 
@@ -141,12 +181,12 @@ const searchByHashtag = async (req, res, next) => {
     try {
         let post_ids = await db.any(`SELECT post_id FROM hashtags WHERE tag = $1`, [req.params.tag])
         let post_ids_arr = post_ids[0].post_id
-       
-        let hashtagPics = await db.any(
-        `SELECT posts.id, username, hashtag, caption, location, img, profile_pic 
-        FROM posts INNER JOIN users ON posts.user_id = users.id 
-        WHERE posts.id IN (${post_ids_arr})`
-        )
+
+        let hashtagPics = await db.any(`
+            SELECT posts.id, username, hashtag, caption, location, img, profile_pic 
+            FROM posts INNER JOIN users ON posts.user_id = users.id 
+            WHERE posts.id IN (${post_ids_arr})
+        `)
 
         res.json({
             status: 'success',

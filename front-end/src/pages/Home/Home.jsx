@@ -3,8 +3,10 @@ import Hamburger from '../../Components/Shared/Hamburger'
 import axios from 'axios'
 import ImageCard from '../../Components/Shared/Cards'
 import '../../styles/HomePage.css'
+import '../../styles/AppNavBar.css'
 import { Container } from '@material-ui/core'
 import UploadModal from './Modal'
+import Quote from './Quote'
 
 class Home extends Component {
     constructor() {
@@ -44,6 +46,7 @@ class Home extends Component {
     }
 
     getAllPhotos = async () => {
+        console.log('oop')
         let allPhotos = `http://localhost:8080/posts/all`
         try {
             const { data: { payload } } = await axios.get(allPhotos)
@@ -51,6 +54,7 @@ class Home extends Component {
             this.setState({
                 feedArr: payload
             })
+            console.log(payload)
         } catch (error) {
             console.log(error)
         }
@@ -105,20 +109,24 @@ class Home extends Component {
 
         return (this.state.loggedIn ? (
             <div className='home'>
-                <div className='nav'>
-                    <div className='header'>
-                        <h1>WanderFull</h1>
-                    </div>
-                    <div className='hamburger'>
-                        <Hamburger
-                            handleInput={handleInput}
-                            searchUser={searchUser}
-                            searchHashtag={searchHashtag}
-                            input={input}
-                            feed={feed} />
+                <div className='appNavBar' >
+                    <div className='appNavBarItems'>
+                        <div className='appName'>
+                            <h1>WanderFull</h1>
+                        </div>
+                        <div className='hamburger'>
+                            <Hamburger
+                                handleInput={handleInput}
+                                searchUser={searchUser}
+                                searchHashtag={searchHashtag}
+                                input={input}
+                                feed={feed}
+                            />
+                        </div>
                     </div>
                 </div>
 
+                <Quote />
 
                 <Container maxWidth='md' className='feedContainer'>
 
@@ -133,8 +141,10 @@ class Home extends Component {
                                     className='imgCard'
                                     hashtag={el.hashtag}
                                     username={el.username}
-                                    postOwner={el.username}
-                                    postId ={el.id}
+                                    postId={el.id}
+                                    getAllPhotos={this.getAllPhotos}
+                                    home={true}
+                                //  handleCardMenu = {this.handleCardMenu}
                                 />
                             </div>
                         })

@@ -3,12 +3,31 @@ import IconButton from '@material-ui/core/IconButton';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
+import { makeStyles } from '@material-ui/core/styles';
 // import Axios from 'axios';
 import '../../styles/Hamburger.css'
 
 const ITEM_HEIGHT = 48;
 
+const useStyles = makeStyles({
+    root: {
+        background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
+        border: 0,
+        borderRadius: 3,
+        boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
+        color: 'white',
+        height: 48,
+        padding: '0 30px',
+    },
+    iconBtn: {
+        color: 'white',
+        marginTop: 15,
+        size: 300
+    }
+});
+
 const Hamburger = (props) => {
+    const classes = useStyles()
     console.log('hamburger props', props)
 
     const handleLogout = () => {
@@ -60,6 +79,8 @@ const Hamburger = (props) => {
                 aria-controls="long-menu"
                 aria-haspopup="true"
                 onClick={handleClick}
+                color="primary"
+                className = {classes.iconBtn}
             >
                 <MoreVertIcon />
             </IconButton>

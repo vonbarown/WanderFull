@@ -29,7 +29,11 @@ CREATE TABLE posts (
 CREATE TABLE likes (
     id SERIAL PRIMARY KEY, 
     liker_id INT REFERENCES users(id), 
+<<<<<<< HEAD
     post_id INT REFERENCES posts(id) ON DELETE CASCADE 
+=======
+    post_id INT REFERENCES posts(id) ON DELETE CASCADE
+>>>>>>> 3398840bca7ae9a9a5f664327bbe59d0bd7e539e
 );
 
 -- create hashtag table 
