@@ -3,7 +3,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 
 import UploadForm from '../../Components/TestComponents/UploadForm'
-import UpdateForm from  '../../Components/TestComponents/UpdateForm'
 
 function rand() {
     return Math.round(Math.random() * 20) - 10;
@@ -72,7 +71,7 @@ export default function UploadModal(props) {
                 onClose={handleClose}
             >
                 <div style={modalStyle} className={classes.paper}>
-                  <UploadForm />  
+                    <UploadForm />
                 </div>
             </Modal>
         </div>
