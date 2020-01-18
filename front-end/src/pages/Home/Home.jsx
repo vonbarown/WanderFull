@@ -23,6 +23,7 @@ class Home extends Component {
     }
 
     componentDidMount() {
+        this.checkStorage()
         this.getAllPhotos()
     }
 
@@ -30,7 +31,6 @@ class Home extends Component {
         const { input } = this.state
         if (!input === prevState.input) {
             this.searchHashtag()
-
         }
     }
 
@@ -48,7 +48,7 @@ class Home extends Component {
         let allPhotos = `http://localhost:8080/posts/all`
         try {
             const { data: { payload } } = await axios.get(allPhotos)
-          //  console.log(payload);
+            //  console.log(payload);
             this.setState({
                 feedArr: payload
             })
@@ -147,12 +147,9 @@ class Home extends Component {
                         })
                     }
                 </Container>
-
-
-
-                <UploadModal className='UploadForm' updateForm={false}/>
+                <UploadModal className='UploadForm' />
             </div>
-        ) : <div></div>)
+        ) : <div>berbter</div>)
     }
 }
 
