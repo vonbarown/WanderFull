@@ -8,7 +8,6 @@ import CardActions from '@material-ui/core/CardActions';
 import Avatar from '@material-ui/core/Avatar';
 import IconButton from '@material-ui/core/IconButton';
 import { blueGrey } from '@material-ui/core/colors';
-import FavoriteIcon from '@material-ui/icons/Favorite';
 import ShareIcon from '@material-ui/icons/Share';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import Menu from '@material-ui/core/Menu';
@@ -41,8 +40,6 @@ export default function ImageCard(props) {
     const open = Boolean(anchorEl);
 
     const deleteCard = async (event) => {
-        let button = event.target
-        console.log('in function')
 
         try {
             let deletePost = `http://localhost:8080/posts/delete/${props.postId}`
@@ -156,7 +153,7 @@ export default function ImageCard(props) {
                     </Typography>
                 </IconButton> */}
                 <div className='likeButton'>
-                    <button id={props.postId} onClick={handleAddingLike}><img className='heart' id={props.postId} src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f1/Heart_coraz%C3%B3n.svg/1200px-Heart_coraz%C3%B3n.svg.png" /></button>
+                    <button id={props.postId} onClick={handleAddingLike}><img className='heart' id={props.postId} src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f1/Heart_coraz%C3%B3n.svg/1200px-Heart_coraz%C3%B3n.svg.png" alt='heart' /></button>
                     <NumOfLikes
                         postId={props.postId}
                     />

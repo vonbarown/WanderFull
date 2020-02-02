@@ -19,7 +19,6 @@ class Quote extends Component {
     }
 
     getQuote = () => {
-        let t = this.state.quotesArr[this.state.index]
         this.setState({
             quote: this.state.quotesArr[this.state.index]
         })

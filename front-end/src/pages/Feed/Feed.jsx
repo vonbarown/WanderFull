@@ -90,8 +90,7 @@ class Feed extends Component {
     }
 
     render() {
-        const { feed, feedArr, input } = this.state
-        const { handleInput, searchUser, searchHashtag } = this
+        const { feedArr } = this.state
 
         return (this.state.loggedIn ? (
             <div className='home'>

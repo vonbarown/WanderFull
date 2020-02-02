@@ -14,16 +14,6 @@ class Carousel extends Component {
         }
     }
 
-
-    componentDidMount() {
-        this.interval = setInterval(() => {
-            const { array, index } = this.state
-            const newIndex = (index + 1) % (array.length)
-            this.setState({
-                index: newIndex
-            })
-        }, 3000);
-    }
     componentDidMount() {
         this.interval = setInterval(() => {
             const { array, index } = this.state
