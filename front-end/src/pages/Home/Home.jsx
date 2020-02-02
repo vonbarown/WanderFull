@@ -5,7 +5,7 @@ import ImageCard from '../../Components/Shared/Cards'
 import '../../styles/AppNavBar.css'
 import logo from '../../themes/Logo/f537d019-e1b6-4e42-8275-2c9c5c7b8075_200x200.png'
 import { Sidebar } from '../../Components/Sidebar/Sidebar'
-
+import Carousel from '../../Components/Caroursel/carousel'
 class Home extends Component {
     constructor() {
         super()
@@ -114,6 +114,7 @@ class Home extends Component {
                         </div>
                     </div>
                 </div>
+                <Carousel />
             </div>
         ) : <div>berbter</div>)
     }
