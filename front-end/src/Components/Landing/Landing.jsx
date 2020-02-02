@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
 import Container from './Container'
 import { Switch, Route } from 'react-router-dom'
-import Home from '../../pages/Home/Home'
+import Feed from '../../pages/Feed/Feed'
 import Profile from '../../pages/Profile'
 import { Buds } from '../../Components/Profile/Buds'
 import Settings from '../../pages/Settings'
 import AppNavBar from '../Shared/AppNavBar'
+import Home from '../../pages/Home/Home'
 import './Landing.css'
 
 import Upload from '../TestComponents/UploadForm'
@@ -82,6 +83,7 @@ class Landing extends Component {
                             {// <Route path='/map' component={MapContainer} />
                             }
                             <AppNavBar>
+                                <Route path='/feed' component={Feed} />
                                 <Route path='/profile' component={Profile} />
                                 <Route path='/settings' component={Settings} />
                             </AppNavBar>

@@ -2,11 +2,15 @@ import React, { Component } from 'react'
 import Hamburger from '../../Components/Shared/Hamburger'
 import axios from 'axios'
 import ImageCard from '../../Components/Shared/Cards'
+import '../../styles/HomePage.css'
 import '../../styles/AppNavBar.css'
 import logo from '../../themes/Logo/f537d019-e1b6-4e42-8275-2c9c5c7b8075_200x200.png'
+import { Container } from '@material-ui/core'
+import UploadModal from './Modal'
+import Quote from './Quote'
 import { Sidebar } from '../../Components/Sidebar/Sidebar'
 
-class Home extends Component {
+class Feed extends Component {
     constructor() {
         super()
         this.state = {
@@ -113,9 +117,35 @@ class Home extends Component {
                         </div>
                     </div>
                 </div>
+
+                <Quote />
+                <Container maxWidth='md' className='feedContainer'>
+
+                    {
+                        feedArr.map(el => {
+                            return <div className='cards' id={el.username}>
+                                <ImageCard
+                                    postPic={el.img}
+                                    pic={el.profile_pic}
+                                    caption={el.caption}
+                                    key={el.id}
+                                    className='imgCard'
+                                    hashtag={el.hashtag}
+                                    username={el.username}
+                                    postId={el.id}
+                                    getAllPhotos={this.getAllPhotos}
+                                    home={true}
+                                />
+                            </div>
+                        })
+                    }
+                </Container>
+
+                <UploadModal className='UploadForm' />
+
             </div>
         ) : <div>berbter</div>)
     }
 }
 
-export default Home
+export default Feed
