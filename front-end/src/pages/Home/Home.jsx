@@ -7,6 +7,7 @@ import '../../styles/AppNavBar.css'
 import { Container } from '@material-ui/core'
 import UploadModal from './Modal'
 import Quote from './Quote'
+import { NewsContainer } from '../../containers/newsContainer'
 
 class Home extends Component {
     constructor() {
@@ -151,9 +152,10 @@ class Home extends Component {
                     }
                 </Container>
 
-
+                <NewsContainer />
 
                 <UploadModal className='UploadForm' />
+
             </div>
         ) : <div></div>)
     }

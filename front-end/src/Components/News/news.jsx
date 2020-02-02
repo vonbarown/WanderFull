@@ -1,13 +1,10 @@
 import React, { useEffect } from 'react'
 import { useState } from 'react'
+import axios from 'axios'
+import { newsKey } from '../Map/apiKey'
 
-const News = () => {
+export const News = () => {
 
-    const [data, setData] = useState([])
-
-    useEffect(() => {
-
-    })
 
     return (
         <div>
