@@ -1,14 +1,11 @@
 import React, { Component } from 'react'
-import Hamburger from '../../Components/Shared/Hamburger'
 import axios from 'axios'
 import ImageCard from '../../Components/Shared/Cards'
-import '../../styles/HomePage.css'
+import '../../styles/Feed.css'
 import '../../styles/AppNavBar.css'
-import logo from '../../themes/Logo/f537d019-e1b6-4e42-8275-2c9c5c7b8075_200x200.png'
 import { Container } from '@material-ui/core'
 import UploadModal from './Modal'
 import Quote from './Quote'
-import { Sidebar } from '../../Components/Sidebar/Sidebar'
 
 class Feed extends Component {
     constructor() {
@@ -99,7 +96,11 @@ class Feed extends Component {
         return (this.state.loggedIn ? (
             <div className='home'>
                 <Quote />
-                <Container maxWidth='md' className='feedContainer'>
+                <Container maxWidth='md' className='feedContainer' style={{
+                    alignItems: 'center',
+                    display: 'flex',
+                    flexDirection: 'column'
+                }}>
 
                     {
                         feedArr.map(el => {
@@ -114,7 +115,7 @@ class Feed extends Component {
                                     username={el.username}
                                     postId={el.id}
                                     getAllPhotos={this.getAllPhotos}
-                                    home={true}
+                                    feed={true}
                                 />
                             </div>
                         })

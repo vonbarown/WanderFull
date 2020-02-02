@@ -20,7 +20,7 @@ import NumOfLikes from './NumofLikes'
 
 const useStyles = makeStyles(theme => ({
     card: {
-        width: 800,
+        width: 500,
     },
     media: {
         height: 0,
@@ -49,7 +49,7 @@ export default function ImageCard(props) {
             const { data: { payload } } = await axios.delete(deletePost)
             console.log('deleted')
 
-            props.home ? props.getAllPhotos() : props.getUserAlbum()
+            props.feed ? props.getAllPhotos() : props.getUserAlbum()
 
         } catch (error) {
             console.log(error)
