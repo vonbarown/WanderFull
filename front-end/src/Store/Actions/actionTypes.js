@@ -1,0 +1,1 @@
+export const LOAD_MAP = 'LOAD_MAP'
