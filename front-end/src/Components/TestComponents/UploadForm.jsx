@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import Geocode from 'react-geocode'
 import axios from 'axios'
-import ApiKey from '../Map/apiKey'
+import { mapKey } from '../Map/apiKey'
 
 
-Geocode.setApiKey(ApiKey);
+Geocode.setApiKey(mapKey);
 
 Geocode.setLanguage("en");
 

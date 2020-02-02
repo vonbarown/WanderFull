@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import ReactMapGl, { NavigationControl, Marker } from 'react-map-gl'
-import ApiKey from './apiKey'
+import mapKey from './apiKey'
 import signpost from '../../themes/icons/signpost.svg'
 class MapBox extends Component {
   constructor() {

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import Geocode from 'react-geocode';
-import ApiKey from './apiKey';
+import { mapKey } from './apiKey';
 
 
 class GeoCoder extends Component {
@@ -18,7 +18,7 @@ class GeoCoder extends Component {
     }
 
     geoCodeSetUp = () => {
-        Geocode.setApiKey(ApiKey);
+        Geocode.setApiKey(mapKey);
 
         Geocode.setLanguage("en");
 
