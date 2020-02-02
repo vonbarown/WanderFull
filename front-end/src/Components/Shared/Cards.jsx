@@ -43,45 +43,26 @@ export default function ImageCard(props) {
     const deleteCard = async (event) => {
         let button = event.target
         console.log('in function')
-        //let postId = event.target.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.id
-        let postId = event.target.id
-        if (button.value === 'Delete') {
-            try {
-                let deletePost = `http://localhost:8080/posts/delete/${postId}`
-                const { data: { payload } } = await axios.delete(deletePost)
-                console.log('deleted')
-
-                props.home ? props.getAllPhotos() : props.getUserAlbum()
-
-            } catch (error) {
-                console.log(error)
-            }
-        } 
-    }
-
-    const updatePost = async (event) => {
-        const { hashtag, caption } = this.props
-        const newInfo = { hashtag, caption }
-        let postId = event.target.id
-        this.editPost()
 
         try {
-            let updatePost = (`http://localhost:8080/posts/update/${postId}`, newInfo)
-            const { data: { payload } } = await axios.patch(updatePost)
-            console.log('updated')
-            props.getAllPhotos()
+            let deletePost = `http://localhost:8080/posts/delete/${props.postId}`
+            const { data: { payload } } = await axios.delete(deletePost)
+            console.log('deleted')
+
+            props.home ? props.getAllPhotos() : props.getUserAlbum()
+
         } catch (error) {
             console.log(error)
         }
+
     }
 
+    let pusher = <p id={props.postId} onClick={deleteCard} value='Delete'>Delete</p>
     const options = [
-        <div>
-            <UpdateForm postId = {props.postId} getAllPhotos={props.getAllPhotos}/>
-            <p id={props.postId} onClick={deleteCard} value='Delete'>Delete</p>
-        </div>
-        // <p id={props.postId} onClick={handleCardMenu} value='Update'>Update</p>,
+        <UpdateForm postId={props.postId} getAllPhotos={props.getAllPhotos} />
     ]
+
+    options.push(pusher)
 
     const handleClick = event => {
         let userCardName = event.target.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.id
@@ -98,23 +79,23 @@ export default function ImageCard(props) {
     };
 
     const handleAddingLike = async (event) => {
-     let userId = sessionStorage.getItem('user_id')
-     let postId = event.target.id
-     console.log('userid', userId, 'postId', postId)
+        let userId = sessionStorage.getItem('user_id')
+        let postId = event.target.id
+        console.log('userid', userId, 'postId', postId)
 
-     try {
-        const { data : {payload} } = await axios.post(`http://localhost:8080/likes/add/${Number(postId)}/${userId}`)
-         console.log('payload',payload)
-         window.location.reload(true);
-         
-     } catch (error) {
-         console.log(error)
-     }
+        try {
+            const { data: { payload } } = await axios.post(`http://localhost:8080/likes/add/${Number(postId)}/${userId}`)
+            console.log('payload', payload)
+            window.location.reload(true);
+
+        } catch (error) {
+            console.log(error)
+        }
     }
 
     const classes = useStyles();
     return (
-        
+
         <Card className={classes.card} id={props.postId}>
             <CardHeader
                 avatar={
@@ -157,14 +138,14 @@ export default function ImageCard(props) {
             />
             <form>
                 <CardContent>
-                <Typography variant="h6" color="inherit">
-                    {props.caption}
-                </Typography>
+                    <Typography variant="h6" color="inherit">
+                        {props.caption}
+                    </Typography>
                     <br />
-                <Typography variant="body1" color="primary">
-                    {/* //sparates each hashtag in arr */}
-                    {`#${props.hashtag}`.split(',').join(' #')}
-                </Typography>
+                    <Typography variant="body1" color="primary">
+                        {/* //sparates each hashtag in arr */}
+                        {`#${props.hashtag}`.split(',').join(' #')}
+                    </Typography>
                 </CardContent>
             </form>
             <CardActions disableSpacing>
@@ -174,11 +155,11 @@ export default function ImageCard(props) {
                     {} likes
                     </Typography>
                 </IconButton> */}
-                <div>
-                <button id={props.postId} onClick={handleAddingLike}><img id={props.postId} src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f1/Heart_coraz%C3%B3n.svg/1200px-Heart_coraz%C3%B3n.svg.png"/></button>
-                <NumOfLikes
-                postId={props.postId}
-                />
+                <div className='likeButton'>
+                    <button id={props.postId} onClick={handleAddingLike}><img className='heart' id={props.postId} src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f1/Heart_coraz%C3%B3n.svg/1200px-Heart_coraz%C3%B3n.svg.png" /></button>
+                    <NumOfLikes
+                        postId={props.postId}
+                    />
                 </div>
                 <IconButton aria-label="share">
                     <ShareIcon />
