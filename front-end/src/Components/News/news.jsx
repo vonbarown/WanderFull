@@ -7,8 +7,8 @@ export const News = () => {
 
 
     return (
-        <div>
-            news
+        <div className='newsComponent'>
+
         </div>
     )
 }
