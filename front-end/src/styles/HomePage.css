@@ -64,8 +64,13 @@ h1 {
   position: absolute;
   right: 20px;
 }
-.appName {
-  width: 900px;
+
+.heart {
   display: flex;
-  flex-direction: column;
+  height: 12px;
+  width: 12px;
+}
+.likeButton {
+  display: flex;
+  gap: 2px;
 }
