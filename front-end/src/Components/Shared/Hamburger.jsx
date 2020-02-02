@@ -80,7 +80,7 @@ const Hamburger = (props) => {
                 aria-haspopup="true"
                 onClick={handleClick}
                 color="primary"
-                className = {classes.iconBtn}
+                className={classes.iconBtn}
             >
                 <MoreVertIcon />
             </IconButton>

@@ -10,7 +10,7 @@ import './Landing.css'
 
 import Upload from '../TestComponents/UploadForm'
 
-// import MapContainer from '../Map/MapOfficial'
+import MapContainer from '../Map/MapOfficial'
 
 class Landing extends Component {
     state = {
@@ -79,8 +79,8 @@ class Landing extends Component {
                         <>
                             <Route path='/buds' component={Buds} />
                             <Route path='/upload' component={Upload} />
-                            {// <Route path='/map' component={MapContainer} />
-                            }
+                            <Route path='/map' component={MapContainer} />
+
                             <AppNavBar>
                                 <Route path='/profile' component={Profile} />
                                 <Route path='/settings' component={Settings} />

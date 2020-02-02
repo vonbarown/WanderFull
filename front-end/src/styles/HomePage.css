@@ -64,3 +64,13 @@ h1 {
   position: absolute;
   right: 20px;
 }
+
+.heart {
+  display: flex;
+  height: 12px;
+  width: 12px;
+}
+.likeButton {
+  display: flex;
+  gap: 2px;
+}
