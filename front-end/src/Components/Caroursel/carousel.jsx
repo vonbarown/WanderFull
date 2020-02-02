@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
-
+import './carousel.css'
 class Carousel extends Component {
     constructor() {
 
         super()
         this.state = {
+            // eventually store the trending post
             index: 0,
             array: ["http://packages.world-avenues.com/wp-content/uploads/2017/10/nightlife-singapore.jpg.jpg",
                 "https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/001_Tacos_de_carnitas%2C_carne_asada_y_al_pastor.jpg/1200px-001_Tacos_de_carnitas%2C_carne_asada_y_al_pastor.jpg",
@@ -36,8 +37,8 @@ class Carousel extends Component {
     render() {
 
         return (
-            <div>
-                <img alt='carousel' src={this.state.array[this.state.index]} />
+            <div className='carousel'>
+                <img className='carouselImg' alt='carousel' src={this.state.array[this.state.index]} />
             </div>
         )
     }

@@ -1,0 +1,15 @@
+.home {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.appNavBarItems,
+.logo {
+  height: 20vh;
+}
+
+.appNavBar {
+  height: 90px;
+}
