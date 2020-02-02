@@ -1,5 +1,5 @@
 import { combineReducers } from "redux";
-import { mapReducer } from './MapReducer'
+import { mapReducer } from './mapReducer'
 
 export const rootReducer = combineReducers({
     mapReducer,

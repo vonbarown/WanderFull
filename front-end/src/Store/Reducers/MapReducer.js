@@ -15,6 +15,7 @@ export const mapReducer = (state = initialState, action) => {
             stateCopy.stores = [...stateCopy.stores, newMarker]
             break
         default:
-            return stateCopy;
+            break
     }
+    return stateCopy
 };
