@@ -13,7 +13,10 @@ import ShareIcon from '@material-ui/icons/Share';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
+import { Typography } from '@material-ui/core';
 import axios from 'axios'
+import UpdateForm from '../TestComponents/UpdateForm';
+import NumOfLikes from './NumofLikes'
 
 const useStyles = makeStyles(theme => ({
     card: {
@@ -26,34 +29,23 @@ const useStyles = makeStyles(theme => ({
     avatar: {
         backgroundColor: blueGrey[500],
     },
+    // favoriteIcon: {
+    //     color: 'red',
+    // }
 }));
+
 
 export default function ImageCard(props) {
     // code for menu on individual card
     const [anchorEl, setAnchorEl] = React.useState(null);
     const open = Boolean(anchorEl);
 
-    // const handleCardMenu = (option) => {
-    //     // if (option === 'Update') {
-    //     //     // show the input
-    //     //     console.log('will update')
-    //     // } else {
-    //     //     // let postId = event.target.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.id
-    //     //     console.log('will delete')
-    //     //     //call localhost:8080/post/delete/"id"
-    //     // }
-    // }
-
-    const handleCardMenu = async (event) => {
+    const deleteCard = async (event) => {
         let button = event.target
         console.log('in function')
         //let postId = event.target.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.id
         let postId = event.target.id
-        console.log('POSTID')
-
-        if (button.value === 'Update') {
-            updatePost();
-        } else {
+        if (button.value === 'Delete') {
             try {
                 let deletePost = `http://localhost:8080/posts/delete/${postId}`
                 const { data: { payload } } = await axios.delete(deletePost)
@@ -64,14 +56,8 @@ export default function ImageCard(props) {
             } catch (error) {
                 console.log(error)
             }
-        }
+        } 
     }
-
-    // const editPost = () =>{
-    //     const { hashtag, caption } = this.props
-    //     const newInfo = { hashtag, caption }
-
-    // }
 
     const updatePost = async (event) => {
         const { hashtag, caption } = this.props
@@ -90,8 +76,11 @@ export default function ImageCard(props) {
     }
 
     const options = [
-        <p id={props.postId} onClick={handleCardMenu} value='Update'>Update</p>,
-        <p id={props.postId} onClick={handleCardMenu} value='Delete'>Delete</p>
+        <div>
+            <UpdateForm postId = {props.postId} getAllPhotos={props.getAllPhotos}/>
+            <p id={props.postId} onClick={deleteCard} value='Delete'>Delete</p>
+        </div>
+        // <p id={props.postId} onClick={handleCardMenu} value='Update'>Update</p>,
     ]
 
     const handleClick = event => {
@@ -108,8 +97,24 @@ export default function ImageCard(props) {
         setAnchorEl(null);
     };
 
+    const handleAddingLike = async (event) => {
+     let userId = sessionStorage.getItem('user_id')
+     let postId = event.target.id
+     console.log('userid', userId, 'postId', postId)
+
+     try {
+        const { data : {payload} } = await axios.post(`http://localhost:8080/likes/add/${Number(postId)}/${userId}`)
+         console.log('payload',payload)
+         window.location.reload(true);
+         
+     } catch (error) {
+         console.log(error)
+     }
+    }
+
     const classes = useStyles();
     return (
+        
         <Card className={classes.card} id={props.postId}>
             <CardHeader
                 avatar={
@@ -152,16 +157,29 @@ export default function ImageCard(props) {
             />
             <form>
                 <CardContent>
+                <Typography variant="h6" color="inherit">
                     {props.caption}
+                </Typography>
                     <br />
+                <Typography variant="body1" color="primary">
                     {/* //sparates each hashtag in arr */}
                     {`#${props.hashtag}`.split(',').join(' #')}
+                </Typography>
                 </CardContent>
             </form>
             <CardActions disableSpacing>
-                <IconButton aria-label="add to favorites">
-                    <FavoriteIcon />
-                </IconButton>
+                {/* <IconButton aria-label="add to favorites" onClick={handleLike} color="secondary" id={props.postId}>
+                        <FavoriteIcon id={props.postId}/>
+                    <Typography variant="subtitle1" id={props.postId}>
+                    {} likes
+                    </Typography>
+                </IconButton> */}
+                <div>
+                <button id={props.postId} onClick={handleAddingLike}><img id={props.postId} src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f1/Heart_coraz%C3%B3n.svg/1200px-Heart_coraz%C3%B3n.svg.png"/></button>
+                <NumOfLikes
+                postId={props.postId}
+                />
+                </div>
                 <IconButton aria-label="share">
                     <ShareIcon />
                 </IconButton>

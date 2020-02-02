@@ -15,7 +15,7 @@ import { makeStyles } from '@material-ui/core/styles';
 
 function Copyright() {
   return (
-    <Typography variant="body2" color="textSecondary" align="center">
+    <Typography variant="body2" color="textSecondary" align="center" >
       {'Copyright © '}
       <Link color="inherit" href="http://localhost:3000">
         WanderFull
@@ -32,7 +32,8 @@ const useStyles = makeStyles(theme => ({
     width: '100vw'
   },
   image: {
-    backgroundImage: 'url(https://source.unsplash.com/random)',
+    // backgroundImage: 'url(https://source.unsplash.com/travel)',
+    backgroundImage: 'url(https://source.unsplash.com/1600x900/?sunset)',
     backgroundRepeat: 'no-repeat',
     backgroundColor:
       theme.palette.type === 'dark' ? theme.palette.grey[900] : theme.palette.grey[50],
@@ -56,6 +57,11 @@ const useStyles = makeStyles(theme => ({
   submit: {
     margin: theme.spacing(3, 0, 2),
   },
+  copyright: {
+    position: 'absolute',
+    bottom: 10,
+    marginTop: 200
+  }
 }));
 
 export default function SignUpSide(props) {
@@ -136,10 +142,10 @@ export default function SignUpSide(props) {
               onChange={(e) => inputChange(e)}
               autoFocus
             />
-            <FormControlLabel
+            {/* <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
               label="Remember me"
-            />
+            /> */}
             <Button
               type="submit"
               fullWidth
@@ -161,7 +167,7 @@ export default function SignUpSide(props) {
                 </Link>
               </Grid>
             </Grid>
-            <Box mt={5}>
+            <Box mt={5}  >
               <Copyright />
             </Box>
           </form>

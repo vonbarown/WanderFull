@@ -37,12 +37,6 @@ class uploadForm extends Component {
         });
     }
 
-    // componentDidUpdate(prevProps, prevState) {
-    //     if (this.state.local !== prevState.local) {
-    //         this.geoCodeSetUp()
-    //     }
-    // }
-
     geoCodeSetUp = async () => {
         const { local } = this.state
 
@@ -111,6 +105,6 @@ class uploadForm extends Component {
             </div>
         );
     }
-}
+ }
 
 export default uploadForm;
