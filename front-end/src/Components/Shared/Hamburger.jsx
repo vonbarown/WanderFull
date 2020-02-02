@@ -35,13 +35,21 @@ const Hamburger = (props) => {
         // this.props.history.push('/asdf')
     }
 
-    const options = [
+    let options = [
         <a href='/home'>Home</a>,
+        <a href='/feed'>Feed</a>,
         <a href='/profile'>Profile</a>,
         <a href='/settings'>Settings</a>,
-        <input type='text' onChange={props.handleInput} placeholder="Search #'s" ></input>,
-        <button onClick={handleLogout}>Logout</button>
     ];
+
+    props.home
+        ? options = [...options]
+        : options = [
+            ...options,
+            <input type='text' onChange={props.handleInput} placeholder="Search #'s" ></input>,
+            <button onClick={handleLogout}>Logout</button>
+        ];
+
 
     const [anchorEl, setAnchorEl] = React.useState(null);
     const open = Boolean(anchorEl);

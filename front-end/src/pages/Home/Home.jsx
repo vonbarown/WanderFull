@@ -109,6 +109,7 @@ class Home extends Component {
                                 searchHashtag={searchHashtag}
                                 input={input}
                                 feed={feed}
+                                home={true}
                             />
                         </div>
                     </div>

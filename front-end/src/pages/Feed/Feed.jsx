@@ -98,26 +98,6 @@ class Feed extends Component {
 
         return (this.state.loggedIn ? (
             <div className='home'>
-                <div className='appNavBar' >
-                    <div className='appNavBarItems'>
-                        <div className='appName'>
-                            <div className='logo'>
-                                <img src={logo} alt="logo" />
-                            </div>
-                            <Sidebar className='sidebar' />
-                        </div>
-                        <div className='hamburger'>
-                            <Hamburger
-                                handleInput={handleInput}
-                                searchUser={searchUser}
-                                searchHashtag={searchHashtag}
-                                input={input}
-                                feed={feed}
-                            />
-                        </div>
-                    </div>
-                </div>
-
                 <Quote />
                 <Container maxWidth='md' className='feedContainer'>
 
