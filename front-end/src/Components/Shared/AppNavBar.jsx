@@ -9,7 +9,6 @@ const AppNavBar = (props) => {
             <div className='appNavBarItems'>
                 <div className='logo'>
                     <img src={logo} alt='logo' />
-                    <h3>WanderFull</h3>
                 </div>
                 <Hamburger />
             </div>

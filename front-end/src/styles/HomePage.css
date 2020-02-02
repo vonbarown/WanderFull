@@ -64,3 +64,8 @@ h1 {
   position: absolute;
   right: 20px;
 }
+.appName {
+  width: 900px;
+  display: flex;
+  flex-direction: column;
+}

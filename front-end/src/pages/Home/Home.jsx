@@ -9,6 +9,7 @@ import { Container } from '@material-ui/core'
 import UploadModal from './Modal'
 import Quote from './Quote'
 import { NewsContainer } from '../../containers/newsContainer'
+import { Sidebar } from '../../Components/Sidebar/Sidebar'
 
 class Home extends Component {
     constructor() {
@@ -37,7 +38,6 @@ class Home extends Component {
 
     checkStorage = () => {
         const user = sessionStorage.getItem('user')
-        console.log(user)
         if (!user) {
             window.location.href = '/'
         } else {
@@ -49,7 +49,6 @@ class Home extends Component {
         let allPhotos = `http://localhost:8080/posts/all`
         try {
             const { data: { payload } } = await axios.get(allPhotos)
-            //  console.log(payload);
             this.setState({
                 feedArr: payload
             })
@@ -61,7 +60,6 @@ class Home extends Component {
     searchHashtag = async (input) => {
         // const {input} = this.state
         try {
-            console.log(input)
             const hashtagImgs = `http://localhost:8080/posts/search/hashtag/${input}`
             const { data: { payload } } = await axios.get(hashtagImgs)
             // let urlsArr = payload.map(el=>{
@@ -70,7 +68,6 @@ class Home extends Component {
             this.setState({
                 feedArr: payload
             })
-            console.log(payload)
         } catch (error) {
             console.log(error)
         }
@@ -84,7 +81,6 @@ class Home extends Component {
             this.setState({
                 feedArr: payload
             })
-            console.log('user2 info', payload)
         } catch (error) {
             console.log(error)
         }
@@ -92,7 +88,6 @@ class Home extends Component {
     }
 
     handleInput = (event) => {
-        console.log('input changing')
         this.setState({
             input: event.target.value
         })
@@ -109,8 +104,8 @@ class Home extends Component {
                         <div className='appName'>
                             <div className='logo'>
                                 <img src={logo} alt="logo" />
-                                <h3>WanderFull</h3>
                             </div>
+                            <Sidebar className='sidebar' />
                         </div>
                         <div className='hamburger'>
                             <Hamburger
@@ -125,12 +120,10 @@ class Home extends Component {
                 </div>
 
                 <Quote />
-
                 <Container maxWidth='md' className='feedContainer'>
 
                     {
                         feedArr.map(el => {
-                            console.log(el)
                             return <div className='cards' id={el.username}>
                                 <ImageCard
                                     postPic={el.img}
@@ -149,7 +142,9 @@ class Home extends Component {
                     }
                 </Container>
 
-                <NewsContainer />
+                {
+                    // <NewsContainer />
+                }
 
                 <UploadModal className='UploadForm' />
 

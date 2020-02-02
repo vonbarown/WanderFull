@@ -28,10 +28,8 @@ const useStyles = makeStyles({
 
 const Hamburger = (props) => {
     const classes = useStyles()
-    console.log('hamburger props', props)
 
     const handleLogout = () => {
-        console.log('Logout')
         sessionStorage.clear()
         window.location.href = '/'
         // this.props.history.push('/asdf')
@@ -65,7 +63,6 @@ const Hamburger = (props) => {
             }
             else {
                 props.searchUser()
-                console.log('input')
             }
 
         }
@@ -80,7 +77,7 @@ const Hamburger = (props) => {
                 aria-haspopup="true"
                 onClick={handleClick}
                 color="primary"
-                className = {classes.iconBtn}
+                className={classes.iconBtn}
             >
                 <MoreVertIcon />
             </IconButton>

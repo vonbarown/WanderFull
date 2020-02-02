@@ -15,16 +15,11 @@ class Quote extends Component {
 
     async componentDidMount() {
         await this.fetchQuote()
-        // this.getRandomNum()
-        // this.setState({
-        //     quote: this.state.quotesArr[this.state.index]
-        // })
-        // await this.getQuote()
+
     }
 
     getQuote = () => {
         let t = this.state.quotesArr[this.state.index]
-        console.log(t);
         this.setState({
             quote: this.state.quotesArr[this.state.index]
         })
@@ -42,9 +37,6 @@ class Quote extends Component {
     async fetchQuote() {
         try {
             const { data } = await axios.get('https://type.fit/api/quotes')
-            console.log('data', data);
-
-
             this.setState({
                 quotesArr: data
             })
@@ -56,7 +48,6 @@ class Quote extends Component {
     }
 
     render() {
-        console.log(this.state);
         const { quote } = this.state
 
         return (
