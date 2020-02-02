@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { ThemeProvider } from 'styled-components'
 import { lightTheme, darkTheme } from '../themes/theme'
 import { GlobalStyles } from '../themes/global'
@@ -13,7 +13,6 @@ const useStyles = {
     display: 'none',
 }
 
-
 const Settings = () => {
 
     const [theme, toggleTheme, componentMounted] = useDarkMode();
@@ -23,25 +22,16 @@ const Settings = () => {
     const [username, setUsername] = useState('');
 
 
+    const fetchData = async () => {
+        const { data: { payload } } = await axios.patch(`http://localhost:8080/users/update/${sessionStorage.getItem('user_id')}`,
+            {
+                username: username
+            }
 
-    useEffect(() => {
-        const fetchData = async () => {
-            const { data: { payload } } = await axios.patch(`http://localhost:8080/users/update/${sessionStorage.getItem('user_id')}`,
-                {
-                    username: username
-                }
-
-            );
-            sessionStorage.setItem('user', payload.username)
-            setData(payload);
-        }
-
-        fetchData()
-    }, [username])
-
-
-    console.log(data);
-
+        );
+        sessionStorage.setItem('user', payload.username)
+        setData(payload);
+    }
 
     if (!componentMounted) {
         return <div />
@@ -74,7 +64,10 @@ const Settings = () => {
             </div>
 
             <p>Edit Profile info</p>
-            <form onSubmit={e => e.preventDefault()} >
+            <form onSubmit={e => {
+                fetchData()
+                e.preventDefault()
+            }} >
                 <input type="text" placeholder="username" onChange={e => setUsername(e.target.value)}></input>
                 {// <input type="text" placeholder="profile pic url"></input>
                 }
@@ -99,6 +92,6 @@ const Settings = () => {
             </div>
         </div>
     )
-     }
+}
 
 export default Settings 
