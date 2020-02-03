@@ -200,4 +200,30 @@ router.get('/posts/interest/:liker_id', async (req, res) => {
     }
 });
 
+//query to get the number of times a posts is liked
+
+router.get('/posts/times_liked', async (req, res) => {
+    try {
+        let insertQuery = `
+        SELECT poster_username,body,posts.id AS post_id, COUNT(posts.id) AS times_liked
+        from posts
+        JOIN likes ON posts.id = likes.post_id
+        GROUP BY posts.id
+        ORDER BY times_liked DESC
+        `;
+        let liked = await db.any(insertQuery)
+        res.json({
+            status: 'success',
+            message: 'request sent',
+            body: liked,
+        });
+    } catch (error) {
+        res.status(500);
+        res.json({
+            status: 'failed',
+            message: 'There was an error the retrieving data'
+        });
+        console.log(error);
+    }
+});
 module.exports = router
