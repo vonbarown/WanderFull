@@ -7,21 +7,21 @@ export const NewsContainer = () => {
 
     const [data, setData] = useState([])
 
-    const fetchNews = async () => {
-        try {
-            const url = `https://newsapi.org/v2/top-headlines?country=us&apiKey=${newsKey}`
+    // const fetchNews = async () => {
+    //     try {
+    //         const url = `https://newsapi.org/v2/top-headlines?country=us&apiKey=${newsKey}`
 
-            const { data } = await axios.get(url)
-            console.log('news', data);
+    //         const { data } = await axios.get(url)
+    //         console.log('news', data);
 
-        } catch (error) {
+    //     } catch (error) {
 
-        }
-    }
+    //     }
+    // }
 
-    useEffect(() => {
-        fetchNews()
-    })
+    // useEffect(() => {
+    //     fetchNews()
+    // })
 
     return (
         <div>
