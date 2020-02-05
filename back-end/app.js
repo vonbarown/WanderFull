@@ -99,8 +99,8 @@ app.use((err, req, res, next) => {
   res.render('error');
 });
 
-// app.get('*', (req, res) => {
-//   res.sendFile(path.join(__dirname + '../front-end/build/index.html'))
-// })
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname + '../front-end/build/index.html'))
+})
 
 module.exports = app;
