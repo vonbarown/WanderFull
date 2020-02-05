@@ -28,7 +28,7 @@ class UpdateForm extends Component {
         // let postId = props.postId
 
         try {
-            const { data: { payload } } = await axios.patch(`http://localhost:8080/posts/update/${this.props.postId}`,
+            const { data: { payload } } = await axios.patch(`/api/posts/update/${this.props.postId}`,
                 {
                     hashtag: hashtag,
                     caption: caption

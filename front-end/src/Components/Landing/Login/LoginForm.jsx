@@ -17,7 +17,7 @@ class LoginForm extends Component {
         console.log('Submitting Login request...')
         const { username, password } = this.state
         try {
-            const { data: { payload } } = await axios.post(`api/login`, { username, password })
+            const { data: { payload } } = await axios.post(`/api/login`, { username, password })
             console.log('data', payload)
             sessionStorage.setItem('user', username)
             sessionStorage.setItem('profile_pic', payload.profile_pic)

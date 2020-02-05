@@ -74,7 +74,7 @@ class uploadForm extends Component {
 
 
         try {
-            const { data: { payload } } = await axios.post('http://localhost:8080/posts/add', data)
+            const { data: { payload } } = await axios.post('/api/posts/add', data)
             console.log('data', payload);
             this.setState({
                 imageUrl: payload.imageUrl

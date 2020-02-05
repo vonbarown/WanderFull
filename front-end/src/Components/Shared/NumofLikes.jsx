@@ -1,30 +1,30 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import axios from 'axios';
 
 class NumOfLikes extends Component {
     constructor(props) {
         super(props)
-        this.state ={
-            numOfLikes:''
+        this.state = {
+            numOfLikes: ''
         }
     }
 
-    componentDidMount(){
+    componentDidMount() {
         this.getNumOfLikes()
     }
 
 
     getNumOfLikes = async () => {
         try {
-            const { data:{payload} } = await axios.get(`http://localhost:8080/likes/${this.props.postId}`)
+            const { data: { payload } } = await axios.get(`/api/likes/${this.props.postId}`)
             this.setState({
-                numOfLikes:payload.length
+                numOfLikes: payload.length
             })
-         } catch (error) {
-             console.log(error)
-         }
+        } catch (error) {
+            console.log(error)
+        }
     }
-    render () {
+    render() {
         return (
             <p>{this.state.numOfLikes}</p>
         )

@@ -22,7 +22,7 @@ export class MapContainer extends Component {
     loadCoords = async () => {
 
         try {
-            const { data: { payload } } = await axios.get(`https://wanderfull-backend.herokuapp.com/posts/all/coords/${sessionStorage.getItem('user')}`)
+            const { data: { payload } } = await axios.get(`/api/posts/all/coords/${sessionStorage.getItem('user')}`)
             console.log('data', payload);
             this.props.loadMap(...payload)
 

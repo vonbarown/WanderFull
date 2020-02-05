@@ -43,7 +43,7 @@ class Feed extends Component {
     }
 
     getAllPhotos = async () => {
-        let allPhotos = `https://wanderfull-backend.herokuapp.com/posts/all`
+        let allPhotos = `/api/posts/all`
         try {
             const { data: { payload } } = await axios.get(allPhotos)
             this.setState({
@@ -57,7 +57,7 @@ class Feed extends Component {
     searchHashtag = async (input) => {
         // const {input} = this.state
         try {
-            const hashtagImgs = `https://wanderfull-backend.herokuapp.com/posts/search/hashtag/${input}`
+            const hashtagImgs = `/api/posts/search/hashtag/${input}`
             const { data: { payload } } = await axios.get(hashtagImgs)
             // let urlsArr = payload.map(el=>{
             //     return el.img
@@ -73,7 +73,7 @@ class Feed extends Component {
     searchUser = async () => {
         const { input } = this.state
         try {
-            const username = `https://wanderfull-backend.herokuapp.com/posts/profile/${input}`
+            const username = `/api/posts/profile/${input}`
             const { data: { payload } } = await axios.get(username)
             this.setState({
                 feedArr: payload
