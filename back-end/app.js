@@ -102,7 +102,7 @@ app.use((err, req, res, next) => {
 });
 
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname + '../front-end/build/index.html'))
+  res.sendFile(path.resolve(__dirname, '../front-end/build/index.html'))
 })
 
 module.exports = app;
