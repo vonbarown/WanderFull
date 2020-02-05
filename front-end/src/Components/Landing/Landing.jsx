@@ -77,20 +77,19 @@ class Landing extends Component {
                 <Switch>
                     <Route path='/home' component={Home} />
                     {
-                        // !!sessionStorage.getItem('user') && (
-                        <>
-                            <Route path='/buds' component={Buds} />
-                            <Route path='/upload' component={Upload} />
-                            <Route path='/map' component={MapContainer} />
+                        !!sessionStorage.getItem('user') && (
+                            <>
+                                <Route path='/buds' component={Buds} />
+                                <Route path='/upload' component={Upload} />
+                                <Route path='/map' component={MapContainer} />
 
-                            <AppNavBar>
-                                <Route path='/feed' component={Feed} />
-                                <Route path='/profile' component={Profile} />
-                                <Route path='/settings' component={Settings} />
-                            </AppNavBar>
-                        </>
-                        // )
-                    }
+                                <AppNavBar>
+                                    <Route path='/feed' component={Feed} />
+                                    <Route path='/profile' component={Profile} />
+                                    <Route path='/settings' component={Settings} />
+                                </AppNavBar>
+                            </>
+                        )}
                     <Route path='/' component={this.renderContainer} />
                 </Switch>
             </div>
