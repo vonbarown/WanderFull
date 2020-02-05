@@ -42,7 +42,7 @@ class Feed extends Component {
     }
 
     getAllPhotos = async () => {
-        let allPhotos = `http://localhost:8080/posts/all`
+        let allPhotos = `https://wanderfull-backend.herokuapp.com/posts/all`
         try {
             const { data: { payload } } = await axios.get(allPhotos)
             this.setState({

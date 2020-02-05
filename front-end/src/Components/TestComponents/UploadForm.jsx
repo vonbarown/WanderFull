@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Geocode from 'react-geocode'
 import axios from 'axios'
-import { mapKey } from '../Map/apiKey'
+const mapKey = process.env.MAP_API_KEY
 
 
 Geocode.setApiKey(mapKey);
@@ -105,6 +105,6 @@ class uploadForm extends Component {
             </div>
         );
     }
- }
+}
 
 export default uploadForm;

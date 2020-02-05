@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { useState } from 'react'
 import axios from 'axios'
-import { newsKey } from '../Components/Map/apiKey'
+const newsKey = process.env.NEWS_API_KEY
 
 export const NewsContainer = () => {
 
