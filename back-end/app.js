@@ -74,14 +74,14 @@ const logRequest = (req, res, next) => {
 }
 
 // Routes
-app.use('/', indexRouter)
-app.use('/register', registerRouter)
+app.use('/api/', indexRouter)
+app.use('/api/register', registerRouter)
 // app.use('/login', passport.authenticate('local'), loginRouter)
-app.use('/login', loginRouter)
-app.use('/logout', logoutRouter)
-app.use('/users', usersRouter)
-app.use('/posts', upload.single('imageUrl'), photosRouter)
-app.use('/likes', likesRouter)
+app.use('/api/login', loginRouter)
+app.use('/api/logout', logoutRouter)
+app.use('/api/users', usersRouter)
+app.use('/api/posts', upload.single('imageUrl'), photosRouter)
+app.use('/api/likes', likesRouter)
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
