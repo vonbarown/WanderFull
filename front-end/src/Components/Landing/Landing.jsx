@@ -76,7 +76,8 @@ class Landing extends Component {
             <div>
                 <Switch>
                     <Route path='/home' component={Home} />
-                    {!!sessionStorage.getItem('user') && (
+                    {
+                        // !!sessionStorage.getItem('user') && (
                         <>
                             <Route path='/buds' component={Buds} />
                             <Route path='/upload' component={Upload} />
@@ -88,7 +89,8 @@ class Landing extends Component {
                                 <Route path='/settings' component={Settings} />
                             </AppNavBar>
                         </>
-                    )}
+                        // )
+                    }
                     <Route path='/' component={this.renderContainer} />
                 </Switch>
             </div>
