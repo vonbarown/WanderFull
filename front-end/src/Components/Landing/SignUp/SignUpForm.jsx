@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios'
-import SignUpSide from './Material/SignUpMaterialUI'
+import SignUpSide from '../Material/SignUpMaterialUI'
 import { Redirect } from 'react-router-dom'
 class SignUpForm extends Component {
     constructor(props) {

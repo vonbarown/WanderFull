@@ -6,6 +6,7 @@ import MoreVertIcon from '@material-ui/icons/MoreVert';
 import { makeStyles } from '@material-ui/core/styles';
 // import Axios from 'axios';
 import '../../styles/Hamburger.css'
+import { Link } from 'react-router-dom'
 
 const ITEM_HEIGHT = 48;
 
@@ -36,10 +37,10 @@ const Hamburger = (props) => {
     }
 
     let options = [
-        <a href='/home'>Home</a>,
-        <a href='/feed'>Feed</a>,
-        <a href='/profile'>Profile</a>,
-        <a href='/settings'>Settings</a>,
+        <Link to='/home'>Home</Link>,
+        <Link to='/feed'>Feed </Link>,
+        <Link to='/profile'>Profile</Link>,
+        <Link to='/settings'>Settings</Link>,
     ];
 
     props.home

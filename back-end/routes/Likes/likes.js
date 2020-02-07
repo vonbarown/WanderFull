@@ -203,7 +203,7 @@ router.get('/posts/interest/:liker_id', async (req, res) => {
 router.get('/posts/times_liked', async (req, res) => {
     try {
         let insertQuery = `
-        SELECT caption,hashtag,,posts.id AS post_id, COUNT(posts.id) AS times_liked
+        SELECT posts.id AS post_id, COUNT(posts.id) AS times_liked
         from posts
         JOIN likes ON posts.id = likes.post_id
         GROUP BY posts.id

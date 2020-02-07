@@ -74,7 +74,7 @@ const logRequest = (req, res, next) => {
 }
 
 // Routes
-app.use('/api/', indexRouter)
+app.use('/api', indexRouter)
 app.use('/api/register', registerRouter)
 // app.use('/login', passport.authenticate('local'), loginRouter)
 app.use('/api/login', loginRouter)
@@ -82,6 +82,10 @@ app.use('/api/logout', logoutRouter)
 app.use('/api/users', usersRouter)
 app.use('/api/posts', upload.single('imageUrl'), photosRouter)
 app.use('/api/likes', likesRouter)
+
+app.get('*', (req, res) => {
+  res.sendFile(path.resolve(__dirname, '../front-end/build/index.html'))
+})
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
@@ -101,8 +105,6 @@ app.use((err, req, res, next) => {
   res.render('error');
 });
 
-app.get('*', (req, res) => {
-  res.sendFile(path.resolve(__dirname, '../front-end/build/index.html'))
-})
+
 
 module.exports = app;

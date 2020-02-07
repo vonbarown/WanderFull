@@ -16,10 +16,12 @@ class NumOfLikes extends Component {
 
     getNumOfLikes = async () => {
         try {
-            const { data: { payload } } = await axios.get(`/api/likes/${this.props.postId}`)
-            this.setState({
-                numOfLikes: payload.length
-            })
+            const { data } = await axios.get(`/api/likes/posts/times_liked`)
+            // this.setState({
+            //     numOfLikes: payload.length
+            // })
+            console.log('timesLiked', data);
+
         } catch (error) {
             console.log(error)
         }
