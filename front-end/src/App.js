@@ -15,7 +15,7 @@ const App = () => {
 
     const fetchTrending = async () => {
         try {
-            const { data } = await axios.get('https://wanderfull-backend.herokuapp.com/likes/posts/popular')
+            const { data } = await axios.get('api/likes/posts/popular')
             setTrending(data)
 
         } catch (error) {
