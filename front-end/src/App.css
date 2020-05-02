@@ -10,3 +10,6 @@
 .darkMode {
   background-color: black;
 }
+.darkMode h1 {
+  color: white;
+}

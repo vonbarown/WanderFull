@@ -119,6 +119,8 @@ class Home extends Component {
             </div>
           </div>
         </div>
+        <h1>Welcome to WanderFull</h1>
+        <h1>You one stop shop for food and travel</h1>
         <Carousel />
       </div>
     ) : (

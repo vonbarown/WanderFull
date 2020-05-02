@@ -96,7 +96,7 @@ class Feed extends Component {
 
 
         return (this.state.loggedIn ? (
-            <div className='home'>
+            <div className='feed'>
                 <Quote />
                 <div className='hamburger'>
                     <Hamburger
