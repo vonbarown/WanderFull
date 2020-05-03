@@ -6,12 +6,12 @@ const useStyles = makeStyles(theme => ({
     root: {
         display: 'flex',
         '& > *': {
-            margin: theme.spacing(1),
+            // margin: theme.spacing(1),
         },
     },
     large: {
-        width: theme.spacing(25),
-        height: theme.spacing(25),
+        width: theme.spacing(20),
+        height: theme.spacing(20),
     },
 }));
 

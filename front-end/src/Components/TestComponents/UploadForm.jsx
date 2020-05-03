@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Geocode from 'react-geocode'
 import axios from 'axios'
-import { mapKey } from '../Map/apiKey'
+const mapKey = process.env.MAP_API_KEY
 
 
 Geocode.setApiKey(mapKey);
@@ -74,7 +74,7 @@ class uploadForm extends Component {
 
 
         try {
-            const { data: { payload } } = await axios.post('http://localhost:8080/posts/add', data)
+            const { data: { payload } } = await axios.post('/api/posts/add', data)
             console.log('data', payload);
             this.setState({
                 imageUrl: payload.imageUrl
@@ -105,6 +105,6 @@ class uploadForm extends Component {
             </div>
         );
     }
- }
+}
 
 export default uploadForm;

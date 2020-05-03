@@ -6,6 +6,7 @@ import '../../styles/AppNavBar.css'
 import { Container } from '@material-ui/core'
 import UploadModal from './Modal'
 import Quote from './Quote'
+import Hamburger from '../../Components/Shared/Hamburger'
 
 class Feed extends Component {
     constructor() {
@@ -42,7 +43,7 @@ class Feed extends Component {
     }
 
     getAllPhotos = async () => {
-        let allPhotos = `http://localhost:8080/posts/all`
+        let allPhotos = `/api/posts/all`
         try {
             const { data: { payload } } = await axios.get(allPhotos)
             this.setState({
@@ -56,7 +57,7 @@ class Feed extends Component {
     searchHashtag = async (input) => {
         // const {input} = this.state
         try {
-            const hashtagImgs = `http://localhost:8080/posts/search/hashtag/${input}`
+            const hashtagImgs = `/api/posts/search/hashtag/${input}`
             const { data: { payload } } = await axios.get(hashtagImgs)
             // let urlsArr = payload.map(el=>{
             //     return el.img
@@ -72,7 +73,7 @@ class Feed extends Component {
     searchUser = async () => {
         const { input } = this.state
         try {
-            const username = `http://localhost:8080/posts/profile/${input}`
+            const username = `/api/posts/profile/${input}`
             const { data: { payload } } = await axios.get(username)
             this.setState({
                 feedArr: payload
@@ -90,11 +91,22 @@ class Feed extends Component {
     }
 
     render() {
-        const { feedArr } = this.state
+        const { feedArr, input } = this.state
+        const { handleInput, searchUser, searchHashtag } = this
+
 
         return (this.state.loggedIn ? (
-            <div className='home'>
+            <div className='feed'>
                 <Quote />
+                <div className='hamburger'>
+                    <Hamburger
+                        handleInput={handleInput}
+                        searchUser={searchUser}
+                        searchHashtag={searchHashtag}
+                        input={input}
+                        feed={true}
+                    />
+                </div>
                 <Container maxWidth='md' className='feedContainer' style={{
                     alignItems: 'center',
                     display: 'flex',

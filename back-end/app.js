@@ -1,3 +1,4 @@
+require('dotenv').config()
 const createError = require('http-errors');
 const path = require('path');
 const logger = require('morgan');
@@ -62,6 +63,8 @@ app.use(cors())
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, '../front-end/build')));
+
 
 // const loggedIn = (req, res, next) => req.isAuthenticated() ? next() : res.redirect('/')
 const logRequest = (req, res, next) => {
@@ -71,14 +74,18 @@ const logRequest = (req, res, next) => {
 }
 
 // Routes
-app.use('/', indexRouter)
-app.use('/register', registerRouter)
+app.use('/api', indexRouter)
+app.use('/api/register', registerRouter)
 // app.use('/login', passport.authenticate('local'), loginRouter)
-app.use('/login', loginRouter)
-app.use('/logout', logoutRouter)
-app.use('/users', usersRouter)
-app.use('/posts', upload.single('imageUrl'), photosRouter)
-app.use('/likes', likesRouter)
+app.use('/api/login', loginRouter)
+app.use('/api/logout', logoutRouter)
+app.use('/api/users', usersRouter)
+app.use('/api/posts', upload.single('imageUrl'), photosRouter)
+app.use('/api/likes', likesRouter)
+
+app.get('*', (req, res) => {
+  res.sendFile(path.resolve(__dirname, '../front-end/build/index.html'))
+})
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
@@ -98,8 +105,6 @@ app.use((err, req, res, next) => {
   res.render('error');
 });
 
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname + '../front-end/build/index.html'))
-})
+
 
 module.exports = app;

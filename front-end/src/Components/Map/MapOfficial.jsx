@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { Map, GoogleApiWrapper, Marker } from 'google-maps-react';
-import { mapKey } from "./apiKey";
 import axios from 'axios'
 import { connect } from 'react-redux'
 import { loadMap } from '../../Store/Actions/mapActions'
@@ -23,7 +22,7 @@ export class MapContainer extends Component {
     loadCoords = async () => {
 
         try {
-            const { data: { payload } } = await axios.get(`http://localhost:8080/posts/all/coords/${sessionStorage.getItem('user')}`)
+            const { data: { payload } } = await axios.get(`/api/posts/all/coords/${sessionStorage.getItem('user')}`)
             console.log('data', payload);
             this.props.loadMap(...payload)
 
@@ -76,5 +75,5 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(GoogleApiWrapper({
-    apiKey: mapKey
+    apiKey: process.env.MAPS_API_KEY
 })(MapContainer))

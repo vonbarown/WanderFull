@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios'
-import SignUpSide from './Material/SignUpMaterialUI'
+import SignUpSide from '../Material/SignUpMaterialUI'
 import { Redirect } from 'react-router-dom'
 class SignUpForm extends Component {
     constructor(props) {
@@ -19,7 +19,7 @@ class SignUpForm extends Component {
         console.log('Submitting Signup request...')
         const { username, password, firstname, lastname, email } = this.state
         try {
-            const data = await axios.post(`http://localhost:8080/register`,
+            const data = await axios.post(`/api/register`,
                 { username, password, firstname, lastname, email }
             )
             console.log('Data', data.data)

@@ -42,7 +42,7 @@ export default function ImageCard(props) {
     const deleteCard = async (event) => {
 
         try {
-            let deletePost = `http://localhost:8080/posts/delete/${props.postId}`
+            let deletePost = `api/posts/delete/${props.postId}`
             const { data: { payload } } = await axios.delete(deletePost)
             console.log('deleted')
 
@@ -81,7 +81,7 @@ export default function ImageCard(props) {
         console.log('userid', userId, 'postId', postId)
 
         try {
-            const { data: { payload } } = await axios.post(`http://localhost:8080/likes/add/${Number(postId)}/${userId}`)
+            const { data: { payload } } = await axios.post(`/api/likes/add/${Number(postId)}/${userId}`)
             console.log('payload', payload)
             window.location.reload(true);
 

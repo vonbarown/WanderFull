@@ -1,27 +1,27 @@
 import React, { useEffect } from 'react'
 import { useState } from 'react'
 import axios from 'axios'
-import { newsKey } from '../Components/Map/apiKey'
+const newsKey = process.env.NEWS_API_KEY
 
 export const NewsContainer = () => {
 
     const [data, setData] = useState([])
 
-    const fetchNews = async () => {
-        try {
-            const url = `https://newsapi.org/v2/top-headlines?country=us&apiKey=${newsKey}`
+    // const fetchNews = async () => {
+    //     try {
+    //         const url = `https://newsapi.org/v2/top-headlines?country=us&apiKey=${newsKey}`
 
-            const { data } = await axios.get(url)
-            console.log('news', data);
+    //         const { data } = await axios.get(url)
+    //         console.log('news', data);
 
-        } catch (error) {
+    //     } catch (error) {
 
-        }
-    }
+    //     }
+    // }
 
-    useEffect(() => {
-        fetchNews()
-    })
+    // useEffect(() => {
+    //     fetchNews()
+    // })
 
     return (
         <div>

@@ -1,8 +1,8 @@
-DROP DATABASE IF EXISTS wanderfull_db;
+-- DROP DATABASE IF EXISTS wanderfull_db;
 
-CREATE DATABASE wanderfull_db;
+-- CREATE DATABASE wanderfull_db;
 
-\c wanderfull_db
+-- \c wanderfull_db
 
 CREATE TABLE users (
     id SERIAL PRIMARY KEY,

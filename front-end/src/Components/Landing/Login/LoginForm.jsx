@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 // import Home from '../../../pages/Home'
 import { Redirect } from 'react-router-dom'
 import axios from 'axios'
-import SignInSide from './Material/LoginMaterialUI'
+import SignInSide from '../Material/LoginMaterialUI'
 
 class LoginForm extends Component {
     constructor(props) {
@@ -17,7 +17,7 @@ class LoginForm extends Component {
         console.log('Submitting Login request...')
         const { username, password } = this.state
         try {
-            const { data: { payload } } = await axios.post(`http://localhost:8080/login`, { username, password })
+            const { data: { payload } } = await axios.post(`api/login`, { username, password })
             console.log('data', payload)
             sessionStorage.setItem('user', username)
             sessionStorage.setItem('profile_pic', payload.profile_pic)

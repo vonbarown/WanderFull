@@ -157,11 +157,9 @@ router.get('/posts/times_liked', async (req, res) => {
 router.get('/posts/popular', async (req, res) => {
     try {
         let insertQuery = `
-        SELECT user_id,img,caption,hashtag, id from posts
-        WHERE posts.id = (
-            SELECT posts.id FROM posts JOIN likes ON posts.id = likes.post_id 
-            GROUP BY posts.id ORDER BY COUNT(posts.img) DESC, posts.id DESC LIMIT 1
-        )
+        SELECT user_id,img,caption,hashtag from posts
+        JOIN likes ON posts.id = likes.post_id 
+            GROUP BY posts.id ORDER BY COUNT(posts.img) DESC, posts.id DESC LIMIT 5
         `;
         let num1 = await db.any(insertQuery)
         res.json({
@@ -200,4 +198,30 @@ router.get('/posts/interest/:liker_id', async (req, res) => {
     }
 });
 
+//query to get the number of times a posts is liked
+
+router.get('/posts/times_liked', async (req, res) => {
+    try {
+        let insertQuery = `
+        SELECT posts.id AS post_id, COUNT(posts.id) AS times_liked
+        from posts
+        JOIN likes ON posts.id = likes.post_id
+        GROUP BY posts.id
+        ORDER BY times_liked DESC
+        `;
+        let liked = await db.any(insertQuery)
+        res.json({
+            status: 'success',
+            message: 'request sent',
+            body: liked,
+        });
+    } catch (error) {
+        res.status(500);
+        res.json({
+            status: 'failed',
+            message: 'There was an error the retrieving data'
+        });
+        console.log(error);
+    }
+});
 module.exports = router
